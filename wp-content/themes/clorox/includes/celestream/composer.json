@@ -1,0 +1,11 @@
+{
+    "require": {
+        "facebook/php-sdk-v4": "^5.1",
+        "google/apiclient": "1.0.*@beta"
+    },
+    "autoload": {
+        "psr-4": {
+            "Celestream\\": "src/"
+        }
+    }
+}
