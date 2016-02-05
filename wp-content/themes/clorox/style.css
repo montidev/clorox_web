@@ -561,6 +561,18 @@ header > nav {
   font-weight: 600;
 }
 
+.nav.social-links {
+  margin-right: 10px;
+}
+
+.nav.social-links > li + li {
+  margin-left: 10px;
+}
+
+.nav.social-links > li > a {
+  height: 100%;
+}
+
 /*
 * HOME
 */

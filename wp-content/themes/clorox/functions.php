@@ -5,6 +5,7 @@ require_once(__DIR__ . '/includes/custom_post_types.php');
 require_once(__DIR__ . '/includes/metaboxes.php');
 require_once(__DIR__ . '/includes/styles_scripts.php');
 require_once(__DIR__ . '/includes/actions_and_filters.php');
+require_once(__DIR__ . '/includes/admin_configs.php');
 // require_once(__DIR__ . '/includes/social_stream.php');
 
 //  ===========================================================================
@@ -68,6 +69,27 @@ function get_category_image_uri($cat_id) {
 function display_primary_menu($classes = "") {
   $args = array( 'theme_location' => 'primary', 'menu_class' => $classes );
   return wp_nav_menu( $args );
+}
+
+function display_social_networks() {
+  $fb_link = get_option('fb_link', '');
+  $yt_link = get_option('yt_link', '');
+  ?>
+
+  <ul class="nav navbar-nav navbar-right social-links">
+    <li>
+      <a href="<?php echo_safe($fb_link); ?>" target="_blank" class="icon">
+        <img src="<?php get_image_uri('fb-icon-menu.png'); ?>" alt="" />
+      </a>
+    </li>
+    <li>
+      <a href="<?php echo_safe($yt_link); ?>" target="_blank" class="icon">
+        <img src="<?php get_image_uri('yt-icon-menu.png'); ?>" alt="" />
+      </a>
+    </li>
+  </ul>
+
+  <?php
 }
 
 function link_next_pagination() {

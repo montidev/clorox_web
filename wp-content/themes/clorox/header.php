@@ -24,6 +24,7 @@
           </div>
           <!-- ./navbar-header -->
           <div class="collapse navbar-collapse" id="nav-top-collapse">
+            <?php display_social_networks(); ?>
             <?php display_primary_menu('nav navbar-nav navbar-right'); ?>
           </div>
           <!-- ./navbar-collapse -->
