@@ -62,6 +62,11 @@ strong {
 * GENERAL
 */
 
+.disabled {
+  cursor: not-allowed;
+  opacity: .3;
+}
+
 .fontX20 {
   font-size: 20px;
 }
@@ -381,6 +386,10 @@ select.input-md {
   transition: .5s;
 }
 
+.box.box-layered .animate-height:hover > a.link:hover {
+  text-decoration: underline;
+}
+
 .visible-on-hover {
   visibility: hidden;
 }
@@ -517,6 +526,12 @@ select.input-md {
 * HEADER
 */
 
+header > nav {
+  box-shadow: -50px -20px 150px 0px;
+  -moz-box-shadow: -50px -20px 150px 0px;
+  -webkit-box-shadow: -50px -20px 150px 0px;
+}
+
 .navbar-custom {
   min-height: 100px;
   background: #fff;
@@ -538,6 +553,12 @@ select.input-md {
   line-height: 70px;
   font-size: 20px;
   color: #1967bb;
+}
+
+.navbar-custom .navbar-nav > li.current-menu-item > a {
+  border-top: 6px solid #1967bb;
+  line-height: 54px;
+  font-weight: 600;
 }
 
 /*
@@ -568,6 +589,8 @@ select.input-md {
 
 #section-tips .box {
   height: 300px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 #section-products {

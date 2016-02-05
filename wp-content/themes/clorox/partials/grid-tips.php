@@ -16,8 +16,3 @@
     </div>
   <?php endwhile; ?>
 </div>
-<div class="text-center btn-more">
-  <a href="<?php link_to('tips'); ?>">
-    <span class="icon iconX2 plus-icon"></span>
-  </a>
-</div>

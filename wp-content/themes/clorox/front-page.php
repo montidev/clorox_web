@@ -18,6 +18,11 @@
       <h2>Todo para el <strong>control de tu casa</strong></h2>
     </div>
     <?php get_template_part('partials/grid-tips'); ?>
+    <div class="text-center btn-more">
+      <a href="<?php link_to('tips'); ?>">
+        <span class="icon iconX2 plus-icon"></span>
+      </a>
+    </div>
   </section>
   <!-- #/section-control -->
 

@@ -66,18 +66,30 @@ function get_category_image_uri($cat_id) {
 }
 
 function display_primary_menu($classes = "") {
-  $items = wp_get_nav_menu_items( 'primary' );
-  ?>
-    <ul class="<?php echo_safe($classes); ?>">
-      <?php foreach ($items as $item) { ?>
-        <li>
-          <a href="<?php echo_safe($item->url); ?>">
-            <?php echo_safe($item->title); ?>
-          </a>
-        </li>
-      <?php } ?>
-    </ul>
-<?php
+  $args = array( 'theme_location' => 'primary', 'menu_class' => $classes );
+  return wp_nav_menu( $args );
+}
+
+function link_next_pagination() {
+  global $wp_query;
+
+  $current = max( 1, get_query_var('paged') );
+
+  $args = array(
+    'total'              => $wp_query->max_num_pages,
+    'current'            => $current,
+    'type'               => 'array'
+  );
+
+  $page_numbers = paginate_links( $args );
+
+  $next_link = array_pop($page_numbers);
+
+  preg_match('/^<a.*?href=(["\'])(.*?)\1.*$/', $next_link, $m);
+
+  $link = count($m) ? array_pop($m) : "";
+
+  echo_safe($link);
 }
 
 function get_filter_product_types_form() {
@@ -202,11 +214,13 @@ function get_product_type_verb_by_slug($term_slug) {
   return get_product_type_verb( $product_type->term_id);
 }
 
-function get_tips($limit = 5) {
+function get_tips($limit = 3) {
   wp_reset_query();
+  $paged = get_query_var('paged', 1);
   $args = array(
     'post_type' => 'tip',
-    'posts_per_page' => $limit
+    'posts_per_page' => $limit,
+    'paged' => $paged
   );
   query_posts($args);
 }
