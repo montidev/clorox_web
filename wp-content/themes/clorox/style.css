@@ -62,6 +62,17 @@ strong {
 * GENERAL
 */
 
+.container850 {
+  width: 850px;
+  max-width: 850px;
+  margin: auto;
+}
+
+.container850 .container {
+  padding: 35px 90px 50px 90px;
+  width: 100%;
+}
+
 .disabled {
   cursor: not-allowed;
   opacity: .3;
@@ -527,9 +538,9 @@ select.input-md {
 */
 
 header > nav {
-  box-shadow: -50px -20px 150px 0px;
-  -moz-box-shadow: -50px -20px 150px 0px;
-  -webkit-box-shadow: -50px -20px 150px 0px;
+  box-shadow: -50px -20px 80px 0px;
+  -moz-box-shadow: -50px -20px 80px 0px;
+  -webkit-box-shadow: -50px -20px 80px 0px;
 }
 
 .navbar-custom {
@@ -694,6 +705,39 @@ header > nav {
 .tip:nth-child(3n) .body > .title,
 .tip:nth-child(3n) .body > .link {
   color: #f0c828;
+}
+
+
+/*
+* Pages
+*/
+
+.page .featured-image {
+  height: 420px;
+  max-height: 420px;
+}
+
+.page .content.shadow {
+  box-shadow: 0px 0 50px 0px rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0px 0 50px 0px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 0 50px 0px rgba(0,0,0,0.3);
+}
+
+.page .content h2 {
+  font-size: 38px;
+  font-weight: 400;
+  margin-bottom: 30px;
+}
+
+.page .content p {
+  color: #6e6e6e;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.page .content h3 {
+  margin-top: 30px;
+  font-size: 28px;
 }
 
 
