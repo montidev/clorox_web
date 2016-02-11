@@ -20,7 +20,7 @@
       </div>
 
       <div class="text-center copyright">
-        <p>&copy; 2016 Clorox - <a href="/politicas-de-privacidad">Política de Privacidad</a></p>
+        <p>&copy; 2016 Clorox - <a href="/policies">Política de Privacidad</a></p>
       </div>
     </footer>
 

@@ -728,7 +728,12 @@ header > nav {
   color: #fff;
 }
 
-.page .featured-image {
+.page .section > .title > h2,
+.page .dropdown.filters > .btn {
+  font-size: 38px;
+}
+
+.page:not(.home) .featured-image {
   height: 420px;
   max-height: 420px;
 }

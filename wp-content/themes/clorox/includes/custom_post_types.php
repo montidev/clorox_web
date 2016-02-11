@@ -33,8 +33,8 @@ function clorox_create_post_types() {
   register_taxonomy( 'category', array( 'product', 'tip' ),
     array(
       'labels'            => array(
-        'name'              => __( 'Categorías', 'mobext' ),
-        'singular_name'     => __( 'Categoría del producto', 'mobext' ),
+        'name'              => __( 'Categorías', 'clorox' ),
+        'singular_name'     => __( 'Categoría del producto', 'clorox' ),
       )
     )
   );
@@ -44,8 +44,8 @@ function clorox_create_post_types() {
     array(
       'labels'            => array(
         'name'            => __( 'Tipos', 'mobext' ),
-        'singular_name'   => __( 'Tipo del producto', 'mobext' ),
-        'add_new_item'    => __('Agregar nuevo tipo', 'mobext')
+        'singular_name'   => __( 'Tipo del producto', 'clorox' ),
+        'add_new_item'    => __('Agregar nuevo tipo', 'clorox')
       )
     )
   );

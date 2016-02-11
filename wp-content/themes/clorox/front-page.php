@@ -39,7 +39,12 @@
       </h2>
     </div>
     <div class="container-products">
-      <?php get_template_part('partials/grid-products'); ?>
+      <?php display_grid_products(); ?>
+    </div>
+    <div class="text-center btn-more">
+      <a href="<?php link_to('products'); ?>">
+        <span class="icon iconX2 plus-icon"></span>
+      </a>
     </div>
   </section>
   <!-- #/section-products -->

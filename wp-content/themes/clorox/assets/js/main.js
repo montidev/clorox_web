@@ -1,3 +1,27 @@
+window.filters = {
+  current: {},
+  _addParam: function(filter) {
+    var f = filter.split('=');
+    var k = f[0].replace('?','');
+    var v = f[1];
+    this.current[k] = v;
+  },
+  addFilterFromUrl: function(link){
+    var fs = link.split('&');
+    if ( fs.length ) {
+      for (var i = 0; i < fs.length; i++) {
+        this._addParam(fs[i]);
+      }
+    } else {
+      this._addParam(link);
+    }
+    return this.current;
+  }
+};
+
+// Update filters when page is loaded
+window.filters.addFilterFromUrl(window.location.search);
+
 jQuery(function($){
 
   $('.bxslider').bxSlider({
@@ -17,8 +41,11 @@ jQuery(function($){
     var target = $(this).attr('data-target');
     var container = $(this).attr('data-container');
     var append = $(this).attr('data-container');
+    var objURL = window.filters.addFilterFromUrl(link);
+    var filtersURL = '?' + $.param( objURL );
     $(container).fadeOut();
-    $(container).load(link + ' ' + target, function(){
+    $(container).load(filtersURL + ' ' + target, function(){
+      window.history.pushState('', '', filtersURL);
       $(this).fadeIn();
     });
   });

@@ -1,7 +1,14 @@
-<?php get_products(); ?>
+<?php
+  global $limit;
+  get_products($limit);
+?>
 
 <?php global $total_products; ?>
-<h3 class="white semibold">Encontramos <span class="fontX35"><?php echo $total_products; ?></span> productos que te pueden servir:</h3>
+<h3 class="white semibold">
+  Encontramos
+    <span class="fontX35"><?php echo_safe($total_products); ?></span>
+  productos que te pueden servir:
+</h3>
 
 <div class="content boxes clearfix products">
   <?php while (have_posts()): the_post(); ?>
@@ -19,9 +26,4 @@
       </a>
     </div>
   <?php endwhile; ?>
-</div>
-<div class="text-center btn-more">
-  <a href="<?php link_to('products'); ?>">
-    <span class="icon iconX2 plus-icon"></span>
-  </a>
 </div>

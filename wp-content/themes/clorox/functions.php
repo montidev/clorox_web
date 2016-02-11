@@ -28,10 +28,13 @@ function dd($data){
 }
 
 function link_to($path = "") {
-  echo $SERVER['HTTP_HOST'] . '/' . $path;
+  echo_safe($SERVER['HTTP_HOST'] . '/' . $path);
 }
 
 function link_to_with_args($args = [], $url = null) {
+  if( ! $url ) {
+    $url = $SERVER['HTTP_HOST'];
+  }
   echo esc_url( add_query_arg($args, $url) );
 }
 
@@ -74,8 +77,8 @@ function display_primary_menu($classes = "") {
 function display_social_networks() {
   $fb_link = get_option('fb_link', '');
   $yt_link = get_option('yt_link', '');
+  ob_start();
   ?>
-
   <ul class="nav navbar-nav navbar-right social-links">
     <li>
       <a href="<?php echo_safe($fb_link); ?>" target="_blank" class="icon">
@@ -88,8 +91,8 @@ function display_social_networks() {
       </a>
     </li>
   </ul>
-
   <?php
+  return ob_end_flush();
 }
 
 function link_next_pagination() {
@@ -115,16 +118,15 @@ function link_next_pagination() {
 }
 
 function get_filter_product_types_form() {
-  $param = safe_GET('product_type', 'desinfección');
+  $param = safe_GET('product_type', '-');
   // retrive verb
   $value = get_product_type_verb_by_slug($param);
-  $args = array();
-  $types = get_terms('product-type', $args);
+  $types = get_terms('product-type');
   ob_start();
   ?>
   <div class="dropdown filters md yellow" data-filter="product-type">
     <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
-      <span class="text semibold"><?php echo_safe(ucfirst($value)); ?></span>
+      <span class="text semibold"><?php echo ($value) ? ucfirst($value) : '-'; ?></span>
     </button>
     <ul class="dropdown-menu">
       <?php foreach ($types as $type): ?>
@@ -145,7 +147,40 @@ function get_filter_product_types_form() {
     $('.ajax-load').click(function(e){
       e.preventDefault();
       var text = $(this).text().trim();
-      console.log(text);
+      $(this).closest('.dropdown').find('button>.text').html(text);
+    })
+  </script>
+  <?php
+  return ob_end_flush();
+}
+
+function get_filter_product_categories_form() {
+  $value = safe_GET('category', '-');
+  $categories = get_categories();
+  ob_start();
+  ?>
+  <div class="dropdown filters md yellow" data-filter="category">
+    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+      <span class="text semibold"><?php echo_safe(ucfirst($value)); ?></span>
+    </button>
+    <ul class="dropdown-menu">
+      <?php foreach ($categories as $cat): ?>
+        <li class="text blue fontX20 semibold">
+          <?php $args = array( array('category' => $cat->slug) ); ?>
+          <a class="ajax-load"
+            href="<?php link_to_with_args($args); ?>"
+            data-target=".container-products"
+            data-container=".container-products">
+            <?php echo_safe(ucfirst($cat->name)); ?>
+          </a>
+        </li>
+      <?php endforeach; ?>
+    </ul>
+  </div>
+  <script type="text/javascript">
+    $('.ajax-load').click(function(e){
+      e.preventDefault();
+      var text = $(this).text().trim();
       $(this).closest('.dropdown').find('button>.text').html(text);
     })
   </script>
@@ -171,6 +206,7 @@ function widget_languages_as_dropdown() {
     'flag' => get_image_uri('flag-arg.png', false),
     'name' => 'Argentina'
   );
+  ob_start();
   ?>
 
   <div class="dropdown flags md">
@@ -198,6 +234,7 @@ function widget_languages_as_dropdown() {
     </ul>
   </div>
   <?php
+  return ob_end_flush();
 }
 
 //  ===========================================================================
@@ -219,6 +256,18 @@ function get_home_slides($id) {
   }, $slides);
 
   return $slides_formated;
+}
+
+//  ===========================================================================
+//  Home Helpers
+//  ===========================================================================
+//
+function display_grid_products($total = 5) {
+  global $limit;
+  $limit = $total;
+  ob_start();
+  get_template_part('partials/grid-products');
+  return ob_end_flush();
 }
 
 //  ===========================================================================
@@ -249,20 +298,36 @@ function get_tips($limit = 3) {
 
 function get_products($limit = 5) {
   wp_reset_query();
+
   $paged = get_query_var('paged', 1);
-  $type = safe_GET('product_type', 'desinfección');
+
   $args = array(
     'post_type' => 'product',
     'posts_per_page' => $limit,
-    'paged' => $paged,
-    'tax_query' => array(
-			array(
-				'taxonomy' => 'product-type',
-				'field' => 'slug',
-				'terms' => array($type)
-			)
-		)
+    'paged' => $paged
   );
+
+  $type = safe_GET('product_type');
+  $cat = safe_GET('category');
+
+  if ($type) {
+    $args['tax_query'][] = array(
+      'taxonomy' => 'product-type',
+      'field' => 'slug',
+      'terms' => array($type)
+    );
+  }
+
+  if ($cat) {
+    $args['tax_query']['relation'] = 'AND';
+    $args['tax_query'][] = array(
+      'taxonomy' => 'category',
+      'field' => 'slug',
+      'terms' => array($cat)
+    );
+  }
+
+  // dd($args);
 
   query_posts($args);
 
