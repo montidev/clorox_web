@@ -29,7 +29,7 @@ function clorox_create_post_types() {
     )
   );
 
-  // PRODUCT CATEGORIES
+  // PRODUCT-TIP CATEGORIES
   register_taxonomy( 'category', array( 'product', 'tip' ),
     array(
       'labels'            => array(
@@ -39,7 +39,7 @@ function clorox_create_post_types() {
     )
   );
 
-  // PRODUCT CATEGORIES
+  // PRODUCT TYPE
   register_taxonomy( 'product-type', array( 'product' ),
     array(
       'labels'            => array(

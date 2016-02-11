@@ -259,7 +259,7 @@ function get_home_slides($id) {
 }
 
 //  ===========================================================================
-//  Home Helpers
+//  Page Product Helpers
 //  ===========================================================================
 //
 function display_grid_products($total = 5) {
@@ -308,7 +308,6 @@ function get_products($limit = 5) {
   );
 
   $type = safe_GET('product_type');
-  $cat = safe_GET('category');
 
   if ($type) {
     $args['tax_query'][] = array(
@@ -318,6 +317,8 @@ function get_products($limit = 5) {
     );
   }
 
+  $cat = safe_GET('category');
+
   if ($cat) {
     $args['tax_query']['relation'] = 'AND';
     $args['tax_query'][] = array(
@@ -326,8 +327,6 @@ function get_products($limit = 5) {
       'terms' => array($cat)
     );
   }
-
-  // dd($args);
 
   query_posts($args);
 
