@@ -2,10 +2,8 @@
 
 global $meta_boxes;
 
-$key = PREFIX . 'metabox_product_type';
-
-$meta_boxes[$key] = array(
-  'id'            => $key,
+$meta_boxes[PRODUCT_TYPE_MB] = array(
+  'id'            => PRODUCT_TYPE_MB,
   'title'         => __( 'Metadatos', 'clorox' ),
   'object_types'  => array( 'product-type' ),
   'context'       => 'normal',
@@ -14,7 +12,7 @@ $meta_boxes[$key] = array(
   'fields'        => array(
     array(
       'name'  => __('Verbo', 'clorox' ),
-      'id'    => $key . '_verb',
+      'id'    => PRODUCT_TYPE_MB_VERB,
       'type'  => 'text',
     )
   )
