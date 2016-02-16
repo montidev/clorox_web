@@ -1,8 +1,5 @@
 <?php
 
-$prefix = PREFIX . 'homepage_metabox';
-$prefix_slider = $prefix . '_slider';
-
 function is_page_admin_home($cmb) {
   $post = get_post($cmb->object_id);
   return ( ($post->post_type == 'page') && ($post->post_name == 'home') );
@@ -10,7 +7,7 @@ function is_page_admin_home($cmb) {
 
 // Homepage
 $homepage = new_cmb2_box( array(
-  'id'            => $prefix,
+  'id'            => HOMEPAGE_MB,
   'title'         => __( 'Destacado', 'clorox' ),
   'object_types'  => array( 'page', ),
   'show_on_cb'    => 'is_page_admin_home',
@@ -20,7 +17,7 @@ $homepage = new_cmb2_box( array(
 ));
 
 $slider = $homepage->add_field(array(
-  'id'            => $prefix_slider,
+  'id'            => HOMEPAGE_MB_SLIDER,
   'type'          => 'group',
   'options'       => array(
     'group_title'   => __( 'Imágenes del slider', 'clorox' ),
@@ -33,12 +30,12 @@ $slider = $homepage->add_field(array(
 
 $homepage->add_group_field( $slider, array(
   'name'  => __('Título destacado', 'clorox' ),
-  'id'    => $prefix_slider . '_text',
+  'id'    => HOMEPAGE_MB_SLIDER_TEXT,
   'type'  => 'text'
 ));
 
 $homepage->add_group_field( $slider, array(
   'name'  => __('Título destacado', 'clorox' ),
-  'id'    => $prefix_slider . '_image',
+  'id'    => HOMEPAGE_MB_SLIDER_IMAGE,
   'type'  => 'file'
 ));

@@ -4,6 +4,7 @@ add_action( 'cmb2_admin_init', 'clorox_register_meta_boxes' );
 function clorox_register_meta_boxes() {
 
   require_once( __DIR__ . '/metaboxes/page-home.php' );
+  require_once( __DIR__ . '/metaboxes/product.php' );
 }
 
 

@@ -22,13 +22,23 @@ function safe_GET($key, $default = "") {
 
 function dd($data){
   echo "<pre>";
-  print_r($data);
+  var_dump($data);
   echo "</pre>";
   die();
 }
 
 function link_to($path = "") {
   echo_safe($SERVER['HTTP_HOST'] . '/' . $path);
+}
+
+function link_to_back() {
+  $prev_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
+  if( !empty( $prev_url ) && strpos( $prev_url, get_blog_details()->domain ) !== false ) { ?>
+    <a href="<?php echo_safe($prev_url); ?>" class="previous-history-link">
+      <i class="icon icon-back"></i>
+      <span class="white fontX20">Volver</span>
+    </a>
+  <?php };
 }
 
 function link_to_with_args($args = [], $url = null) {
@@ -59,14 +69,19 @@ function get_featured_image_uri($post_id) {
   echo_safe($feat_image);
 }
 
-function get_meta_KEY($key) {
-  return PREFIX . $key;
-}
+function get_category_image_uri($cat_id, $type = 'light-bg') {
+  $images = get_term_meta($cat_id, CATEGORY_MB_IMAGES, true);
+  if ( is_array($images) ) {
+    $results = array_filter($images, function($e) use ($type) {
+      return $e[CATEGORY_MB_IMAGES_TYPE] == $type;
+    });
 
-function get_category_image_uri($cat_id) {
-  $name = PREFIX . 'metabox_category_image';
-  $uri = get_term_meta($cat_id, $name, true);
-  echo $uri;
+    if ( count($results) ) {
+      $image = array_pop($results);
+      $img_url = $image[CATEGORY_MB_IMAGES_IMAGE];
+      echo esc_url( $img_url );
+    }
+  }
 }
 
 function display_primary_menu($classes = "") {
@@ -243,15 +258,14 @@ function widget_languages_as_dropdown() {
 //
 
 function get_home_slides($id) {
-  $key = get_meta_key('homepage_metabox_slider');
   // Get slides
-  $slides = get_post_meta( $id, $key, true );
+  $slides = get_post_meta( $id, HOMEPAGE_MB_SLIDER, true );
 
   // Convert into Human readable keys
   $slides_formated = array_map(function($slide) use ($key) {
     return array(
-      'text' => $slide[$key.'_text'],
-      'url' => $slide[$key.'_image'],
+      'text' => $slide[HOMEPAGE_MB_SLIDER_TEXT],
+      'url' => $slide[HOMEPAGE_MB_SLIDER_IMAGE],
     );
   }, $slides);
 
@@ -259,15 +273,64 @@ function get_home_slides($id) {
 }
 
 //  ===========================================================================
-//  Page Product Helpers
+//  Product Helpers
 //  ===========================================================================
 //
+
+function display_categories_of($post_id, $type = 'dark-bg') {
+  $args = array('fields' => 'ids');
+  $categories = wp_get_post_categories( $post_id, $args );
+  ob_start(); ?>
+
+  <ul class="list-inline categories">
+    <?php foreach ( $categories as $cat_id ): ?>
+      <li>
+        <a href="<?php echo_safe( get_category_link($cat_id) ); ?>"
+          class="bg-image"
+          style="background-image:url(<?php get_category_image_uri( $cat_id, $type ); ?>)">
+        </a>
+      </li>
+    <?php endforeach; ?>
+  </ul>
+
+  <?php
+  return ob_end_flush();
+}
+
 function display_grid_products($total = 5) {
   global $limit;
   $limit = $total;
   ob_start();
-  get_template_part('partials/grid-products');
+  get_template_part('partials/grid', 'products');
   return ob_end_flush();
+}
+
+function display_related_products($product_id, $limit = 5) {
+  get_related_products($product_id, $limit);
+  ob_start();
+  get_template_part('partials/loop', 'products');
+  return ob_end_flush();
+}
+
+function display_characteristics($product_id) {
+  $chars = get_characteristics($product_id);
+  ob_start();
+  ?>
+    <?php foreach ($chars as $c): ?>
+      <div class="col-md-4">
+        <div class="characteristic">
+          <div class="bg-image" style="background-image:url(<?php echo_safe($c[PRODUCT_MB_CHARAC_IMAGE]); ?>)"></div>
+          <p class="fontX16 grey"><?php echo_safe($c[PRODUCT_MB_CHARAC_TEXT]); ?></p>
+        </div>
+      </div>
+    <?php endforeach; ?>
+  <?php
+  return ob_end_flush();
+}
+
+function display_product_video($product_id) {
+  $video_embed = get_post_meta($product_id, PRODUCT_MB_VIDEO, true);
+  echo wp_oembed_get($video_embed);
 }
 
 //  ===========================================================================
@@ -275,9 +338,13 @@ function display_grid_products($total = 5) {
 //  ===========================================================================
 //
 
+function get_characteristics($product_id) {
+  $chars = get_post_meta( $product_id, PRODUCT_MB_CHARACS, false);
+  return (count($chars) > 0) ? $chars[0] : [];
+}
+
 function get_product_type_verb($term_id) {
-  $key = get_meta_KEY('metabox_product_type_verb');
-  return get_term_meta( $term_id, $key, true);
+  return get_term_meta( $term_id, PRODUCT_TYPE_MB_VERB, true);
 }
 
 function get_product_type_verb_by_slug($term_slug) {
@@ -296,8 +363,13 @@ function get_tips($limit = 3) {
   query_posts($args);
 }
 
-function get_products($limit = 5) {
+function get_products($limit = 5, $filters = array()) {
   wp_reset_query();
+
+  global $wp_query;
+  global $total_products;
+
+  $total_products = 0;
 
   $paged = get_query_var('paged', 1);
 
@@ -307,32 +379,53 @@ function get_products($limit = 5) {
     'paged' => $paged
   );
 
-  $type = safe_GET('product_type');
+  $types = safe_GET('product_type');
+  $cats = safe_GET('category');
 
-  if ($type) {
+  if ( !$types && array_key_exists('product-types', $filters) ) {
+    $types = $filters['product-types'];
+  } else {
+    if ( ! empty($types) ) {
+      $types = array($types);
+    }
+  }
+
+  if ( !$cats && array_key_exists('categories', $filters) ) {
+    $cats = $filters['categories'];
+  } else {
+    if ( ! empty($cats) ) {
+      $cats = array($cats);
+    }
+  }
+
+  if ( !empty($types) ) {
     $args['tax_query'][] = array(
       'taxonomy' => 'product-type',
       'field' => 'slug',
-      'terms' => array($type)
+      'terms' => $types
     );
   }
 
-  $cat = safe_GET('category');
-
-  if ($cat) {
+  if ( !empty($cats) ) {
     $args['tax_query']['relation'] = 'AND';
     $args['tax_query'][] = array(
       'taxonomy' => 'category',
       'field' => 'slug',
-      'terms' => array($cat)
+      'terms' => $cats
     );
   }
 
+  if ( array_key_exists('args', $filters) ) {
+    $args = array_merge($args, $filters['args']);
+  }
+
+  // dd($args);
+
   query_posts($args);
 
-  global $wp_query;
-  global $total_products;
   $total_products = $wp_query->post_count;
+
+  return $wp_query->posts;
 }
 
 function get_product_type($post_id) {
@@ -342,4 +435,20 @@ function get_product_type($post_id) {
     $type = array_pop($types);
     return $type->name;
   }
+}
+
+function get_related_products($product_id, $limit = 5) {
+  $args = array('fields' => 'slugs');
+  $product_types = wp_get_post_terms( $product_id, 'product-type', $args );
+  $categories = wp_get_post_categories( $product_id, $args );
+
+  $filters = array(
+    'product-types' => $product_types,
+    'categories' => $categories,
+    'args' => array(
+      'post__not_in' => array($product_id)
+    )
+  );
+
+  get_products($limit, $filters);
 }
