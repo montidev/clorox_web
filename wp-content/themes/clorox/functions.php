@@ -282,7 +282,7 @@ function display_categories_of($post_id, $type = 'dark-bg') {
   $categories = wp_get_post_categories( $post_id, $args );
   ob_start(); ?>
 
-  <ul class="list-inline categories">
+  <ul class="list-inline categories <?php echo_safe( $type ); ?>">
     <?php foreach ( $categories as $cat_id ): ?>
       <li>
         <a href="<?php echo_safe( get_category_link($cat_id) ); ?>"
@@ -312,6 +312,13 @@ function display_related_products($product_id, $limit = 5) {
   return ob_end_flush();
 }
 
+function display_related_tips($tip_id, $limit = 5) {
+  get_related_tips($tip_id, $limit);
+  ob_start();
+  get_template_part('partials/grid', 'tips');
+  return ob_end_flush();
+}
+
 function display_characteristics($product_id) {
   $chars = get_characteristics($product_id);
   ob_start();
@@ -332,6 +339,18 @@ function display_product_video($product_id) {
   $video_embed = get_post_meta($product_id, PRODUCT_MB_VIDEO, true);
   echo wp_oembed_get($video_embed);
 }
+
+
+//	===========================================================================
+//  Tip helpers
+//  ===========================================================================
+//
+
+function display_tip_video($product_id) {
+  $video_embed = get_post_meta($product_id, TIP_MB_VIDEO, true);
+  echo wp_oembed_get($video_embed);
+}
+
 
 //  ===========================================================================
 //  Queries
@@ -354,6 +373,8 @@ function get_product_type_verb_by_slug($term_slug) {
 
 function get_tips($limit = 3) {
   wp_reset_query();
+  global $wp_query;
+  global $total_products;
   $paged = get_query_var('paged', 1);
   $args = array(
     'post_type' => 'tip',
@@ -361,6 +382,7 @@ function get_tips($limit = 3) {
     'paged' => $paged
   );
   query_posts($args);
+  return $wp_query->posts;
 }
 
 function get_products($limit = 5, $filters = array()) {
@@ -451,4 +473,19 @@ function get_related_products($product_id, $limit = 5) {
   );
 
   get_products($limit, $filters);
+}
+
+
+function get_related_tips($tip_id, $limit = 3) {
+  $args = array('fields' => 'slugs');
+  $categories = wp_get_post_categories( $tip_id, $args );
+
+  $filters = array(
+    'categories' => $categories,
+    'args' => array(
+      'post__not_in' => array($tip_id)
+    )
+  );
+
+  get_tips($limit, $filters);
 }

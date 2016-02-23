@@ -9,8 +9,8 @@
         </div>
         <div class="body bg-white animate-height">
           <h4 class="title"><?php the_title(); ?></h4>
-          <p class="grey"><?php the_excerpt(); ?></p>
-          <a class="link" href="<?php the_permalink(); ?>">Seguir Leyendo</a>
+          <div class="grey"><?php the_excerpt(); ?></div>
+          <a class="link semibold underline" href="<?php the_permalink(); ?>">Seguir Leyendo</a>
         </div>
       </article>
     </div>

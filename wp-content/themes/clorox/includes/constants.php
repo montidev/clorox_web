@@ -20,3 +20,7 @@ define('CATEGORY_MB', PREFIX . 'category');
 define('CATEGORY_MB_IMAGES', CATEGORY_MB . '_images');
 define('CATEGORY_MB_IMAGES_IMAGE', CATEGORY_MB_IMAGES . '_image');
 define('CATEGORY_MB_IMAGES_TYPE', CATEGORY_MB_IMAGES . '_type');
+
+define('TIP_MB', PREFIX . 'tip_metabox');
+define('TIP_MB_CHARACS', TIP_MB . '_characteristics');
+define('TIP_MB_VIDEO', TIP_MB . '_video');
