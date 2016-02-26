@@ -29,6 +29,18 @@ function clorox_create_post_types() {
     )
   );
 
+  register_post_type( 'campaign',
+    array(
+      'labels' => array(
+        'name' => __( 'Campañas', 'clorox' ),
+        'singular_name' => __( 'Campaña', 'clorox' )
+      ),
+      'show_ui' => true,
+      'public' => true,
+      'supports' => array( 'title', 'editor', 'thumbnail' )
+    )
+  );
+
   // PRODUCT-TIP CATEGORIES
   register_taxonomy( 'category', array( 'product', 'tip' ),
     array(
@@ -49,4 +61,6 @@ function clorox_create_post_types() {
       )
     )
   );
-}
+};
+
+

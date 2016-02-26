@@ -20,10 +20,21 @@
             <div class="categories-container">
               <?php display_categories_of(get_the_ID()); ?>
             </div>
-            <button type="button" class="btn btn-default btn-lg btn-clorox">
-              <i class="icon icon-share"></i>
-              <span>Compartir</span>
-            </button>
+            
+
+            <div class="dropdown pull-left">
+            	<button type="button" class="btn btn-default btn-lg btn-clorox"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	              <i class="icon icon-share"></i>
+	              <span>Compartir</span>
+	            </button>
+			        
+			        <ul class="dropdown-menu" aria-labelledby="dLabel">
+			        	<li class="text-center"><?php if ( function_exists( 'ADDTOANY_SHARE_SAVE_KIT' ) ) { 
+								    ADDTOANY_SHARE_SAVE_KIT( array( 'use_current_page' => true ) );
+								} ?>
+								</li>					        
+  						</ul>				
+		  			</div>
           </div>
         </div>
       </div>

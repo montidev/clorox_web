@@ -24,6 +24,7 @@ window.filters.addFilterFromUrl(window.location.search);
 
 jQuery(function($){
 
+	//Slider
   $('.bxslider').bxSlider({
     mode: 'horizontal',
     captions: true,
@@ -78,6 +79,8 @@ jQuery(function($){
 
   canPaginate($('.paginate-ajax'));
 
+
+  
 
   // $('.filters').on('click', 'a', function(e){
   //   e.preventDefault();

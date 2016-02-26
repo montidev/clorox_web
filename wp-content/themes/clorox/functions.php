@@ -133,7 +133,9 @@ function link_next_pagination() {
 }
 
 function get_filter_product_types_form() {
-  $param = safe_GET('product_type', '-');
+
+	$param = safe_GET('product_type', '-');	
+	
   // retrive verb
   $value = get_product_type_verb_by_slug($param);
   $types = get_terms('product-type');
@@ -170,7 +172,14 @@ function get_filter_product_types_form() {
 }
 
 function get_filter_product_categories_form() {
-  $value = safe_GET('category', '-');
+  
+  if(is_category()){
+	  $cat = get_category_by_path(get_query_var('category_name'),false);
+		$value = $cat->cat_name;
+	} else {
+		$value = safe_GET('category', '-');
+	}
+
   $categories = get_categories();
   ob_start();
   ?>
@@ -272,6 +281,44 @@ function get_home_slides($id) {
   return $slides_formated;
 }
 
+
+//  ===========================================================================
+//  Campaign Helpers
+//  ===========================================================================
+//
+
+function get_campaign_slides($id) {
+  // Get slides
+  $slides = get_post_meta( $id, CAMPAIGN_MB_SLIDER, true );
+  if($slides){
+	  // Convert into Human readable keys
+	  $slides_formated = array_map(function($slide) use ($key) {
+	    return array(
+	      'text' => $slide[CAMPAIGN_MB_SLIDER_TEXT],
+	      'url' => $slide[CAMPAIGN_MB_SLIDER_IMAGE],
+	    );
+	  }, $slides);
+
+	  return $slides_formated;
+	} else {
+		return array();
+	}
+}
+
+
+function display_campaign_video($campaign_id) {
+  $video_embed = get_post_meta($campaign_id, CAMPAIGN_MB_VIDEO, true);
+  echo wp_oembed_get($video_embed);
+}
+function display_campaign_products($campaign_id){
+	get_campaign_products($campaign_id);
+  ob_start();
+  get_template_part('partials/loop', 'campaignProducts');
+  return ob_end_flush();
+}
+
+
+
 //  ===========================================================================
 //  Product Helpers
 //  ===========================================================================
@@ -312,13 +359,6 @@ function display_related_products($product_id, $limit = 5) {
   return ob_end_flush();
 }
 
-function display_related_tips($tip_id, $limit = 5) {
-  get_related_tips($tip_id, $limit);
-  ob_start();
-  get_template_part('partials/grid', 'tips');
-  return ob_end_flush();
-}
-
 function display_characteristics($product_id) {
   $chars = get_characteristics($product_id);
   ob_start();
@@ -351,6 +391,12 @@ function display_tip_video($product_id) {
   echo wp_oembed_get($video_embed);
 }
 
+function display_related_tips($tip_id, $limit = 3) {
+  get_related_tips($tip_id, $limit);
+  ob_start();
+  get_template_part('partials/grid', 'tips');
+  return ob_end_flush();
+}
 
 //  ===========================================================================
 //  Queries
@@ -369,6 +415,26 @@ function get_product_type_verb($term_id) {
 function get_product_type_verb_by_slug($term_slug) {
   $product_type = get_term_by('slug', $term_slug, 'product-type');
   return get_product_type_verb( $product_type->term_id);
+}
+
+function get_campaign_products($campaign_id){
+	$ids = get_post_meta($campaign_id, CAMPAIGN_MB_PRODUCTS, true);
+	$ids = preg_split("/[\s,]+/",$ids);	
+	for ($i=0; $i < count($ids); $i++) {
+		$ids[$i] = (int) $ids[$i]; 
+	}
+	$limit = 3; 
+	$args = array('fields' => 'slugs');
+  
+
+  $filters = array(
+    'args' => array(
+      'post__not_in' => array($product_id),
+      'post__in' => $ids
+    )
+  );
+
+  get_products($limit, $filters);
 }
 
 function get_tips($limit = 3) {
@@ -403,7 +469,11 @@ function get_products($limit = 5, $filters = array()) {
 
   $types = safe_GET('product_type');
   $cats = safe_GET('category');
-
+  if(!$cats && is_category()){
+  	//solamente para template categoría
+  	$cat = get_category_by_path(get_query_var('category_name'),false);
+		$cats = $cat->cat_name;
+  }
   if ( !$types && array_key_exists('product-types', $filters) ) {
     $types = $filters['product-types'];
   } else {

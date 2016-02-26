@@ -24,3 +24,11 @@ define('CATEGORY_MB_IMAGES_TYPE', CATEGORY_MB_IMAGES . '_type');
 define('TIP_MB', PREFIX . 'tip_metabox');
 define('TIP_MB_CHARACS', TIP_MB . '_characteristics');
 define('TIP_MB_VIDEO', TIP_MB . '_video');
+
+
+define('CAMPAIGN_MB', PREFIX . 'campaign_metabox');
+define('CAMPAIGN_MB_SLIDER', CAMPAIGN_MB . '_slider');
+define('CAMPAIGN_MB_CHARAC_IMAGE', CAMPAIGN_MB_SLIDER . '_image');
+define('CAMPAIGN_MB_CHARAC_TEXT', CAMPAIGN_MB_SLIDER . '_text');
+define('CAMPAIGN_MB_VIDEO', CAMPAIGN_MB . '_video');
+define('CAMPAIGN_MB_PRODUCTS', CAMPAIGN_MB . '_products');

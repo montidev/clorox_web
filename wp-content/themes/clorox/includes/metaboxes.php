@@ -6,6 +6,7 @@ function clorox_register_meta_boxes() {
   require_once( __DIR__ . '/metaboxes/page-home.php' );
   require_once( __DIR__ . '/metaboxes/product.php' );
   require_once( __DIR__ . '/metaboxes/tip.php');
+  require_once( __DIR__ . '/metaboxes/campaign.php');
 }
 
 

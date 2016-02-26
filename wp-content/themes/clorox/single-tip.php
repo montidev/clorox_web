@@ -21,10 +21,23 @@
 		        </div>
 		        <?php the_content(); ?>
 		        <div class="socialFunciones">
-			        <button type="button" class="btn btn-default btn-lg btn-clorox btn-share pull-right">
-			          <i class="icon icon-share"></i>
-			          <span>Compartir</span>
-			        </button>
+		        	<div class="likebtns pull-left blue fontX18 m-t-xss">
+		        		<span class='pull-left'> ¿Te resultó interesante este tip?</span>
+		        		<?php echo do_shortcode('[rating-system-posts]'); ?>
+
+		        	</div>
+		        	<div class="dropdown pull-right">
+				        <button type="button" id="shareme" class="btn btn-default btn-lg btn-clorox btn-share pull-right" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				          <i class="icon icon-share"></i>
+				          <span>Compartir</span>
+				        </button>
+				        <ul class="dropdown-menu" aria-labelledby="dLabel">
+				        	<li class="text-center"><?php if ( function_exists( 'ADDTOANY_SHARE_SAVE_KIT' ) ) { 
+									    ADDTOANY_SHARE_SAVE_KIT( array( 'use_current_page' => true ) );
+									} ?>
+									</li>					        
+	  						</ul>				
+			  			</div>
 			      </div>
 		      </div>
 	      </div>
@@ -51,7 +64,7 @@
 	    <h2 class="title fontX38 light white text-center">Tips Relacionados</h2>
 	    
 	    <?php get_template_part('partials/grid', 'tips'); ?>
-	</div>
+	</section>
 
 
  	<!-- fin tips relacionados --> 
