@@ -62,7 +62,7 @@
 		 		<p class="grey fontX16 light">
 		 			Completá los datos y envianos tu comentario
 		 		</p>
-		    <?php echo do_shortcode( '[contact-form-7 id="73" title="Formulario de contacto"]' ); ?>
+		    <?php echo do_shortcode( '[contact-form-7 id="71" title="Formulario de contacto"]' ); ?>
 		 		<!-- fin formulario -->
 	 		</div>
 	 		<div class="list col-md-2">
