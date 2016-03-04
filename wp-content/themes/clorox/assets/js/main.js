@@ -77,10 +77,102 @@ jQuery(function($){
 
   });
 
+
+
+  //responsive JS 
+  //inicio de sliders
+
   canPaginate($('.paginate-ajax'));
 
+  var envSlider; 
+  var proSlider;
+  var proRelateds;
+  var campSlider;
+  initSliders = function(){
 
+  	if(!envSlider && $('.environments').length){
+	  	envSlider = $('.environments').bxSlider({
+	    	hideControlOnEnd: true,
+			  slideWidth: 223,
+			  slideMargin: 10,
+			  adaptiveHeight: true,
+	    });
+  	}
+
+  	if(!proSlider && $('.home .products, .single-product .products').length){
+  		proSlider = $('.home .products, .single-product .products').bxSlider({
+	    	hideControlOnEnd: true,
+			  slideWidth: 190,
+			  slideMargin: 10,
+			  adaptiveHeight: true,
+	    });
+	
+  	}
+    
+    if(!proRelateds && $('#section-relateds .products').length){
+	    proRelateds = $('#section-relateds .products').bxSlider({
+	    	hideControlOnEnd: true,
+			  slideWidth: 190,
+			  slideMargin: 10,
+			  adaptiveHeight: true,
+	    });
+	  }
+
+	  if(!campSlider && $('#sectionCampaignDetail .products').length){
+	    campSlider = $('#sectionCampaignDetail .products').bxSlider({
+	    	hideControlOnEnd: true,
+			  slideWidth: 190,
+			  slideMargin: 10,
+			  adaptiveHeight: true,
+	    });
+	  }
+  }
+
+
+  /* BREAKPOINT events */
+  $(window).bind('enterBreakpoint320',function() {
+    
+    	initSliders();
+    
+  });
+	
   
+  $(window).bind('enterBreakpoint480',function() {
+    
+    	initSliders();
+    
+  });
+  $(window).bind('enterBreakpoint768',function() {
+    if(envSlider){
+    	envSlider.destroySlider();
+    	envSlider = undefined;	
+    } 
+    if(proSlider){
+    	proSlider.destroySlider();
+    	proSlider = undefined;
+    }
+    if(proRelateds){
+    	proRelateds.destroySlider();
+    	proRelateds = undefined;
+    }
+    if(campSlider){
+    	campSlider.destroySlider();
+    	campSlider = undefined;
+    }
+  });
+
+  // $(window).bind('exitBreakpoint1024',function() {
+  //   $('#log').append('<p>Exiting 1024 breakpoint</p>');
+  // });
+  // $(window).bind('enterBreakpoint1024',function() {
+  //   $('#log').append('<p>Entering 1024 breakpoint</p>');
+  // });
+
+	$(window).setBreakpoints({
+		distinct: true,
+		breakpoints: [320, 480, 768]
+	});
+
 
   // $('.filters').on('click', 'a', function(e){
   //   e.preventDefault();

@@ -25,10 +25,10 @@
 </script>
 
 <form method="post" action="http://clorox.com.ar/?na=s" onsubmit="return newsletter_check(this)">
-  <div class="col-md-5">
+  <div class="col-lg-5 col-md-6">
     <label for="email" class="blue">Quiero recibir novedades</label>
   </div>
-  <div class="col-md-7">
+  <div class="col-lg-7 col-md-6">
     <div class="input-group">
       <input class="newsletter-email form-control input-md primary" type="email" placeholder="Ingresar email" name="ne" size="30" required>
       <span class="input-group-btn">

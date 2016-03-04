@@ -1,8 +1,8 @@
-<div class="content boxes environments clearfix">
+<div class="content boxes environments clearfix categoryBoxCont">
   <?php $categories = get_categories(array('number' => 6)); ?>
   <?php foreach ($categories as $category): ?>
-    <div class="col-md-2">
-      <article class="box box-white box-shadow border-x4-bottom border-blue animate-scale">
+    <div class="col-lg-2 col-md-4 col-xs-4">
+      <article class="box box-white box-shadow border-x4-bottom border-blue categoryBox animate-scale">
         <div class="header">
           <div class="bg-image" style="background-image:url(<?php get_category_image_uri($category->term_id); ?>)"></div>
         </div>

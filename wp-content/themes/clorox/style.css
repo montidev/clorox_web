@@ -52,6 +52,11 @@ button:hover
 	-webkit-box-shadow: none;
 }
 
+.md-hide {
+	display: none;
+}
+
+
 .form-control:focus{
     border-color: #cccccc;
     -webkit-box-shadow: none;
@@ -465,7 +470,7 @@ select.input-md {
 }
 
 .box > .header {
-  height: 75%;
+  height: 80%;
 }
 
 .box > .header > .bg-image {
@@ -522,6 +527,10 @@ select.input-md {
   height: 25%;
 }
 
+
+.product .box > .body {
+	height: 20%;
+}
 .environments .box > .body a {
   height: 100%;
   width: 100%;
@@ -575,12 +584,22 @@ select.input-md {
 }
 
 .box-layered > .body {
-  height: 30%;
+  min-height: 124px;
+  padding: 25px;
   bottom: 0;
   left: 5%;
   width: 90%;
   z-index: 2;
-  padding: 10px 20px;
+}
+
+#section-tips .box-layered > .body {
+	height: 124px;
+	padding: 25px;
+	bottom: -15px;
+}
+
+#section-tips .box-layered > .body:hover {
+	height: 174px;
 }
 
 .box-layered > .body p {
@@ -757,6 +776,7 @@ header > nav {
   line-height: 70px;
   font-size: 20px;
   color: #1967bb;
+  text-align: center;
 }
 
 .navbar-custom .navbar-nav > li.current-menu-item > a {
@@ -770,8 +790,14 @@ header > nav {
 	box-shadow: none;
 }
 
+.menu-primary-container ul:first-child {
+	margin-right: 0px;
+}
+
 .nav.social-links {
   margin-right: 15px;
+  position: absolute;
+  right: 0px;
 }
 
 .nav.social-links > li:first-child {
@@ -784,6 +810,7 @@ header > nav {
 
 .nav.social-links > li > a {
   height: 100%;
+  padding: 15px 0;
 }
 
 
@@ -829,8 +856,15 @@ header > nav {
 * HOME
 */
 
+#main-wrapper {
+	overflow: hidden;
+}
+
 .bx-wrapper, .bx-viewport, .bxslider, .bxslide {
   height: 100% !important;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none; 
+  box-shadow: none; 
   border: 0;
 }
 
@@ -861,13 +895,29 @@ header > nav {
   min-height: 1050px;
 }
 
+#sectionCampaignDetail .bx-viewport, #section-relateds .bx-viewport, #section-products .bx-viewport {
+	overflow: visible !important;
+}
+
+#sectionCampaignDetail .bx-controls, #section-relateds .bx-controls, #section-products .bx-controls {
+	display: none;
+}
+
+#sectionCampaignDetail .bx-wrapper, #section-relateds .bx-wrapper, #section-products .bx-wrapper {
+	background: transparent;
+}
+
 .products .product {
   height: 330px;
-  min-width: 225px;
+  width: 19.6%;
+  display: inline-block;
+  padding: 15px 30px;
+  padding-bottom: 15px !important;
+  /*min-width: 225px;*/
 }
 
 .products .product + .product {
-  margin-left: 5px;
+  /*margin-left: 5px;*/
 }
 
 .products .box {
@@ -896,6 +946,18 @@ header > nav {
 
 #section-tips {
   padding-bottom: 60px;
+}
+
+#section-environment {
+	overflow: hidden;
+}
+
+#section-environment .bx-viewport {
+	overflow: visible !important;
+}
+
+#section-environment .bx-controls {
+	display: none;
 }
 
 #section-environment .boxes,
@@ -947,7 +1009,13 @@ header > nav {
 .tip:nth-child(3n) .body > .link {
   color: #f0c828;
 }
+.categoryBoxCont {
+	overflow: hidden;
 
+}
+.categoryBox {
+	margin: 10px auto;
+}
 
 /*
 * Pages
@@ -1143,6 +1211,10 @@ header > nav {
   margin-right: 15%;
 }
 
+.single-product .characteristic p {
+	margin-top: 15px;
+}
+
 .single-product .characteristic > .bg-image {
   height: 240px;
   width: 100%;
@@ -1192,7 +1264,6 @@ header > nav {
 
 .single-tip #section-relateds {
 	padding-top: 170px;
-	padding-bottom: ;
 }
 
 #section-tip .previous-history {
@@ -1327,7 +1398,6 @@ header > nav {
 	padding-top: 0;
 }
 
-
 .single-campaign #sectionCampaignDetail {
 	padding-top: 80px;
 }
@@ -1376,15 +1446,47 @@ header > nav {
 	max-height: 280px;
 }
 
+
+
+.single-campaign #section-contactForm {
+	background-color: #f3f3f3;
+	padding-bottom: 80px;
+	height: auto;
+	min-height: auto;
+}
 .single-campaign .contactFormCont {
 	width: 670px;
-	margin-left: auto;
-	margin-right: auto;
+	margin-left: 50%;
+	left: -265px;
+  position: relative;
 }
 
 .single-campaign .contactFormCont ul {
 	font-size: 20px;
 	margin: 70px 0px 0 30px;
+}
+
+#section-contactForm .socialShare li span {
+	display: none;
+}
+
+.single-campaign footer .logo img {
+    margin: auto;
+    padding-top: 20px;
+    padding-bottom: 50px;
+}
+
+
+
+/*
+* TIPS 
+*/
+
+
+.box-layered > .body p {
+  max-height: 40px;
+  overflow: hidden;
+  
 }
 /*
 * FOOTER
@@ -1401,7 +1503,7 @@ footer .top-center {
 }
 
 footer .newsletter {
-  padding: 10px 70px;
+  padding: 10px 50px;
   height: 90px;
   line-height: 65px;
   box-shadow: 5px 25px 35px -12px #ccc;
@@ -1418,6 +1520,7 @@ footer .newsletter input{
   font-size: 20px;
   width: 100%;
 }
+
 
 footer .input-md + .input-group-btn > .btn {
   margin-top: 8px;
@@ -1507,3 +1610,901 @@ footer .copyright {
 #shareme .facebook {
   margin:0 4px 0 0;
 }
+
+
+
+/* 
+* Policies
+*/
+
+#section-policies {
+	padding-top: 55px;
+}
+
+
+
+
+
+
+/*==========  Media Queries  ==========*/
+/*=====================================*/
+
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+
+	/* tip element*/
+	#section-tips .box-layered > .body {
+		height: 144px;
+		padding: 25px;
+		bottom: -15px;
+	}	
+
+	.box-layered > .body p {
+	  max-height: 60px;
+	  overflow: hidden;
+	  
+	}
+	/*
+	* Home page
+	*/
+	.environments {
+
+		margin: 0 auto;
+	}
+	.categoryBox {
+		margin: 20px auto 10px ;
+	}
+
+	.environments {
+		width: 80%;
+	}
+
+	footer .newsletter label {
+		font-size: 32px;
+    line-height: 39px;
+    vertical-align: bottom;
+    text-align: right;
+  }
+
+  footer .newsletter form div:first-child {
+  	text-align: right;
+  }
+
+  footer .newsletter {
+  	padding: 10px 80px 10px 50px;
+  }
+
+  /*
+  * Products
+  */
+  .page #section-products .container-fluid:first-child {
+  
+  	padding: 0;
+  	margin: 0 -50px 0 -50px;
+  }
+  .page #section-products .container-fluid:first-child h2 {
+  	font-size: 32px;
+  	line-height: 50px;
+  }
+
+  .page #section-products .container-fluid:first-child .filters > .btn {
+  	font-size: 32px;
+  }
+
+  .page #section-products .dropdown.filters > .btn {
+  	min-width: 180px;
+  }
+
+  /*
+  * Contacto 
+  */
+
+  #section-contacto .container925 {
+  	margin-left: 0;
+  	margin-right: 0;
+  	width: 100%;
+  	max-width: 100%;
+  }
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+	/*
+	* General
+	*/
+
+	.xs-hide {
+		display: none;
+	}
+
+	.md-hide {
+		display: block;
+	}
+
+	.container850 {
+	  width: 100%;
+	  max-width: 850px;
+	  margin: auto;
+	}
+
+
+	.previous-history {
+		margin-left: 0;
+	}
+
+	/* tip element */
+	/* tip element*/
+	#section-tips .box-layered > .body {
+		height: 124px;
+		padding: 25px;
+		bottom: -15px;
+	}	
+
+	.box-layered > .body p {
+	  max-height: 40px;
+	  overflow: hidden;
+	  
+	}
+	/*
+	* Home page
+	*/
+  #section-tips .content .tip, #section-relateds-tips .content .tip{
+		max-width:550px;
+		margin: 0 auto 50px auto;
+	}
+	#section-products .label-filter {
+		text-align: center;
+		line-height: 1.5;
+	}
+
+	#section-products .label-filter + div {
+		width: 280px;
+		margin: 0 auto;
+		float: none !important;
+	}
+
+
+	#section-products {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.products .product {
+
+	}
+
+	/*
+	* Section Tips 
+	*/
+
+	.single-tip #section-relateds-tips .content > div {
+		padding-bottom: 30px;
+	}
+
+	/* Newsletter subscription */
+	footer .newsletter {
+		top: 0;
+		width: 100%;
+		padding: 10px 15px;
+		height: auto;
+		line-height: 34px;
+	}
+
+	footer .newsletter form > div {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	footer .newsletter label {
+		font-size: 26px;
+		line-height: 1.5;
+		width: 100%;
+		text-align: center;
+	}
+
+	footer .newsletter-email {	
+		margin: 0 auto;
+		margin-top: 0;
+	}
+
+	footer .newsletter form .input-group {
+		margin-bottom: 45px;
+		margin-left: auto;
+    margin-right: auto;
+	}
+
+	footer .logo img { 
+		padding-top: 200px;
+	}
+
+	/* 
+	* Campaña
+	*/
+
+	.single-campaign #section-contactForm {
+		padding-bottom: 20px;
+
+
+	}
+
+	.single-campaign .contactFormCont {
+		margin-left: auto;
+		margin-right: auto;
+		left: 0;
+	}
+
+	#sectionCampaignDetail .container1060 {
+		width: 100%;
+	}
+
+	.container925 {
+		width: 100%;
+	}
+
+	.single-campaign .contactFormCont {
+		min-height: auto;
+		height: auto;
+	}
+
+	.single-campaign .contactFormCont .contactForm {
+		margin-left: 0;
+	}
+	.single-campaign #section-contactForm .contactFormCont .socialShare {
+		margin-top:40px;
+		margin-bottom: 40px;
+	}
+	.single-campaign #section-contactForm .contactFormCont .socialShare li span {
+		display: inline;
+	}
+
+
+	/* 
+	* Contacto
+	*/
+
+	#section-contacto .contactFormCont {
+  	height: auto;
+  }
+
+  #section-contacto .contactForm {
+  	margin-left: 0;
+  }
+
+
+  /*
+  * Products
+  */
+  .page #section-products h2 {
+  	display: inline-block;
+  	margin: 0 auto;
+  }
+
+  .page #section-products h2 div:nth-child(2) {
+  	clear: left;
+  	width: 100%;
+  }
+
+  .page #section-products h2 div:nth-child(3) {
+  	clear: left;
+  	position: absolute;
+  	padding-top: 13px;
+  }
+
+  .page #section-products h2 div:nth-child(4) {
+  	width: 100%;
+  	padding-left: 60px;
+  }
+ }
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+	/*
+	*Layout
+	*/
+	body {
+		padding-top: 50px;
+	}
+	.single .title {
+    font-size: 38px;
+	}
+	.navbar-custom {
+		min-height: 74px !important;
+	}
+
+
+
+	.navbar-custom .navbar-header {
+		height: 74px;
+	}
+
+	.navbar-custom .navbar-brand {
+		height: 74px;
+	}
+
+	.navbar-custom .navbar-brand img {
+    height: auto;
+    width: 85px;
+    margin: 10px;
+  }
+
+  .navbar-toggle {
+  	padding: 0;
+  	border-radius: none;
+  	border: 0;
+  	width: 35px;
+  	margin: 22px;
+  }
+
+  .navbar-toggle .icon-bar {
+    display: block;
+    width: 35px;
+    height: 4px;
+    border-radius: 1px;
+	}
+
+	.navbar-default .navbar-toggle .icon-bar {
+    background-color: #1967bb;
+	}
+
+	.navbar-toggle .icon-bar+.icon-bar {
+    margin-top: 8px;
+	}
+
+	.navbar-default .navbar-collapse {
+
+	}
+
+	.menu-primary-container ul li:last-child {
+		margin-bottom: 0px;
+	}
+
+	.navbar-nav {
+     margin: 0px 0px; 
+	}
+
+	.nav.social-links {
+		display: inline-block;
+    width: auto;
+    margin: 0 auto !important;
+    position: relative;
+    bottom: 0;
+    margin-left: 50% !important;
+    left: -58px;
+	}
+
+	.navbar-collapse {
+		padding-top: 60px;
+	}
+
+	.social-links li {
+		display: inline-block;
+		width: 45px;
+		float:left;
+	}
+
+	.section {
+    padding: 35px 60px 35px 60px;
+	}
+
+	.single .top-overlaped {
+    margin-top: 0px;
+    min-height: 500px;
+    box-shadow: none;
+    margin-bottom: 0;
+	}
+
+	.videoContainer {
+		padding: 0;
+	}
+
+	/*
+	* Home page
+	*/
+
+	.featured-image .box-blue h3 {
+    font-weight: 200;
+    font-size: 30px;
+    color: #fff;
+  }
+
+  .featured-image .bottom-left {
+    bottom: 100px;
+    left: auto;
+    margin: 0px 5%;
+	}
+
+	.box-blue {
+		padding: 10px 10px 10px 15px;
+	}
+
+	.border-three-colors {
+		display: none;
+	}
+
+	#section-environment .boxes, #section-tips .boxes {
+    padding-top: 50px;
+	}
+
+	/* solo para la home page */
+	/* section tips */
+	#section-tips {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.home #section-tips .content .tip {
+		display: none;
+	}
+
+	.home #section-tips .content .tip:first-child {
+		display: block;
+	}
+
+	#section-tips .content .tip {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	#section-tips > .title h2 {
+		padding-left: 65px;
+		padding-right: 65px;
+	}
+
+
+	.plus-icon.iconX2 {
+		width: 70px;
+		height: 70px;
+	}
+
+	#section-tips .btn-more {
+    margin-top: 31px;
+	}
+
+	#section-products {
+    min-height: 715px;
+	}
+
+	#section-relateds .bx-viewport, #section-products .bx-viewport {
+		overflow: visible !important;
+		height: auto !important;
+	}
+
+
+	#section-products .label-filter {
+		font-size: 28px;
+		font-weight: 200;
+		text-align: left;
+	}
+
+	#section-products .label-filter + div {
+		width: 100%;
+		padding: 0 15px;
+
+	}
+	#section-relateds .container-products .bx-wrapper, #section-products .container-products .bx-wrapper {
+		margin-bottom: 0;
+	}
+
+	#section-products .products {
+		padding-bottom: 0;
+	}
+	#section-products .products .product {
+		height: 290px;
+	}
+
+	#section-products .container-products > h3 {
+		font-size: 24px;
+		font-weight: 200;
+		padding-left: 10%;
+		padding-right: 10%;
+		margin-top: 30px;
+		margin-bottom: 30px;
+	}
+
+	#section-products .btn-more {
+		margin-top: 10px;
+	}
+
+
+	/*
+	* Product Single
+	*/
+	.single-product section {
+		padding: 35px 25px 70px;
+	}
+
+	#section-characteristics {
+		padding: 0;
+	}
+
+	#section-product h1.title, #section-product h2.title {
+		font-size: 38px;
+		font-weight: 400;
+	}
+
+	.single-product .featured-image {
+		margin-top: 20px;
+	}
+
+	.single .title + p {
+    margin: 0px auto 10px;
+    font-size: ;
+  
+	}
+
+	.list-inline.categories > li + li {
+    margin-left: 0px;
+	}
+	.categories-container .categories {
+		margin-bottom: 0;
+	}
+	.categories-container + div {
+		width: 100%;
+	}
+
+	.characteristic p {
+		font-size: 18px;
+	}
+
+	.categories-container + div .btn-clorox {
+		width: 100%;
+	}
+
+	#section-characteristics .top-overlaped {
+		padding: 40px 45px;
+
+	}
+
+	#section-characteristics .characteristics {
+		padding: 50px 0 0 0 ;
+		padding
+	}
+
+	#section-characteristics .characteristic {
+		padding: 0px 0;
+		margin: 0 0 40px 0;
+	}
+
+	#section-characteristics .characteristics- > div{
+		padding:0;
+
+	}
+
+	.single-product .videoContainer {
+		margin-top: 40px;
+	}
+
+	.single-product .characteristic {
+    min-height: 330px;
+    max-height: 430px;
+    margin-left: 15%;
+    margin-right: 15%;
+
+	}
+
+	#section-relateds h2.title{
+		font-size: 28px;
+	}
+
+	/*
+	* Products 
+	*/
+
+	#section-products > .container {
+		padding: 0;
+	}
+	#section-products #filter-type-prod-label {
+		width: auto;
+		float: left;
+		padding-top: 18px;
+		position: absolute;
+	}
+	#section-products #filter-type-prod {
+		width: 100%;
+		padding-left: 62px;
+		display: inline-block;
+		margin-right: 15px;
+	}
+	.page #section-products {
+		padding-top: 55px;
+	}
+	.products .product {
+		width: 32%;
+	}
+	
+
+	/*
+	* Tip single
+	*/
+
+	.single-tip #section-tip .container850:first-child {
+		display: none;
+	}
+
+	.single-tip #section-tip {
+		padding: 26px 0;
+		background-color: #fff;
+	}
+
+	.single-tip .container850 {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+	}
+
+	.single-tip #section-tip .detailContainer h1.title {
+		font-size: 28px;
+	}
+
+
+	.single-tip .detailContainer p {
+		margin-bottom: 40px;
+	}
+
+	.single-tip .socialFunciones .likebtns {
+		font-size: 16px;
+		float: none !important;
+    display: block;
+    margin: 0 auto;
+    width: 330px;
+    margin-top: 6px;
+    text-align: center;
+	}
+
+	.single-tip .socialFunciones {
+		margin-left: -15px;
+    margin-right: -15px;
+	}
+
+	.single-tip .socialFunciones .dropdown {
+
+		display: block;
+		float: none !important;
+		clear: both;
+    margin-right: 50%;
+    margin-top: 70px;
+    left: 60px;
+
+	}
+	.single-tip .detailContainer {
+		width: 100%;
+		margin-bottom: 107px;
+	}
+
+	.single-tip #section-relateds {
+		padding-top: 115px;
+		padding-bottom: 10px;
+	}
+
+	.single-tip #section-relateds-tips {
+		background-color: #1967bb;
+		padding: 0 0 25px;
+	}
+
+	.single-tip #section-relateds-tips h2.title:first-child {
+		font-size: 28px;
+		font-weight: 200;
+	} 
+
+	.single-tip #section-relateds-tips .content {
+		margin-top: 25px;
+	}
+	.single-tip #section-relateds-tips .content > div {
+		padding-left: 0;
+		padding-right: 0;
+		padding-bottom: 30px;
+	}
+
+
+
+	/*
+	* Section Tips
+	*/
+
+	.page #section-tips {
+		padding-top: 70px ;
+	}
+
+	.page #section-tips > .title h2 {
+		padding-left: 40px;
+		padding-right: 40px;
+		font-size: 36px;
+	}
+
+	.page #section-tips > .title h2 strong{
+		display: block;
+	}
+
+	.page #section-tips > .content {
+		padding-top: 40px;
+	}
+
+	.page #section-tips .btn-more {
+    margin-top: 10px;
+	}
+
+	/*
+	* Campaña
+	*/
+
+	#sectionCampaignDetail {
+		padding-top: 40px;
+	}
+
+	#sectionCampaignDetail h2.title strong {
+		display: block;
+	}
+
+	.single-campaign #sectionCampaignDetail p {
+    max-width: 625px;
+    margin: 25px 15px 40px;
+    font-size: 16px;
+	}
+
+	.single-campaign #sectionCampaignDetail .products .product {
+    width: 33%;
+    float: left;
+    padding: 0%;
+    height: 420px;
+	}
+
+	.single-campaign #sectionCampaignDetail .products .product .body > .title {
+    font-size: 18px;
+	}
+
+	.single-campaing #section-relateds {
+		padding-top: 115px;
+		padding-bottom: 10px;
+	}
+
+	.single-campaign #section-relateds-tips {
+		
+		padding: 35px 0 25px;
+	}
+
+	.single-campaign #section-relateds-tips h2.title:first-child {
+		font-size: 28px;
+		font-weight: 200;
+	} 
+
+	.single-campaign #section-relateds-tips .content {
+		margin-top: 25px;
+	}
+	.single-campaign #section-relateds-tips .content > div {
+		padding-left: 0;
+		padding-right: 0;
+		padding-bottom: 30px;
+	}
+
+	.single-campaign .videoContainer iframe {
+    width: 100%;
+    height: 600px;
+    margin-bottom: 40px;
+	}
+
+
+
+	/*
+	*	Contacto Form
+	*/
+
+	#section-contactForm {
+		padding: 0;
+		min-height: auto;
+	}
+
+	#section-contactForm .contactFormCont {
+		width: 100%;
+		height: auto;
+	}
+
+	#section-contactForm .overlaped {
+    margin-top: 0px;
+    margin-left: 0px;
+	}
+
+	#section-contactForm .contactForm {
+		padding-bottom: 80px;
+		height: auto;
+	}
+
+	#section-contactForm .socialShare {
+		margin-top: 34px;
+		margin-bottom: 55px;
+	}
+
+
+
+	.single-campaign footer .logo img {
+    padding-top: 50px;
+	}
+
+
+
+	/*
+	* Contacto 
+	*/
+
+	#section-contacto {
+		padding: 65px 0 0 0;
+		min-height: auto;
+	}
+
+	#section-contacto .title {
+		padding-left: 45px;
+		padding-right: 45px;
+		margin-bottom: 0;
+	}
+
+	#section-contacto p.text-contact {
+		padding: 25px 25px 35px;
+	}
+
+	#section-contacto .contactFormCont {
+		width: 100%;
+		height: auto;
+		margin: 0;
+	}
+
+	#section-contacto .overlaped {
+    margin-top: 0px;
+    margin-left: 0px;
+	}
+
+	#section-contacto .contactForm {
+		padding-bottom: 80px;
+		height: auto;
+	}
+
+	#section-contacto .socialShare {
+		margin-top: 34px;
+		margin-bottom: 55px;
+	}
+
+	/*
+	* policies , own history
+	*/
+
+	#section-own-history .content {
+		padding: 35px 25px 55px;
+	}
+
+	.page .content h2 {
+		font-size: 32px;
+	}
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 480px) {
+
+
+	/*
+	* Products
+	*/
+
+	.products .product {
+		width: 49%;
+	}
+
+	/*
+	* own history && policies
+	*/ 
+
+
+	#section-policies, #section-own-history {
+		padding: 15px 0 0 0;
+		margin-bottom: 20px;
+	}
+
+	
+
+}
+
+/* Custom, iPhone Retina */ 
+@media only screen and (max-width : 320px) {
+
+}
+
+

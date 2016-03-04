@@ -7,6 +7,12 @@
     </div>
     <article class="container850">
       <div class="clearfix">
+      	<div class="row">
+	      	<div class="col-xs-12 md-hide">
+	      		<h2 class="title white"><?php echo_safe( get_product_type(get_the_ID()) ); ?></h2>
+	            <h1 class="title white"><?php the_title(); ?></h1>
+	      	</div>
+	      </div>
         <div class="col-md-5">
           <div class="row">
             <div class="bg-image featured-image border-x4-bottom border-blue" style="background-image: url(<?php get_featured_image_uri(get_the_ID()); ?>)"></div>
@@ -14,8 +20,8 @@
         </div>
         <div class="col-md-7">
           <div class="row">
-            <h2 class="title white"><?php echo_safe( get_product_type(get_the_ID()) ); ?></h2>
-            <h1 class="title white"><?php the_title(); ?></h1>
+            <h2 class="title white xs-hide"><?php echo_safe( get_product_type(get_the_ID()) ); ?></h2>
+            <h1 class="title white xs-hide"><?php the_title(); ?></h1>
             <?php the_content(); ?>
             <div class="categories-container">
               <?php display_categories_of(get_the_ID()); ?>

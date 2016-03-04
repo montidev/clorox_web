@@ -6,7 +6,7 @@
 			<div class="row bg-green">
 				<div class="col-sm-offset-2 col-md-8">
 					<h2 class="title white text-center">Siempre estamos con ganas de charlar</h2>
-					<p class="white">
+					<p class="white text-contact">
 						Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. 
 					</p>
 				</div>
@@ -24,19 +24,19 @@
 		 		<div class="list col-md-4">
 		 			<ul class='list-unstyled socialShare white'>
 		 				<li>
-		 					<i class="icon icon-email iconX40"></i> info@clorox.com
+		 					<a href="mailto:info@clorox.com" target="_blank" class="white"><i class="icon icon-email iconX40"></i> info@clorox.com</a>
 		 				</li>
 		 				<li>
 		 					<i class="icon icon-telephone iconX40"></i> 0-800-333-9487
 		 				</li>
 		 				<li>
-		 					<i class="icon icon-fb-white iconX40"></i> /clorox
+		 					<a href="http://facebook.com/clorox" target="_blank" class="white"><i class="icon icon-fb-white iconX40"></i> /clorox</a>
 		 				</li>
 		 				<li>
-		 					<i class="icon icon-yt-white iconX40"></i> /clorox
+		 					<a href="http://youtube.com/clorox" target="_blank" class="white"><i class="icon icon-yt-white iconX40"></i> /clorox</a>
 		 				</li>
 		 				<li>
-		 					<i class="icon icon-tw-white iconX40"></i> @clorox
+		 					<a href="http://twitter.com/clorox" target="_blank" class="white"><i class="icon icon-tw-white iconX40"></i> @clorox</a>
 		 				</li>
 		 			</ul>
 		 		</div>

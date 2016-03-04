@@ -6,11 +6,31 @@ add_filter('show_admin_bar', '__return_false');
 // Add support thumbnails
 add_theme_support( 'post-thumbnails' );
 
-// limit the_excerpt()
-add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
-function custom_excerpt_length( $length ) {
-	return 12;
+
+
+function wp_new_excerpt($text)
+{
+	if ($text == ''){
+		$text = get_the_content('');
+		$text = strip_shortcodes( $text );
+		$text = apply_filters('the_content', $text);
+		$text = str_replace(']]>', ']]>', $text);
+		$text = strip_tags($text);
+		$text = nl2br($text);
+		$excerpt_length = apply_filters('excerpt_length', 10);
+		$words = explode(' ', $text, $excerpt_length + 1);
+		if (count($words) > $excerpt_length) {
+			array_pop($words);
+			array_push($words, '...');
+			$text = implode(' ', $words);
+		}
+	}
+	return $text;
 }
+remove_filter('get_the_excerpt', 'wp_trim_excerpt');
+add_filter('get_the_excerpt', 'wp_new_excerpt');
+
+
 
 // Register Menu
 add_action( 'after_setup_theme', 'register_my_menu' );

@@ -68,12 +68,12 @@
 	 		<div class="list col-md-2">
 	 			<ul class='list-unstyled socialShare white'>
 	 				<li>
-	 					<i class="icon icon-fb-white iconX50"></i> 
+	 					<a class="white" href="http://facebook.com/clorox"><i class="icon icon-fb-white iconX50"></i> <span>/clorox</span> </a> 
 	 				</li>
 	 				<li>
-	 					<i class="icon icon-yt-white iconX50"></i> 
+	 					<a class="white" href="http://facebook.com/clorox"><i class="icon icon-yt-white iconX50"></i> <span>/clorox</span></a>
 	 				<li>
-	 					<i class="icon icon-tw-white iconX50"></i> 
+	 					<a class="white" href="http://twitter.com"><i class="icon icon-tw-white iconX50"></i> <span>@clorox</span></a>
 	 				</li>
 	 			</ul>
 	 		</div>
@@ -87,4 +87,4 @@
 
 	<?php endwhile; ?>
 
-<?php get_footer('campaign');?>
+<?php get_footer('nonenewsletter');?>
