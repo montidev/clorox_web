@@ -6,7 +6,7 @@ require_once(__DIR__ . '/includes/metaboxes.php');
 require_once(__DIR__ . '/includes/styles_scripts.php');
 require_once(__DIR__ . '/includes/actions_and_filters.php');
 require_once(__DIR__ . '/includes/admin_configs.php');
-// require_once(__DIR__ . '/includes/social_stream.php');
+require_once(__DIR__ . '/includes/social_stream.php');
 
 //  ===========================================================================
 //  Helpers

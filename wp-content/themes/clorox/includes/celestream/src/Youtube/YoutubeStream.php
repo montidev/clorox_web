@@ -1,6 +1,7 @@
 <?php namespace Celestream\Youtube;
 
 use Celestream\Interfaces\StreamInterface;
+use Celestream\Items\YoutubeItem;
 
 class YoutubeStream implements StreamInterface {
 
@@ -24,6 +25,16 @@ class YoutubeStream implements StreamInterface {
 
     $result = $this->youtube->search->listSearch($fields, $args);
 
-    return $result['items'];
+    $items = [];
+
+    foreach ($result['items'] as $feed) {
+      $id = $feed->id->videoId;
+      $name = $feed->snippet->title;
+      $img_url = $feed->snippet->thumbnails['high']['url'];
+      $link = "http://youtube.com/watch?v={$id}";
+      $items[] = new YoutubeItem($id, $name, $link, $img_url);
+    }
+
+    return $items;
   }
 }

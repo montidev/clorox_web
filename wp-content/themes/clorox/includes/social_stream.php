@@ -27,21 +27,18 @@ $feed_args = [
   'facebook' => [
     'endpoint' => '/Clorox/posts',
     'params' => [
-      'limit' => 5
+      'limit' => 5,
+      'fields' => 'id,name,attachments'
     ]
   ],
   'youtube' => [
     'fields' => 'snippet',
     'channelId' => 'UCSsUEf0vY2ghWC10lj_oVrw',
     'maxResults' => 5,
-    'order' => 'date'
+    'order' => 'date',
+    'type' => 'video'
   ]
 ];
 
-try {
-  $API = new SocialStreams($credentials);
-  $res = $API->getFeeds($feed_args);
-  dd($res);
-} catch (Exception $e) {
-  error_log($e->getMessage());
-}
+// $API = new SocialStreams($credentials);
+// $res = $API->getFeeds($feed_args);

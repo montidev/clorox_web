@@ -1,6 +1,7 @@
 <?php namespace Celestream\Facebook;
 
 use Celestream\Interfaces\StreamInterface;
+use Celestream\Items\FacebookItem;
 use Facebook\Facebook;
 
 class FacebookStream implements StreamInterface {
@@ -23,27 +24,17 @@ class FacebookStream implements StreamInterface {
     // query params
     $endpoint = $args['endpoint'];
     $params = $args['params'];
-
     // Get feeds
     $feeds = $this->facebook->sendRequest('GET', $endpoint, $params);
-
-    // Get feeds ids
     $feeds = json_decode($feeds->getBody())->data;
-    $feeds_ids = array_map(function($f){ return $f->id; }, $feeds);
+    $items = [];
 
-    // Prepare requests for feeds (retrive more info)
-    $requests = [];
-    foreach ($feeds_ids as $feed_id) {
-      $requests[] = $this->facebook->request('GET', "/{$feed_id}/attachments");
+    foreach ($feeds as $feed) {
+      $img_url = $feed->attachments->data[0]->media->image->src;
+      $link = $feed->attachments->data[0]->target->url;
+      $items[] = new FacebookItem($feed->id, $feed->name, $link, $img_url);
     }
 
-    $feeds = json_decode($this->facebook->sendBatchRequest($requests)->getBody());
-    $feeds = array_map(function($feed){
-      return json_decode($feed->body)->data[0];
-    }, $feeds);
-
-    // dd($feeds);
-
-    return $feeds;
+    return $items;
   }
 }
