@@ -15,6 +15,7 @@ class SocialStreams implements StreamInterface {
     }
 
     if ( array_key_exists('facebook', $args) ) {
+      
       $this->facebook = new FacebookStream($args['facebook']);
     }
   }
@@ -23,6 +24,6 @@ class SocialStreams implements StreamInterface {
     $facebook_feeds = $this->facebook->getFeeds($args['facebook']);
     $youtube_feeds = $this->youtube->getFeeds($args['youtube']);
 
-    return array_merge($facebook_feeds, $youtube_feeds);
+    return array('facebook' => $facebook_feeds, 'youtube' => $youtube_feeds);
   }
 }

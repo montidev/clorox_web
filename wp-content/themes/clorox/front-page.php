@@ -26,9 +26,9 @@
   </section>
   <!-- #/section-control -->
 
-  <!-- <section class="section clearfix" id="section-social">
-    <?php //get_template_part('partials/grid-social'); ?>
-  </section> -->
+  <section class="section clearfix" id="section-social">
+    <?php get_template_part('partials/grid-social'); ?>
+  </section>
   <!-- #/section-stream -->
 
   <section class="bg-blue section "id="section-products">

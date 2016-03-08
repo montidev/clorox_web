@@ -134,8 +134,8 @@ function link_next_pagination() {
 
 function get_filter_product_types_form() {
 
-	$param = safe_GET('product_type', '-');	
-	
+	$param = safe_GET('product_type', '-');
+
   // retrive verb
   $value = get_product_type_verb_by_slug($param);
   $types = get_terms('product-type');
@@ -172,7 +172,7 @@ function get_filter_product_types_form() {
 }
 
 function get_filter_product_categories_form() {
-  
+
   if(is_category()){
 	  $cat = get_category_by_path(get_query_var('category_name'),false);
 		$value = $cat->cat_name;
@@ -419,13 +419,13 @@ function get_product_type_verb_by_slug($term_slug) {
 
 function get_campaign_products($campaign_id){
 	$ids = get_post_meta($campaign_id, CAMPAIGN_MB_PRODUCTS, true);
-	$ids = preg_split("/[\s,]+/",$ids);	
+	$ids = preg_split("/[\s,]+/",$ids);
 	for ($i=0; $i < count($ids); $i++) {
-		$ids[$i] = (int) $ids[$i]; 
+		$ids[$i] = (int) $ids[$i];
 	}
-	$limit = 3; 
+	$limit = 3;
 	$args = array('fields' => 'slugs');
-  
+
 
   $filters = array(
     'args' => array(
