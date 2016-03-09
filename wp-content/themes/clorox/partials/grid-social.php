@@ -50,9 +50,9 @@
   	
     <article class="text-item video-item pos-3">
     	<a href="<?php echo $sfeed['youtube'][1]->getLink() ?>" target="_blank">
-	      <div class="content">
+	      <div class='yt-video' style="background-image: url(<?php echo $sfeed['youtube'][1]->getImageUrl() ?>)" alt="">
 	      	<span class="play-btn"></span>
-	        <img class='yt-video' style="background-image: url(<?php echo $sfeed['youtube'][1]->getImageUrl() ?>)" alt="" />
+	        
 	      </div>
       </a>
     </article>
