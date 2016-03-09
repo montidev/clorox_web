@@ -28,13 +28,15 @@ class FacebookStream implements StreamInterface {
     $feeds = $this->facebook->sendRequest('GET', $endpoint, $params);
     $feeds = json_decode($feeds->getBody())->data;
     $items = [];
-
+    
     foreach ($feeds as $feed) {
       $img_url = $feed->attachments->data[0]->media->image->src;
-      $link = $feed->attachments->data[0]->target->url;
-      $items[] = new FacebookItem($feed->id, $feed->name, $link, $img_url);
+      $link = 'https://facebook.com/'.$feed->id;
+      $description = '';
+      $items[] = new FacebookItem($feed->id, $feed->message, $link, $img_url, $description);
     }
-
+    
     return $items;
+
   }
 }

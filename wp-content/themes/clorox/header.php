@@ -32,7 +32,12 @@
           <!-- ./navbar-collapse -->
         </div>
         <!-- ./container-fluid -->
+
+	      <div class="alert-messages">
+
+	      </div>
       </nav>
+
     </header>
 
     <main id="main-wrapper">

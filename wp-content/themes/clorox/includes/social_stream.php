@@ -28,7 +28,7 @@ $feed_args = [
     'endpoint' => '/Clorox/posts',
     'params' => [
       'limit' => 5,
-      'fields' => 'id,name,attachments'
+      'fields' => 'id,name,attachments,link,message'
     ]
   ],
   'youtube' => [
@@ -40,5 +40,13 @@ $feed_args = [
   ]
 ];
 
-// $API = new SocialStreams($credentials);
-// $res = $API->getFeeds($feed_args);
+
+
+function get_social_feed() {
+	global $credentials;
+	global $feed_args;
+	$API = new SocialStreams($credentials);
+	$res = $API->getFeeds($feed_args);
+
+	return $res;
+}

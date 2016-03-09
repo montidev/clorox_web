@@ -8,6 +8,7 @@ function theme_styles() {
     wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/bower_components/bootstrap/dist/css/bootstrap.min.css');
     wp_enqueue_style( 'bxslider', '//cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.5/jquery.bxslider.min.css', array('bootstrap'));
     wp_enqueue_style( 'main', get_template_directory_uri() . '/style.css', array('bxslider'));
+    wp_enqueue_style( 'flagcss', get_template_directory_uri() . '/bower_components/flag-icon-css/css/flag-icon.min.css');
 }
 
 //Load the theme JS

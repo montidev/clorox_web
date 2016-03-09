@@ -38,6 +38,10 @@ function register_my_menu() {
   register_nav_menu( 'primary', __( 'Primary Menu', 'clorox' ) );
 }
 
+
+
+remove_action( 'admin_init', 'A2A_SHARE_SAVE_add_meta_box' );
+
 // Adds new $_GET params
 // add_filter( 'query_vars', 'add_query_vars_filter' );
 // function add_query_vars_filter( $vars ){

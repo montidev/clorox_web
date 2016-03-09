@@ -1,57 +1,106 @@
-<div class="col-md-4">
+
+<?php  $sfeed = get_social_feed(); ?>
+
+<div class="col-md-4 first-column">
   <div class="row">
-    <article class="bg-blue text-item">
-      <div class="content">
-        <p>
-          On the fifth day of Christmas my true
-          love spilled on me FIVEEE RUKEY WINGS!
-          #12STAINSOFXMAS
+  	<?php if($sfeed['facebook'][0]){ ?>
+    <article class="bg-blue text-item pos-1">
+    	<a href="<?php echo $sfeed['facebook'][0]->getLink(); ?>" target="_blank">
+      <div class="content facebook">
+        <p class="white">
+        	
+          <?php echo $sfeed['facebook'][0]->getTitle(); ?>
         </p>
       </div>
-      <div class="footer text-right">
+      <div class="footer text-right text-bottom">
         <span class="icon icon-fb"></span>
       </div>
+    	</a>
     </article>
-    <article class="bg-white text-item">
-      <div class="content">
+    <?php } ?>
+    <article class="bg-white text-item title-feed">
+      <div class="title content">
         <p>Para más info, tips y novedades <strong>encontranos en las redes</strong></p>
       </div>
     </article>
-    <article class="bg-red text-item">
+
+    <?php if($sfeed['youtube'][0]) { ?>
+    <article class="bg-red text-item pos-2">
+    	<a href="<?php echo $sfeed['youtube'][0]->getLink() ?>" target="_target">
       <div class="text-center">
-        <span class="icon icon-yt"></span>
+        <span class="play-btn-sm"></span>
       </div>
-      <div class="content">
+      <div class="content youtube">
         <p class="text-center">
-          <strong>Clorox How-To: Remove Toilet Stains</strong>
+          <strong><?php echo $sfeed['youtube'][0]->getTitle(); ?></strong>
           <p>
-            Watch and learn! Find a quick cleaning SOlution using
-            Clorox Regular-Bleach1 with these simple steps
+            <?php echo $sfeed['youtube'][0]->getDescription(); ?>
           </p>
         </p>
       </div>
+    	</a>
     </article>
+    <?php } ?>
   </div>
 </div>
+
 <div class="col-md-5">
   <div class="row">
-    <article class="text-item video-item">
-      <div class="content">
-        <img src="<?php get_image_uri('fake-video.png'); ?>" alt="" />
-      </div>
+  	<?php if($sfeed['youtube'][1]) { ?>  	
+  	
+    <article class="text-item video-item pos-3">
+    	<a href="<?php echo $sfeed['youtube'][1]->getLink() ?>" target="_blank">
+	      <div class="content">
+	      	<span class="play-btn"></span>
+	        <img class='yt-video' style="background-image: url(<?php echo $sfeed['youtube'][1]->getImageUrl() ?>)" alt="" />
+	      </div>
+      </a>
     </article>
+  	    
+    <?php } ?>
+  
+  <?php if($sfeed['facebook'][1]) { ?>
+  
+  	<article class="img-item pos-4 horizontal-photo-text">
+  	<a href="<?php echo $sfeed['facebook'][1]->getLink() ?>" target="_blank">
+	    <div class="image-item" style="background-image: url(<?php echo $sfeed['facebook'][1]->getImageUrl() ?>)">
+	    	
+	    </div>
+	    <div class="text-item">	
+		      <div class="content">		        
+		          <p class="text-center">
+		            <?php echo $sfeed['facebook'][1]->getTitle(); ?>
+		          </p>		        
+		      </div>		    
+	    </div>
+	  	</a>
+  	</article>
   </div>
-  <div class="row">
-    <div class="col-md-4">
-
-    </div>
-    <div class="col-md-8">
-
-    </div>
-  </div>
+  <?php } ?>
 </div>
 <div class="col-md-3">
-  <div class="row">
-
-  </div>
+	<div class='row'>
+  <?php if($sfeed['facebook'][4]) { ?>
+  	
+  	<article class="bg-blue vertical-photo-text pos-5">
+  		<a href="<?php echo $sfeed['facebook'][4]->getLink() ?>" target="_blank">
+	  		<div class="text-item">	    	    
+		      <div class="content facebook">
+		        <p class="white">
+		        	
+		          <?php echo $sfeed['facebook'][4]->getTitle(); ?>
+		        </p>
+		      </div>
+		      <div class="footer text-right text-bottom">
+		        <span class="icon icon-fb"></span>
+		      </div>
+	    	</div>
+		    <div class="image-item" style="background-image: url(<?php echo $sfeed['facebook'][4]->getImageUrl() ?>)">
+		    	
+		    </div>
+	    </a>
+    </article>
+  	
+  <?php } ?>
+	</div>
 </div>

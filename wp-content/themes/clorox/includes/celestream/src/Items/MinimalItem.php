@@ -8,12 +8,14 @@ class MinimalItem implements ItemInterface {
   private $title;
   private $link;
   private $image_url;
+  private $description;
 
-  public function __construct($id, $title, $link, $image_url = null) {
+  public function __construct($id, $title, $link, $image_url = null, $description) {
     $this->id = $id;
     $this->title = $title;
     $this->link = $link;
     $this->image_url = $image_url;
+    $this->description = $description;
   }
 
   public function getId() {
@@ -30,6 +32,10 @@ class MinimalItem implements ItemInterface {
 
   public function getImageUrl() {
     return $this->image_url;
+  }
+
+  public function getDescription() {
+  	return $this->description;
   }
 
   public function hasImage() {

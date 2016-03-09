@@ -52,6 +52,12 @@ button:hover
 	-webkit-box-shadow: none;
 }
 
+.alert-messages {
+	position: absolute;
+	width: 100%;
+	padding: 20px;
+}
+
 .md-hide {
 	display: none;
 }
@@ -222,7 +228,7 @@ button:hover
 }
 
 .dropdown.md.yellow > button {
-  border-color: #f0c828!important;
+	border-bottom: 2px solid  #f0c828!important;;
   background-image: url('assets/img/caret-yellow.png');
 }
 
@@ -232,11 +238,11 @@ button:hover
 
 .dropdown.flags > button > .flag,
 .dropdown.flags > button > .text {
-  float: left;
+  /*float: left;*/
 }
 
 .dropdown.flags > button > .flag {
-  margin-right: 5px;
+  margin-right: 8px;
 }
 
 .dropdown.filters > .btn {
@@ -301,6 +307,10 @@ select.input-md {
   background-repeat: no-repeat;
   padding-right: 10px;
   overflow: hidden;
+}
+
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+    background-color: white;
 }
 
 .section {
@@ -611,13 +621,205 @@ select.input-md {
 
 .text-item {
   color: #fff;
-  padding: 20px;
+  padding: 30px 35px;
   font-size: 16px;
+  position: relative;
+}
+
+.text-bottom {
+	bottom: 15px;
+	position: absolute;
+	right: 25px;
 }
 
 .video-item {
   padding: 0;
+  
 }
+
+
+
+#section-social {
+	padding: 0;
+}
+
+#section-social .facebook.content p{
+	color: white;
+	font-size: 18px;
+}
+
+
+#section-social .title p{
+	font-size: 27px;
+	line-height: 30px;
+	font-weight: 200;
+	text-align: left;
+}
+
+#section-social .pos-1 {
+	height: 142px;
+}
+
+#section-social .pos-2 {
+	height: 183px;
+	padding: 20px;
+}
+
+#section-social .title-feed {
+	height: 166px;
+	padding: 55px 30px 20px;
+	width: 100%;
+}
+
+#section-social .title-feed strong{
+	clear: both;
+}
+
+#section-social .pos-3 {
+	height: 308px;
+}
+
+#section-social .pos-4 {
+	height: 183px;
+}
+
+#section-social .pos-5 {
+	height: 481px;
+}
+ 
+#section-social .title p strong{
+	font-size: 30px;
+}
+
+
+#section-social .pos-4 {
+
+}
+
+#section-social .youtube.content p {
+	color: white;
+	text-align: center;
+}
+
+#section-social .img-item {
+	padding: 0;
+}
+
+#section-social article .play-btn-sm {
+	background-image: url('assets/img/play_icon_x2.png');
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+	width: 50px;
+	height: 35px;
+	display: inline-block;
+	margin-bottom: 5px;
+}
+
+#section-social article.video-item .play-btn {
+	background-image: url('assets/img/play_icon_x2.png');
+	background-repeat: no-repeat;
+	position: absolute;
+	width: 70px;
+	height: 50px;
+	margin-left: 50%;
+	height: 50px;
+	margin-left: 50%;
+	left: -35px;
+	margin-top: 100px;
+	top: 25px;
+}
+
+#section-social article.video-item .yt-video {
+	background-position: center;
+	background-repeat: no-repeat;
+
+	background-size: auto 133%;
+  height:309px;
+  width:100%;
+}
+
+#section-social article.horizontal-photo-text {
+}
+
+#section-social article.horizontal-photo-text .image-item {
+	width: 35%;
+	background-color: #1967bb;
+	background-position: center;
+	background-size: cover;
+	height: 100%;
+	display: inline-block;
+
+}
+
+#section-social article.horizontal-photo-text .text-item {
+	width: 65%;
+	font-size: 18px;
+	padding: 60px 20px 20px;
+	text-align: left;
+	display: inline-block;
+	float: right;
+}
+
+#section-social article.vertical-photo-text {
+	padding: 0;
+}
+
+#section-social article.vertical-photo-text .text-item {
+	height: 152px;
+}
+
+
+#section-social article.vertical-photo-text .image-item{
+	width: 100%;
+	height: 340px;
+	background-size: cover;
+}	
+
+
+.youtube strong {
+	font-size: 18px;
+	margin-top: 5px;
+}
+
+.fb-bg-img {
+	
+	height: 100%;
+	width: 35%;
+	max-width: 197px;
+	background-color: #1967bb;
+	overflow: hidden;
+	padding: 0;
+	display: inline-block;
+}
+
+.fb-text-photo {
+	width: 65%;
+	padding: 15px;
+	display: inline-block;
+	float: right;
+}
+
+
+.fb-bg-img-2 {
+		height: 331px;
+		background-position: center;
+		background-size: auto 100%;
+		background-repeat: no-repeat;
+		overflow: hidden;
+		padding: 0;
+	}
+
+.fb-bg-img img {
+	width: 100%;
+}
+
+.fb-text-photo p {
+	padding-top: 30px;
+	color: #747474;
+}
+
+
+
 
 .bg-white.text-item {
   color: #666;
@@ -790,7 +992,7 @@ header > nav {
 	box-shadow: none;
 }
 
-.menu-primary-container ul:first-child {
+header .menu-primary-container ul:first-child {
 	margin-right: 83px;
 }
 
@@ -811,6 +1013,10 @@ header > nav {
 .nav.social-links > li > a {
   height: 100%;
   padding: 15px 0;
+}
+
+.nav>li>a>img {
+	width: 30px;
 }
 
 
@@ -1390,6 +1596,10 @@ header > nav {
 .vortex-p-dislike-counter, .vortex-p-like-counter {
 	display: none;
 }
+
+
+
+
 /*
 * Single Campaign	
 */
@@ -1475,7 +1685,6 @@ header > nav {
     padding-top: 20px;
     padding-bottom: 50px;
 }
-
 
 
 /*
@@ -1660,6 +1869,22 @@ footer .copyright {
 		width: 80%;
 	}
 
+	#section-social .pos-2 {
+		padding: 15px 10px 10px;
+	}
+
+	#section-social .title-feed {
+		padding: 25px 20px;
+	}
+
+	#section-social .title-feed .content p {
+		font-size: 24px;
+	}
+
+	#section-social .title-feed .content p  strong{
+		font-size: 24px;
+	}
+
 	footer .newsletter label {
 		font-size: 32px;
     line-height: 39px;
@@ -1773,6 +1998,38 @@ footer .copyright {
 
 	.products .product {
 
+	}
+
+	#section-social div.first-column {
+		padding-top: 166px;
+	}
+
+	#section-social .title-feed {
+		position: absolute;
+		top: 0px;
+		padding: 60px 20px 20px;
+	}
+
+	
+	#section-social .pos-1, #section-social .pos-2 {
+		height: auto;
+		padding: 25px 15px;
+	}
+
+	#section-social .pos-1 {
+		padding-bottom: 52px;
+	}
+
+	#section-social > div {
+		display: none;
+	}
+
+	#section-social > div:first-child {
+		display: block;
+	}
+
+	#section-social .title-feed .content p {
+		text-align: center;
 	}
 
 	/*
@@ -1913,7 +2170,26 @@ footer .copyright {
 		min-height: 74px !important;
 	}
 
+	.navbar-custom .navbar-nav > li > a {
+		font-size: 36px;
+	}
 
+	.nav>li>a>img {
+  	width: 42px;
+  	height: auto;
+	}
+
+
+	header .menu-primary-container ul:first-child {
+  	margin-right: 0px;
+	}
+
+	.navbar-custom .navbar-nav > li.current-menu-item > a {
+    border-top: 0px;
+    line-height: 58px;
+    font-weight: 700;
+    color: black;
+	}
 
 	.navbar-custom .navbar-header {
 		height: 74px;
@@ -1931,7 +2207,7 @@ footer .copyright {
 
   .navbar-toggle {
   	padding: 0;
-  	border-radius: none;
+  	border-radius: 0;
   	border: 0;
   	width: 35px;
   	margin: 22px;

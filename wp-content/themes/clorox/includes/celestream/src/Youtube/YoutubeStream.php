@@ -24,7 +24,6 @@ class YoutubeStream implements StreamInterface {
     }
 
     $result = $this->youtube->search->listSearch($fields, $args);
-
     $items = [];
 
     foreach ($result['items'] as $feed) {
@@ -32,7 +31,8 @@ class YoutubeStream implements StreamInterface {
       $name = $feed->snippet->title;
       $img_url = $feed->snippet->thumbnails['high']['url'];
       $link = "http://youtube.com/watch?v={$id}";
-      $items[] = new YoutubeItem($id, $name, $link, $img_url);
+      $description = $feed->snippet->description;
+      $items[] = new YoutubeItem($id, $name, $link, $img_url, $description);
     }
 
     return $items;
