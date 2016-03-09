@@ -35,7 +35,7 @@ $homepage->add_group_field( $slider, array(
 ));
 
 $homepage->add_group_field( $slider, array(
-  'name'  => __('Título destacado', 'clorox' ),
+  'name'  => __('Imagen', 'clorox' ),
   'id'    => HOMEPAGE_MB_SLIDER_IMAGE,
   'type'  => 'file'
 ));

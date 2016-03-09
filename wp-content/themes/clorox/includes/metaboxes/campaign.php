@@ -30,7 +30,7 @@ $campaign->add_group_field( $slider, array(
 ));
 
 $campaign->add_group_field( $slider, array(
-  'name'  => __('Título destacado', 'clorox' ),
+  'name'  => __('Imagen', 'clorox' ),
   'id'    => CAMPAIGN_MB_SLIDER_IMAGE,
   'type'  => 'file'
 ));

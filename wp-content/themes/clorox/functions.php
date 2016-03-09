@@ -6,7 +6,7 @@ require_once(__DIR__ . '/includes/metaboxes.php');
 require_once(__DIR__ . '/includes/styles_scripts.php');
 require_once(__DIR__ . '/includes/actions_and_filters.php');
 require_once(__DIR__ . '/includes/admin_configs.php');
-// require_once(__DIR__ . '/includes/social_stream.php');
+require_once(__DIR__ . '/includes/social_stream.php');
 
 //  ===========================================================================
 //  Helpers
@@ -97,12 +97,12 @@ function display_social_networks() {
   <ul class="nav navbar-nav navbar-right social-links">
     <li>
       <a href="<?php echo_safe($fb_link); ?>" target="_blank" class="icon">
-        <img src="<?php get_image_uri('fb-icon-menu.png'); ?>" alt="" />
+        <img src="<?php get_image_uri('fb-icon-menu-x2.png'); ?>" alt="" />
       </a>
     </li>
     <li>
       <a href="<?php echo_safe($yt_link); ?>" target="_blank" class="icon">
-        <img src="<?php get_image_uri('yt-icon-menu.png'); ?>" alt="" />
+        <img src="<?php get_image_uri('yt-icon-menu-x2.png'); ?>" alt="" />
       </a>
     </li>
   </ul>
@@ -134,8 +134,8 @@ function link_next_pagination() {
 
 function get_filter_product_types_form() {
 
-	$param = safe_GET('product_type', '-');	
-	
+	$param = safe_GET('product_type', '-');
+
   // retrive verb
   $value = get_product_type_verb_by_slug($param);
   $types = get_terms('product-type');
@@ -172,7 +172,7 @@ function get_filter_product_types_form() {
 }
 
 function get_filter_product_categories_form() {
-  
+
   if(is_category()){
 	  $cat = get_category_by_path(get_query_var('category_name'),false);
 		$value = $cat->cat_name;
@@ -213,42 +213,40 @@ function get_filter_product_categories_form() {
 }
 
 function widget_languages_as_dropdown() {
-  // $sites = wp_get_sites( $args );
-  // $blog_id = get_current_blog_id();
-  // $blog_details = get_blog_details( $blog_id );
-  // dd($blog_details);
-  //
-  // $translations = pll_the_languages(array('raw'=>1));
-  // $current = array_filter($translations, function($t){
-  //   if ($t['current_lang']) {
-  //     return $t;
-  //   }
-  // });
+  $sites = wp_get_sites( $args );
+  $blog_id = get_current_blog_id();
+  $currentFlag = get_blog_option( $blog_id , 'country_flag' );
+  $currentCountry = get_blog_option( $blog_id , 'site_country' );
+  
+  $sitesList = array();
+
+  foreach ($sites as $country) {
+  	
+  	array_push($sitesList, array('name' => get_blog_option($country['blog_id'], 'site_country'), 'flag' => get_blog_option($country['blog_id'], 'country_flag'), 'url' => get_blog_option($country['blog_id'], 'siteUrl')));
+  }
+ 
   // $current = array_pop($current);
-  $translations = array();
+  
   $current = array(
-    'flag' => get_image_uri('flag-arg.png', false),
-    'name' => 'Argentina'
+    'flag' => $currentFlag,
+    'name' => $currentCountry
   );
   ob_start();
   ?>
 
   <div class="dropdown flags md">
     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-      <span class="flag">
-        <img src="<?php echo_safe($current['flag']); ?>" alt="" />
-      </span>
+      <span class="flag flag-icon flag-icon-<?php echo_safe($current['flag']); ?>"></span>
       <span class="text">
         <?php echo_safe($current['name']); ?>
       </span>
     </button>
     <ul class="dropdown-menu">
-      <?php foreach ($translations as $t): ?>
+      <?php foreach ($sitesList as $t): ?>
         <li>
-          <a href="<?php echo_safe($t->url); ?>">
-            <span class="flag">
-              <img src="<?php echo_safe($t['flag']); ?>" alt="<?php echo_safe($t['name']); ?>" />
-            </span>
+          <a href="<?php echo_safe($t['url']); ?>">
+          	<span class="flag flag-icon flag-icon-<?php echo_safe($t['flag']); ?>"></span>
+        
             <span class="text">
               <?php echo_safe($t['name']); ?>
             </span>
@@ -419,13 +417,13 @@ function get_product_type_verb_by_slug($term_slug) {
 
 function get_campaign_products($campaign_id){
 	$ids = get_post_meta($campaign_id, CAMPAIGN_MB_PRODUCTS, true);
-	$ids = preg_split("/[\s,]+/",$ids);	
+	$ids = preg_split("/[\s,]+/",$ids);
 	for ($i=0; $i < count($ids); $i++) {
-		$ids[$i] = (int) $ids[$i]; 
+		$ids[$i] = (int) $ids[$i];
 	}
-	$limit = 3; 
+	$limit = 3;
 	$args = array('fields' => 'slugs');
-  
+
 
   $filters = array(
     'args' => array(
