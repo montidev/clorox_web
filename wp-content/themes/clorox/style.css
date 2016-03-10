@@ -547,6 +547,12 @@ select.input-md {
   height: 25%;
 }
 
+.environments .box > .body {
+  height: 20%;
+  font-size: 18px;
+  transition: .3s;
+  line-height: 45px;
+}
 
 .product .box > .body {
 	height: 20%;
@@ -559,6 +565,11 @@ select.input-md {
   font-size: 18px;
   -webkit-transition: .3s;
   transition: .3s;
+}
+
+.environments .box:hover > .body {
+  background: #1967bb;
+  color: #fff;
 }
 
 .box > .body .title {
