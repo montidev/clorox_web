@@ -24,6 +24,14 @@ window.filters.addFilterFromUrl(window.location.search);
 
 jQuery(function($){
 
+  $('.contactForm .form-group input').focusin(function(){
+    $(this).closest('.contactForm .form-group').css({'border-color': '#1967bb'})
+  });
+
+  $('.contactForm .form-group input').focusout(function(){
+    $(this).closest('.contactForm .form-group').css({'border-color': '#a2a2a2'})
+  });
+
 	//Slider
   $('.bxslider').bxSlider({
     mode: 'horizontal',
