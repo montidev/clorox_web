@@ -334,6 +334,10 @@ select.input-md {
   line-height: 70px;
 }
 
+.section > .with-filters .filters {
+  padding-top: 9px;
+}
+
 .section.bg-green > .title > h2,
 .section.bg-blue > .title > h2 {
   color: #fff;
