@@ -22,20 +22,20 @@ class FacebookStream implements StreamInterface {
 
   public function getFeeds(array $args = []) {
     // query params
-    $endpoint = $args['endpoint'];
+    $endpoint = "/{$args['page']}/posts";
     $params = $args['params'];
     // Get feeds
     $feeds = $this->facebook->sendRequest('GET', $endpoint, $params);
     $feeds = json_decode($feeds->getBody())->data;
     $items = [];
-    
+
     foreach ($feeds as $feed) {
       $img_url = $feed->attachments->data[0]->media->image->src;
       $link = 'https://facebook.com/'.$feed->id;
       $description = '';
       $items[] = new FacebookItem($feed->id, $feed->message, $link, $img_url, $description);
     }
-    
+
     return $items;
 
   }
