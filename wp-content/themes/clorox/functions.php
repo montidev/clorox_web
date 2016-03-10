@@ -217,16 +217,16 @@ function widget_languages_as_dropdown() {
   $blog_id = get_current_blog_id();
   $currentFlag = get_blog_option( $blog_id , 'country_flag' );
   $currentCountry = get_blog_option( $blog_id , 'site_country' );
-  
+
   $sitesList = array();
 
   foreach ($sites as $country) {
-  	
+
   	array_push($sitesList, array('name' => get_blog_option($country['blog_id'], 'site_country'), 'flag' => get_blog_option($country['blog_id'], 'country_flag'), 'url' => get_blog_option($country['blog_id'], 'siteUrl')));
   }
- 
+
   // $current = array_pop($current);
-  
+
   $current = array(
     'flag' => $currentFlag,
     'name' => $currentCountry
@@ -246,7 +246,7 @@ function widget_languages_as_dropdown() {
         <li>
           <a href="<?php echo_safe($t['url']); ?>">
           	<span class="flag flag-icon flag-icon-<?php echo_safe($t['flag']); ?>"></span>
-        
+
             <span class="text">
               <?php echo_safe($t['name']); ?>
             </span>
@@ -400,6 +400,11 @@ function display_related_tips($tip_id, $limit = 3) {
 //  Queries
 //  ===========================================================================
 //
+
+function total_posts() {
+  global $wp_query;
+  return $wp_query->post_count;
+}
 
 function get_characteristics($product_id) {
   $chars = get_post_meta( $product_id, PRODUCT_MB_CHARACS, false);
