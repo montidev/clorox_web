@@ -847,6 +847,12 @@ select.input-md {
 
 .btn-more {
   margin-top: 50px;
+  transition: .3s;
+}
+
+.btn-more .icon:hover {
+  opacity: .6;
+  transition: .3s;
 }
 
 .icon {
@@ -958,6 +964,11 @@ select.input-md {
 
 .previous-history-link > span {
   margin-left: 5px;
+}
+
+.previous-history-link:hover {
+  opacity: .6;
+  transition: .3s;
 }
 
 .previous-history + * > * {
