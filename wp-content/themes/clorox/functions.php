@@ -26,6 +26,15 @@ function dd($data){
   echo "</pre>";
   die();
 }
+function trim_add_ellipsis($s, $max_length, $strAdd = '...'){
+	if (strlen($s) > $max_length)
+	{
+	    $offset = ($max_length - 3) - strlen($s);
+	    $s = substr($s, 0, strrpos($s, ' ', $offset)) . $starAdd;
+	}
+
+	return $s;
+} 
 
 function link_to($path = "") {
   echo_safe($SERVER['HTTP_HOST'] . '/' . $path);
@@ -109,6 +118,55 @@ function display_social_networks() {
   <?php
   return ob_end_flush();
 }
+
+
+
+
+function dislay_social_feed_item($pos, $item, $type, $templateType) {
+	$link = $item->getLink();
+	$description = trim_add_ellipsis($item->getDescription(), 135);
+	$title = trim_add_ellipsis($item->getTitle(), 135);
+	$imageUrl = $item->getImageUrl();
+
+
+	ob_start();
+	?>
+		<article class="social-feed pos-<?php echo_safe($pos.' '.$templateType); ?>">
+			<a href="<?php echo_safe($link); ?>" target="_blank">
+				<?php if($title) {?>
+				<div class="text">
+					<?php if($type == 'yt' && $templateType == 'yt-text') { ?>
+							<span class='play-btn-sm'></span>
+					<?php } ?>
+					<h4><?php echo_safe($title); ?></h4>
+					<p>
+						<?php if($type == 'yt') { ?>
+							<?php echo_safe($description); ?>
+						<?php } ?>
+
+						<?php if($type == 'fb' && $templateType == 'fb-text' || $type == 'fb' && $templateType == 'fb-text-image-vertical') { ?>
+							<span class='icon-fb'></span>
+						<?php } ?>
+					</p>
+				</div>
+				<?php } ?>
+				<?php if($imageUrl) {?>
+				<div class="image" style="background-image: url(<?php echo_safe($imageUrl); ?>);">
+					<?php if($type == 'yt'){ ?>
+						<!-- mostramos el play button -->
+						<span class="play-btn"></span>
+					<?php } ?>
+				</div>
+				<?php } ?>
+			</a>
+		</article>
+	<?php
+	return ob_end_flush();
+}
+
+
+
+
 
 function link_next_pagination() {
   global $wp_query;

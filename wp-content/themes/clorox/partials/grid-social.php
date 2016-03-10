@@ -1,106 +1,74 @@
+<?php
+	$sfeed = get_social_feed();
+?>
 
-<?php  $sfeed = get_social_feed(); ?>
-
+<!-- first feed column -->
 <div class="col-md-4 first-column">
-  <div class="row">
-  	<?php if($sfeed['facebook'][0]){ ?>
-    <article class="bg-blue text-item pos-1">
-    	<a href="<?php echo $sfeed['facebook'][0]->getLink(); ?>" target="_blank">
-      <div class="content facebook">
-        <p class="white">
-        	
-          <?php echo $sfeed['facebook'][0]->getTitle(); ?>
-        </p>
-      </div>
-      <div class="footer text-right text-bottom">
-        <span class="icon icon-fb"></span>
-      </div>
-    	</a>
-    </article>
-    <?php } ?>
-    <article class="bg-white text-item title-feed">
+	<div class="row">
+		<?php 
+			$keySfeed = array_rand($sfeed['facebook']);
+			$item = $sfeed['facebook'][$keySfeed];
+			unset($sfeed['facebook'][$keySfeed]);
+			$type = 'fb';
+			$templateType = 'fb-text';
+		?>
+		<?php dislay_social_feed_item(1, $item, $type, $templateType)?>
+
+		<article class="bg-white text-item title-feed">
       <div class="title content">
         <p>Para más info, tips y novedades <strong>encontranos en las redes</strong></p>
       </div>
     </article>
+    <?php 
+			$keySfeed = array_rand($sfeed['youtube']);
+			$item = $sfeed['youtube'][$keySfeed];
+			unset($sfeed['youtube'][$keySfeed]);
+			$type = 'yt';
+			$templateType = 'yt-text';
+		?>
+		<?php dislay_social_feed_item(2, $item, $type, $templateType)?>
 
-    <?php if($sfeed['youtube'][0]) { ?>
-    <article class="bg-red text-item pos-2">
-    	<a href="<?php echo $sfeed['youtube'][0]->getLink() ?>" target="_target">
-      <div class="text-center">
-        <span class="play-btn-sm"></span>
-      </div>
-      <div class="content youtube">
-        <p class="text-center">
-          <strong><?php echo $sfeed['youtube'][0]->getTitle(); ?></strong>
-          <p>
-            <?php echo $sfeed['youtube'][0]->getDescription(); ?>
-          </p>
-        </p>
-      </div>
-    	</a>
-    </article>
-    <?php } ?>
-  </div>
-</div>
 
-<div class="col-md-5">
-  <div class="row">
-  	<?php if($sfeed['youtube'][1]) { ?>  	
-  	
-    <article class="text-item video-item pos-3">
-    	<a href="<?php echo $sfeed['youtube'][1]->getLink() ?>" target="_blank">
-	      <div class='yt-video' style="background-image: url(<?php echo $sfeed['youtube'][1]->getImageUrl() ?>)" alt="">
-	      	<span class="play-btn"></span>
-
-	      </div>
-      </a>
-    </article>
-  	    
-    <?php } ?>
-  
-  <?php if($sfeed['facebook'][1]) { ?>
-  
-  	<article class="img-item pos-4 horizontal-photo-text">
-  	<a href="<?php echo $sfeed['facebook'][1]->getLink() ?>" target="_blank">
-	    <div class="image-item" style="background-image: url(<?php echo $sfeed['facebook'][1]->getImageUrl() ?>)">
-	    	
-	    </div>
-	    <div class="text-item">	
-		      <div class="content">		        
-		          <p class="text-center">
-		            <?php echo $sfeed['facebook'][1]->getTitle(); ?>
-		          </p>		        
-		      </div>		    
-	    </div>
-	  	</a>
-  	</article>
-  </div>
-  <?php } ?>
-</div>
-<div class="col-md-3">
-	<div class='row'>
-  <?php if($sfeed['facebook'][2]) { ?>
-  	
-  	<article class="bg-blue vertical-photo-text pos-5">
-  		<a href="<?php echo $sfeed['facebook'][2]->getLink() ?>" target="_blank">
-	  		<div class="text-item">	    	    
-		      <div class="content facebook">
-		        <p class="white">
-		        	
-		          <?php echo $sfeed['facebook'][2]->getTitle(); ?>
-		        </p>
-		      </div>
-		      <div class="footer text-right text-bottom">
-		        <span class="icon icon-fb"></span>
-		      </div>
-	    	</div>
-		    <div class="image-item" style="background-image: url(<?php echo $sfeed['facebook'][2]->getImageUrl() ?>)">
-		    	
-		    </div>
-	    </a>
-    </article>
-  	
-  <?php } ?>
 	</div>
 </div>
+
+<!-- second feed column -->
+<div class="col-md-5">
+	<div class="row">		
+		<?php 
+			$keySfeed = array_rand($sfeed['youtube']);
+			$item = $sfeed['youtube'][$keySfeed];
+			unset($sfeed['youtube'][$keySfeed]);
+			$type = 'yt';
+			$templateType = 'yt-video';
+		?>
+		<?php dislay_social_feed_item(3, $item, $type, $templateType)?>
+
+		<?php 
+			$keySfeed = array_rand($sfeed['facebook']);
+			$item = $sfeed['facebook'][$keySfeed];
+			unset($sfeed['facebook'][$keySfeed]);
+			$type = 'fb';
+			$templateType = 'fb-text-image-horizontal';
+		?>
+		<?php dislay_social_feed_item(4, $item, $type, $templateType)?>
+	</div>
+</div>
+
+<!-- second feed column -->
+<div class="col-md-3">
+	<div class="row">
+		<!-- contemplamos un caso especial --> 
+		<?php 
+			$keySfeed = array_rand($sfeed['facebook']);
+			$item = $sfeed['facebook'][$keySfeed];
+			unset($sfeed['facebook'][$keySfeed]);
+			$type = 'fb';
+			$templateType = 'fb-text-image-vertical';
+		?>
+		<?php dislay_social_feed_item(5, $item, $type, $templateType)?>
+	</div>
+</div>
+
+
+
