@@ -52,7 +52,7 @@
     	<a href="<?php echo $sfeed['youtube'][1]->getLink() ?>" target="_blank">
 	      <div class='yt-video' style="background-image: url(<?php echo $sfeed['youtube'][1]->getImageUrl() ?>)" alt="">
 	      	<span class="play-btn"></span>
-	        
+
 	      </div>
       </a>
     </article>
@@ -80,22 +80,22 @@
 </div>
 <div class="col-md-3">
 	<div class='row'>
-  <?php if($sfeed['facebook'][4]) { ?>
+  <?php if($sfeed['facebook'][2]) { ?>
   	
   	<article class="bg-blue vertical-photo-text pos-5">
-  		<a href="<?php echo $sfeed['facebook'][4]->getLink() ?>" target="_blank">
+  		<a href="<?php echo $sfeed['facebook'][2]->getLink() ?>" target="_blank">
 	  		<div class="text-item">	    	    
 		      <div class="content facebook">
 		        <p class="white">
 		        	
-		          <?php echo $sfeed['facebook'][4]->getTitle(); ?>
+		          <?php echo $sfeed['facebook'][2]->getTitle(); ?>
 		        </p>
 		      </div>
 		      <div class="footer text-right text-bottom">
 		        <span class="icon icon-fb"></span>
 		      </div>
 	    	</div>
-		    <div class="image-item" style="background-image: url(<?php echo $sfeed['facebook'][4]->getImageUrl() ?>)">
+		    <div class="image-item" style="background-image: url(<?php echo $sfeed['facebook'][2]->getImageUrl() ?>)">
 		    	
 		    </div>
 	    </a>
