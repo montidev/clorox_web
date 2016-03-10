@@ -1,6 +1,6 @@
 <div class="content boxes clearfix products">
   <?php while (have_posts()): the_post(); ?>
-    <div class="product bg-transparent hover-white box-shadow-hover hover-border border-x4-bottom border-yellow">
+    <div class="product bg-transparent transition hover-white box-shadow-hover hover-border border-x4-bottom border-yellow">
       <a href="<?php the_permalink(); ?>">
         <article class="box">
           <div class="header">
