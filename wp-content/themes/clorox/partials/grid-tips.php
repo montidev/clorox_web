@@ -1,6 +1,6 @@
 <?php get_tips(); ?>
 
-<div class="content boxes clearfix">
+<div class="boxes clearfix">
   <?php while (have_posts()): the_post(); ?>
     <div class="col-md-4 tip">
       <article class="box box-layered">

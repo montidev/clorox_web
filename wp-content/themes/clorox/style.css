@@ -52,6 +52,11 @@ button:hover
 	-webkit-box-shadow: none;
 }
 
+.form-control::-webkit-input-placeholder { color: #1967bb; }
+.form-control:-moz-placeholder { color: #1967bb; }
+.form-control::-moz-placeholder { color: #1967bb; }
+.form-control:-ms-input-placeholder { color: #1967bb; }
+
 .alert-messages {
 	position: absolute;
 	width: 100%;
@@ -608,7 +613,7 @@ select.input-md {
 }
 
 .box-layered > .header {
-  height: 90%;
+  height: 224px;
   width: 100%;
   top: 0;
   left: 0;
@@ -624,13 +629,13 @@ select.input-md {
   z-index: 2;
 }
 
-#section-tips .box-layered > .body {
+#section-tips .box-layered > .body, #section-relateds-tips .box-layered > .body {
 	height: 124px;
 	padding: 25px;
 	bottom: -15px;
 }
 
-#section-tips .box-layered > .body:hover {
+#section-tips .box-layered > .body:hover, #section-relateds-tips .box-layered > .body:hover {
 	height: 174px;
 }
 
@@ -1165,8 +1170,8 @@ header .menu-primary-container ul:first-child {
   color: #fff;
 }
 
-#section-tips .box {
-  height: 300px;
+#section-tips .box, #section-relateds-tips .box {
+  height: 270px;
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -1314,7 +1319,9 @@ header .menu-primary-container ul:first-child {
 }
 
 .page .section > .title > h2,
-.page .dropdown.filters > .btn {
+.page .dropdown.filters > .btn, 
+.category .section > .title > h2,
+.category .dropdown.filters > .btn  {
   font-size: 38px;
 }
 
@@ -1365,6 +1372,10 @@ header .menu-primary-container ul:first-child {
 	box-shadow: 5px 9px 25px 0px rgba(0, 0, 0, 0.1);
 }
 
+.socialShare a:hover {
+	color: white;
+	opacity: 0.5;
+}
 .overlaped {
 	margin-top: -45px;
 	margin-left: 25px;
@@ -1405,6 +1416,7 @@ header .menu-primary-container ul:first-child {
 	display: inline;
 	font-size: 14px;
 	color: #1967bb;
+	font-weight: 300;
 }
 .contactForm input {
 	border: 0;
@@ -1768,6 +1780,9 @@ header .menu-primary-container ul:first-child {
 * TIPS
 */
 
+.tip .box-layered > .body {
+	overflow: hidden;
+}
 
 .box-layered > .body p {
   max-height: 40px;
@@ -1793,6 +1808,7 @@ footer .newsletter {
   height: 90px;
   line-height: 65px;
   box-shadow: 5px 25px 35px -12px #ccc;
+  max-width: 1200px;
 }
 
 footer .newsletter label {
@@ -1920,7 +1936,7 @@ footer .copyright {
 @media only screen and (max-width : 1200px) {
 
 	/* tip element*/
-	#section-tips .box-layered > .body {
+	#section-tips .box-layered > .body, #section-relateds-tips .box-layered > .body {
 		height: 144px;
 		padding: 25px;
 		bottom: -15px;
@@ -1978,21 +1994,16 @@ footer .copyright {
   /*
   * Products
   */
-  .page #section-products .container-fluid:first-child {
-
-  	padding: 0;
-  	margin: 0 -50px 0 -50px;
-  }
-  .page #section-products .container-fluid:first-child h2 {
+  .page #section-products .container-fluid:first-child h2, .category #section-products .container-fluid:first-child h2 {
   	font-size: 32px;
   	line-height: 50px;
   }
 
-  .page #section-products .container-fluid:first-child .filters > .btn {
+  .page #section-products .container-fluid:first-child .filters > .btn, .category #section-products .container-fluid:first-child .filters > .btn {
   	font-size: 32px;
   }
 
-  .page #section-products .dropdown.filters > .btn {
+  .page #section-products .dropdown.filters > .btn, .cateogory #section-products .dropdown.filters > .btn {
   	min-width: 180px;
   }
 
@@ -2036,7 +2047,7 @@ footer .copyright {
 
 	/* tip element */
 	/* tip element*/
-	#section-tips .box-layered > .body {
+	#section-tips .box-layered > .body, #section-relateds-tips .box-layered > .body  {
 		height: 124px;
 		padding: 25px;
 		bottom: -15px;
@@ -2350,6 +2361,15 @@ footer .copyright {
 		padding: 0;
 	}
 
+
+	.bg-transparent {
+		transition: none;
+	}
+
+	.bg-transparent.hover-white:hover {
+		transition: none;	
+	}
+
 	/*
 	* Home page
 	*/
@@ -2428,6 +2448,7 @@ footer .copyright {
 		font-weight: 200;
 		text-align: left;
 	}
+
 
 	#section-products .label-filter + div {
 		width: 100%;

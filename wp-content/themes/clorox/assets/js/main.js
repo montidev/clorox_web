@@ -109,7 +109,7 @@ jQuery(function($){
 	    });
   	}
 
-  	if(!proSlider && $('.home .products, .single-product .products').length){
+  	if(!proSlider && $('.home .products').length){
   		proSlider = $('.home .products, .single-product .products').bxSlider({
 	    	hideControlOnEnd: true,
 			  slideWidth: 190,
@@ -119,7 +119,8 @@ jQuery(function($){
 
   	}
 
-    if(!proRelateds && $('#section-relateds .products').length){
+    if(!proRelateds && $('#section-relateds .products').length && $('#section-relateds .products .product').length > 2){
+    	console.log('entro a')
 	    proRelateds = $('#section-relateds .products').bxSlider({
 	    	hideControlOnEnd: true,
 			  slideWidth: 190,
