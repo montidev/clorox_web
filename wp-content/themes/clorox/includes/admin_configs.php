@@ -22,6 +22,9 @@ function register_clorox_settings() {
 	//register our settings
 	register_setting( 'clorox-settings-group', 'fb_link' );
 	register_setting( 'clorox-settings-group', 'yt_link' );
+	register_setting( 'clorox-settings-group', 'tw_link' );
+	register_setting( 'clorox-settings-group', 'telephone_contact' );
+	register_setting( 'clorox-settings-group', 'email_contact');
 	register_setting( 'clorox-settings-group', 'site_country' );
 	register_setting( 'clorox-settings-group', 'country_flag' );
 }
@@ -29,7 +32,6 @@ function register_clorox_settings() {
 function clorox_settings_page() {
 ?>
   <div class="wrap">
-    <h2>Clorox</h2>
 
     <form method="post" action="options.php">
       <?php settings_fields( 'clorox-settings-group' ); ?>
@@ -47,6 +49,24 @@ function clorox_settings_page() {
           <th scope="row">Youtube URL</th>
           <td>
             <input type="text" name="yt_link" value="<?php echo esc_attr( get_option('yt_link') ); ?>" />
+          </td>
+        </tr>
+        <tr valign="top">
+          <th scope="row">Twitter URL</th>
+          <td>
+            <input type="text" name="tw_link" value="<?php echo esc_attr( get_option('tw_link') ); ?>" />
+          </td>
+        </tr>
+        <tr valign="top">
+          <th scope="row">Telefono de contacto</th>
+          <td>
+            <input type="text" name="telephone_contact" value="<?php echo esc_attr( get_option('telephone_contact') ); ?>" />
+          </td>
+        </tr>
+        <tr valign="top">
+          <th scope="row">Email de contacto</th>
+          <td>
+            <input type="text" name="email_contact" value="<?php echo esc_attr( get_option('email_contact') ); ?>" />
           </td>
         </tr>
       </table>
@@ -310,8 +330,27 @@ function clorox_settings_page() {
 						</select>
 
 						<script>
-							(function(){
+							window.onload =function(){
+						
+
 								var select_element = document.querySelector('.country_option_fake');
+								var select_options = document.querySelectorAll('.country_option_fake option');
+								var currentValue = document.querySelector('#country_flag').value;
+								currentValue = currentValue.toUpperCase();	
+								currentOption = {};
+								//currentOption = select_options.filter(checkValue);
+								[].forEach.call(select_options, function(div) {
+								  // do whatever
+								  if(div.value == currentValue){
+								  	currentOption = div;							
+								  }
+								  
+								});
+								
+
+								
+								
+								currentOption.selected = true;
 
 								select_element.onchange = function() {
 								    var elem = (typeof this.selectedIndex === "undefined" ? window.event.srcElement : this);
@@ -324,7 +363,7 @@ function clorox_settings_page() {
 								    country.value = text; 
 								}
 
-							})();
+							};
 						</script>
 
             <input type="hidden" id="country_flag" name="country_flag" value="<?php echo esc_attr( get_option('country_flag') ); ?>" />

@@ -66,14 +66,15 @@
 		 		<!-- fin formulario -->
 	 		</div>
 	 		<div class="list col-md-2">
+
 	 			<ul class='list-unstyled socialShare white'>
 	 				<li>
-	 					<a class="white" href="http://facebook.com/clorox"><i class="icon icon-fb-white iconX50"></i> <span>/clorox</span> </a> 
+	 					<a target="_blank" class="white" href="<?php echo esc_attr( get_option('fb_link') ); ?>"><i class="icon icon-fb-white iconX50"></i> <span>/clorox</span> </a> 
 	 				</li>
 	 				<li>
-	 					<a class="white" href="http://facebook.com/clorox"><i class="icon icon-yt-white iconX50"></i> <span>/clorox</span></a>
+	 					<a target="_blank" class="white" href="<?php echo esc_attr( get_option('yt_link') ); ?>"><i class="icon icon-yt-white iconX50"></i> <span>/clorox</span></a>
 	 				<li>
-	 					<a class="white" href="http://twitter.com"><i class="icon icon-tw-white iconX50"></i> <span>@clorox</span></a>
+	 					<a target="_blank" class="white" href="<?php echo esc_attr( get_option('tw_link') ); ?>"><i class="icon icon-tw-white iconX50"></i> <span>@clorox</span></a>
 	 				</li>
 	 			</ul>
 	 		</div>
