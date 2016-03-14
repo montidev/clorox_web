@@ -1177,7 +1177,11 @@ header .menu-primary-container ul:first-child {
 }
 
 #section-products {
-  min-height: 1050px;
+  min-height: 930px;
+}
+
+#section-products {
+	padding-bottom: 140px;
 }
 
 #sectionCampaignDetail .bx-viewport, #section-relateds .bx-viewport, #section-products .bx-viewport {
@@ -1228,6 +1232,9 @@ header .menu-primary-container ul:first-child {
   margin: 50px auto;
   text-align: center;
 }
+.home #section-tips {
+	padding-top: 50px;
+}
 
 #section-tips {
   padding-bottom: 60px;
@@ -1248,6 +1255,14 @@ header .menu-primary-container ul:first-child {
 #section-environment .boxes,
 #section-tips .boxes {
   padding-top: 100px;
+}
+
+#section-environment {
+	padding-top: 65px;
+}
+
+.home #section-tips .boxes {
+    padding-top: 90px;
 }
 
 #section-environment .box {
@@ -1324,6 +1339,12 @@ header .menu-primary-container ul:first-child {
 .category .dropdown.filters > .btn  {
   font-size: 38px;
 }
+
+
+.home #section-tips > .title > h2, .home #section-environment > .title > h2, .home #section-products > .title > h2 {
+	font-size: 48px;
+}
+
 
 .page:not(.home) .featured-image {
   height: 420px;
