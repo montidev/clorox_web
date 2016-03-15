@@ -2616,6 +2616,10 @@ footer .copyright {
 	* Tip single
 	*/
 
+	#section-tips .box, #section-relateds-tips .box {
+		margin-bottom: 50px;
+	}
+
 	.single-tip #section-tip .container850:first-child {
 		display: none;
 	}
