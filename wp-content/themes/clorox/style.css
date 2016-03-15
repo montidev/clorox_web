@@ -1915,6 +1915,7 @@ footer .copyright {
   font-size:20px;
   width:82px;
 }
+
 #shareme .buttons {
   position: absolute;
   width:294px;
@@ -1925,14 +1926,31 @@ footer .copyright {
   -moz-box-shadow: 0 1px 2px rgba(0,0,0,.1);
   box-shadow: 0 1px 2px rgba(0,0,0,.1);
 }
+
 #shareme .button {
   float:left;
   max-width:50px;
   margin:0 10px 0 0;
 }
+
 #shareme .facebook {
   margin:0 4px 0 0;
 }
+
+.home .with-filters h2 .dropdown {
+	max-width: 320px;
+	display: inline-block;
+}
+
+.home .with-filters h2 .label-filter {
+	padding-right: 7px;
+}
+
+.home .dropdown.filters > .btn {
+	font-size: 48px;
+}
+
+
 
 
 
@@ -1996,20 +2014,6 @@ footer .copyright {
 	#section-social .title-feed .content p  strong{
 		font-size: 24px;
 	}
-
-  .home .with-filters h2 .dropdown {
-		max-width: 320px;
-		display: inline-block;
-	}
-
-	.home .with-filters h2 .label-filter {
-		padding-right: 7px;
-	}
-
-	.home .dropdown.filters > .btn {
-		font-size: 48px;
-	}
-
 
 	footer .newsletter label {
 		font-size: 32px;
