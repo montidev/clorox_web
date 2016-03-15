@@ -1262,7 +1262,7 @@ header .menu-primary-container ul:first-child {
 }
 
 .home #section-tips .boxes {
-    padding-top: 90px;
+    padding-top: 50px;
 }
 
 #section-environment .box {
@@ -1997,6 +1997,20 @@ footer .copyright {
 		font-size: 24px;
 	}
 
+  .home .with-filters h2 .dropdown {
+		max-width: 320px;
+		display: inline-block;
+	}
+
+	.home .with-filters h2 .label-filter {
+		padding-right: 7px;
+	}
+
+	.home .dropdown.filters > .btn {
+		font-size: 48px;
+	}
+
+
 	footer .newsletter label {
 		font-size: 32px;
     line-height: 39px;
@@ -2024,7 +2038,7 @@ footer .copyright {
   	font-size: 32px;
   }
 
-  .page #section-products .dropdown.filters > .btn, .cateogory #section-products .dropdown.filters > .btn {
+  .page #section-products .dropdown.filters > .btn, .category #section-products .dropdown.filters > .btn {
   	min-width: 180px;
   }
 
@@ -2139,6 +2153,8 @@ footer .copyright {
 		text-align: center;
 	}
 
+
+	
 	/*
 	* Section Tips
 	*/
@@ -2264,6 +2280,22 @@ footer .copyright {
   	width: 100%;
   	padding-left: 60px;
   }
+
+  .page #section-products .with-filters.container-fluid, .category #section-products .with-filters.container-fluid {
+  	padding-left: 0;
+  	padding-right: 0;
+  }
+
+  .home #section-products h2 div:nth-child(2) {
+		width: 530px;
+		max-width: 100%;
+
+	}
+
+	.home .dropdown.filters > .btn {
+		font-size: 38px;
+	}
+
  }
 
 /* Small Devices, Tablets */
@@ -2423,6 +2455,11 @@ footer .copyright {
     padding-top: 50px;
 	}
 
+	.home #section-products h2 div:nth-child(2) {
+		max-width: 340px;
+		display: block;		
+	}
+
 	/* solo para la home page */
 	/* section tips */
 	#section-tips {
@@ -2430,18 +2467,15 @@ footer .copyright {
 		padding-right: 0;
 	}
 
-	.home #section-tips .content .tip {
+	.home #section-tips .boxes .tip {
 		display: none;
 	}
 
-	.home #section-tips .content .tip:first-child {
+	.home #section-tips .boxes .tip:first-child {
 		display: block;
 	}
 
-	#section-tips .content .tip {
-		padding-left: 0;
-		padding-right: 0;
-	}
+	
 
 	#section-tips > .title h2 {
 		padding-left: 65px;
@@ -2608,7 +2642,7 @@ footer .copyright {
 		display: inline-block;
 		margin-right: 15px;
 	}
-	.page #section-products {
+	.page #section-products, .category #section-products {
 		padding-top: 55px;
 	}
 	.products .product {
