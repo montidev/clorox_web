@@ -2143,6 +2143,10 @@ footer .copyright {
 	* Section Tips
 	*/
 
+	#section-tips .box, #section-relateds-tips .box {
+    margin-bottom: 50px;
+	}
+
 	.single-tip #section-relateds-tips .content > div {
 		padding-bottom: 30px;
 	}
@@ -2897,6 +2901,15 @@ footer .copyright {
 	#section-policies, #section-own-history {
 		padding: 15px 0 0 0;
 		margin-bottom: 20px;
+	}
+
+	/*
+	* Tips
+	*/
+
+	#section-tips .boxes, #section-relateds-tips .boxes {
+		margin-left: -15px;
+		margin-right: -15px;
 	}
 
 
