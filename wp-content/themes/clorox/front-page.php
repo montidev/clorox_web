@@ -44,6 +44,21 @@
         <?php get_filter_product_types_form(); ?>
       </h2>
 
+      <style>
+
+      	/*.home .with-filters {
+      		padding-left: 0;
+      		padding-right: 0;
+      	}
+*/      .home .with-filters h2 .dropdown {
+      		max-width: 320px;
+      		display: inline-block;
+      	}
+
+      	
+
+				
+      </style>
     </div>
     <div class="container-products">
       <?php display_grid_products(); ?>
