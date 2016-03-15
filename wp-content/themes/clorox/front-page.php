@@ -32,11 +32,55 @@
   <!-- #/section-stream -->
 
   <section class="bg-blue section "id="section-products">
-    <div class="title text-center with-filters">
+    <!-- <div class="title text-center with-filters">
       <h2 class="clearfix">
         <div class="col-md-7 text-right label-filter">Necesito un producto para</div>
         <div class="pull-left text-left"><?php get_filter_product_types_form(); ?></div>
       </h2>
+    </div> -->
+    <div class="title text-center with-filters">
+      <h2 class="clearfix text-center">
+        <span class="label-filter">Necesito un producto para</span>
+        <?php get_filter_product_types_form(); ?>
+      </h2>
+
+      <style>
+      	.with-filters h2 .dropdown {
+      		max-width: 320px;
+      		display: inline-block;
+      	}
+
+      	.with-filters h2 .label-filter {
+      		padding-right: 7px;
+      	}
+
+      	.home .dropdown.filters > .btn {
+      		font-size: 48px;
+      	}
+
+      	@media only screen and (max-width: 992px) {
+					.page #section-products h2 div:nth-child(2) {
+						width: 530px;
+						max-width: 100%;
+
+					}
+
+					.home .dropdown.filters > .btn {
+	      		font-size: 38px;
+	      	}
+
+				}
+
+				@media only screen and (max-width: 768px){
+					
+
+	      	.home #section-products h2 div:nth-child(2) {
+	      		max-width: 340px;
+	      		display: block;
+	      		
+	      	}
+				}
+      </style>
     </div>
     <div class="container-products">
       <?php display_grid_products(); ?>

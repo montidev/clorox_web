@@ -2240,23 +2240,23 @@ footer .copyright {
   /*
   * Products
   */
-  .page #section-products h2 {
+  .category #section-products h2, .page #section-products h2 {
   	display: inline-block;
   	margin: 0 auto;
   }
 
-  .page #section-products h2 div:nth-child(2) {
+  .category #section-products h2 div:nth-child(2), .page #section-products h2 div:nth-child(2) {
   	clear: left;
   	width: 100%;
   }
 
-  .page #section-products h2 div:nth-child(3) {
+  .category #section-products h2 div:nth-child(3), .page #section-products h2 div:nth-child(3) {
   	clear: left;
   	position: absolute;
   	padding-top: 13px;
   }
 
-  .page #section-products h2 div:nth-child(4) {
+  .category #section-products h2 div:nth-child(4), .page #section-products h2 div:nth-child(4) {
   	width: 100%;
   	padding-left: 60px;
   }
@@ -2498,6 +2498,10 @@ footer .copyright {
 
 	#section-products .btn-more {
 		margin-top: 10px;
+	}
+
+	.home #section-environment > .title > h2 {
+		font-size: 38px;
 	}
 
 

@@ -201,12 +201,12 @@ function get_filter_product_types_form() {
   ?>
   <div class="dropdown filters md yellow" data-filter="product-type">
     <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
-      <span class="text semibold"><?php echo ($value) ? ucfirst($value) : '-'; ?></span>
+      <span class="text light"><?php echo ($value) ? ucfirst($value) : '-'; ?></span>
     </button>
     <ul class="dropdown-menu">
       <?php foreach ($types as $type): ?>
         <?php $verb = get_product_type_verb($type->term_id); ?>
-        <li class="text blue fontX20 semibold">
+        <li class="text blue fontX20">
           <?php $args = array( array('product_type' => $type->slug) ); ?>
           <a class="ajax-load"
             href="<?php link_to_with_args($args); ?>"
@@ -243,11 +243,11 @@ function get_filter_product_categories_form() {
   ?>
   <div class="dropdown filters md yellow" data-filter="category">
     <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
-      <span class="text semibold"><?php echo_safe(ucfirst($value)); ?></span>
+      <span class="text"><?php echo_safe(ucfirst($value)); ?></span>
     </button>
     <ul class="dropdown-menu">
       <?php foreach ($categories as $cat): ?>
-        <li class="text blue fontX20 semibold">
+        <li class="text blue fontX20">
           <?php $args = array( array('category' => $cat->slug) ); ?>
           <a class="ajax-load"
             href="<?php link_to_with_args($args); ?>"
