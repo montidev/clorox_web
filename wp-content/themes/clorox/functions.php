@@ -65,7 +65,7 @@ function echo_safe($text = "") {
 function get_logo_uri() {
   $logo =  get_option('logo');
   if($logo) {
-  	return $logo;
+  	echo $logo;
   } else {
   	echo get_template_directory_uri() . '/assets/img/logo.png';
   }
