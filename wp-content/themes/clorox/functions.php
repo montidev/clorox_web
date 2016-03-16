@@ -63,7 +63,12 @@ function echo_safe($text = "") {
 }
 
 function get_logo_uri() {
-  echo get_option('logo');
+  $logo =  get_option('logo');
+  if($logo) {
+  	return $logo;
+  } else {
+  	echo get_template_directory_uri() . '/assets/img/logo.png';
+  }
 }
 
 function get_image_uri($name, $echo = true) {
