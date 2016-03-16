@@ -1092,6 +1092,8 @@ header .menu-primary-container ul:first-child {
 .nav.social-links > li > a {
   height: 100%;
   padding: 15px 0;
+  cursor: pointer;
+	z-index: 10;
 }
 
 .nav>li>a>img {

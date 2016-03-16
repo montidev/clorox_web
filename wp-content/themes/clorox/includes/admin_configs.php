@@ -27,18 +27,32 @@ function register_clorox_settings() {
 	register_setting( 'clorox-settings-group', 'email_contact');
 	register_setting( 'clorox-settings-group', 'site_country' );
 	register_setting( 'clorox-settings-group', 'country_flag' );
+	register_setting( 'clorox-settings-group', 'logo', 'handle_logo_upload');
 }
 
 function clorox_settings_page() {
 ?>
   <div class="wrap">
 
-    <form method="post" action="options.php">
+    <form method="post" action="options.php" enctype="multipart/form-data">
       <?php settings_fields( 'clorox-settings-group' ); ?>
       <?php do_settings_sections( 'clorox-settings-group' ); ?>
       <h1> Configuración Clorox </h1>
       <h1> Redes sociales </h1>
       <table class="form-table">
+      	<tr valign="top">
+
+      		<th scope="row">Logo
+      		</th>
+      		<td>
+      			<?php $logo = get_option('logo'); ?> 
+      			<?php if($logo){ ?>
+      			<img src="<?php echo $logo; ?>" height="100" style=""/>
+      			<?php } ?>
+      			<input type="file" name="logo" style="float: left;"/>
+
+      		</td>
+      	</tr>
         <tr valign="top">
           <th scope="row">Facebook URL</th>
           <td>
@@ -377,3 +391,16 @@ function clorox_settings_page() {
     </form>
   </div>
 <?php }
+
+
+function handle_logo_upload()
+{
+	if(!empty($_FILES["logo"]["tmp_name"]))
+	{
+		$urls = wp_handle_upload($_FILES["logo"], array('test_form' => FALSE));
+	    $temp = $urls["url"];
+	    return $temp;   
+	}
+	  
+	return $option;
+}

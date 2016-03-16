@@ -8,6 +8,7 @@ require_once(__DIR__ . '/includes/actions_and_filters.php');
 require_once(__DIR__ . '/includes/admin_configs.php');
 require_once(__DIR__ . '/includes/social_stream.php');
 
+
 //  ===========================================================================
 //  Helpers
 //  ===========================================================================
@@ -62,7 +63,7 @@ function echo_safe($text = "") {
 }
 
 function get_logo_uri() {
-  echo get_template_directory_uri() . '/assets/img/logo.png';
+  echo get_option('logo');
 }
 
 function get_image_uri($name, $echo = true) {

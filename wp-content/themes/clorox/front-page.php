@@ -3,8 +3,7 @@
   <section class="featured-image" id="section-featured">
     <?php get_template_part('partials/home-featured-slider'); ?>
   </section>
-  <!-- ./featuted-image -->
-
+  <!-- ./featuted-image --> 
   <section class="bg-white section " id="section-environment">
     <div class="title text-center">
       <h2>¿Qué ambiente <strong>me necesita</strong>?</h2>
