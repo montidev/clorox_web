@@ -14,24 +14,38 @@
 			<section class="bg-blue" id="section-404">
 
 				<div class="container404 bg-white">
-					
-					<div class="title">
-						<h2> Error 404 </h2>
-					</div>
-					<p class="t1 blue"> Mmm, alguien ha limpiado muy bien esta página.</p>
+					<p class="t1 blue"> No encontramos la página que buscabas, <br />pero tenemos algunos consejos para darte:</p>
+					<section class="bg-transparent" id="section-relateds-tips">
+					    <?php display_related_tips(get_the_ID()); ?>
+
+					    <div class="text-center btn-more">
+					      <a href="<?php link_to('tips'); ?>">
+					        <span class="icon iconX2 plus-icon-blue"></span>
+					      </a>
+					    </div>
+					</section>				
 					<?php 
 						global $blog_id;
 						$current_blog_details = get_blog_details( array( 'blog_id' => $blog_id ) );						
 					?>
-					<p class="t2 grey"> Puedes evitar el sitio de <a class="blue" href="<?php echo $current_blog_details->siteurl; ?>"><?php echo $current_blog_details->blogname; ?></a><br /> para más información </p>
-					<?php display_social_networks(); ?>
-
-					<img src="<?php echo get_logo_uri(); ?>" class="logo" atl="clorox logo" />
-					<img src='<?php echo get_template_directory_uri()?>/assets/img/woman-cleaning.png' class="woman-cleaning" alt="woman cleaning" />
+					<a href="<?php echo $current_blog_details->siteurl; ?>" class="">
+						<img src="<?php echo get_logo_uri(); ?>" class="logo" atl="clorox logo" />
+					</a>
 				</div>
 
-
 				<footer>
+					<ul class="nav navbar-nav navbar-right social-links">
+				    <li>
+				      <a href="http://facebook.com/clorox" target="_blank" class="icon">
+				        <img src="http://clorox.com.ar/wp-content/themes/clorox/assets/img/fb-icon-menu-x2-blue.png" alt="">
+				      </a>
+				    </li>
+				    <li>
+				      <a href="http://youtube.com/clorox" target="_blank" class="icon">
+				        <img src="http://clorox.com.ar/wp-content/themes/clorox/assets/img/yt-icon-menu-x2-blue.png" alt="">
+				      </a>
+				    </li>
+				  </ul>
 					<p class="text-center white"> © 2016 Clorox - Política de privacidad </p>
 				</footer>
 			</section>
@@ -45,23 +59,25 @@
 				.error404 {
 					padding-top: 0;
 					height: 100%;
-					background-color: ;
+				
 				}
 
 				#section-404 {
 					padding: 80px 50px;
 					height: 100%;
+					overflow-x: hidden;
+					overflow-y: scroll;
 				}
 
 				.container404 {
 					position: relative;
 					width: 100%;
-					max-width: 590px;
-					padding: 55px 30px 35px;
+					max-width: 852px;
+					padding: 85px 30px 35px;
 					margin: auto auto;					
 					text-align: center;
-					height: 452px;
-					margin-bottom: 30px;
+					height: 606px;
+					margin-bottom: 12px;
 				}
 
 				.container404 .logo {
@@ -80,7 +96,22 @@
 
 				.container404 p.t1 {
 					font-size: 23px;
-					margin-bottom: 182px;
+				}
+
+				.container404 #section-relateds-tips {
+					padding: 0;
+					width: 1200px;
+					position: relative;
+					left: -600px;
+					margin-left: 50%;
+				}
+
+				.container404 #section-relateds-tips .box-layered .body {
+					box-shadow: 5px 9px 25px 0px rgba(0, 0, 0, 0.1);
+				}
+
+				.container404 .btn-more {
+					margin-top: 0;
 				}
 
 				.container404 p.t2 {
@@ -90,22 +121,16 @@
 					line-height: 28px;
 					margin-bottom: 0;
 					z-index: 10;
-				}
+				}				
 
-				.container404 .social-links {
-					left: auto;
-			    right: auto;
-			    padding: 0;
-			    position: static;
-			    float: none !important;
-			    margin: 0 auto !important;
-			    display: block;
-			    width: 95px;
-			    z-index: 10;
-				}
-
-				.container404 .social-links li a {
+				.error404 .nav.social-links li a {
 					z-index: 10;
+				}
+
+				.error404 .nav.social-links li a:hover {
+					z-index: 10;
+					background-color: transparent;
+
 				}
 
 				.container404 .nav.social-links > li + li {
@@ -119,14 +144,32 @@
 					z-index: 0;
 				}
 
+				.error404 .social-links {
+					left: auto;
+			    right: auto;
+			    padding: 0;
+			    position: static;
+			    float: none !important;
+			    margin: 0 auto !important;
+			    display: block;
+			    width: 95px;
+			    z-index: 10;
+				}
+
 				/* Medium Devices, Desktops */
 				@media only screen and (max-width : 992px) {
-					.woman-cleaning {
-						display: none;
+					.container404 {
+						height: auto;
+					}
+
+					.container404 #section-relateds-tips {
+						width: 600px;
+						margin-left: 50%;
+						left: -300px;						
 					}
 
 					.container404 p.t1 {
-						margin-bottom: 140px
+						
 					}
 
 					.container404 p.t2 {
@@ -148,8 +191,14 @@
 						max-width: auto;
 					}
 
+					.container404 #section-relateds-tips {
+						width: 500px;
+						margin-left: 50%;
+						left: -250px;						
+					}
+
 					.container404 p.t1 {
-						margin-bottom: 120px
+						
 					}
 
 					.social-links li {
@@ -165,9 +214,22 @@
 				}
 
 				@media only screen and (max-width : 480px) {
+					.container404 {
+						padding-left: 0;
+						padding-right: 0;
+					}
+
 					.container404 p.t1 {
-						margin-bottom: 100px
+						padding-left: 10px;
+						padding-right: 10px;
+						font-size: 20px;
 					}	
+
+					.container404 #section-relateds-tips {
+						width: 100%;
+						margin-left: 0;
+						left: auto;						
+					}
 				}
 			</style>
 	</body>

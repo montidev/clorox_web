@@ -7,6 +7,7 @@ require_once(__DIR__ . '/includes/styles_scripts.php');
 require_once(__DIR__ . '/includes/actions_and_filters.php');
 require_once(__DIR__ . '/includes/admin_configs.php');
 require_once(__DIR__ . '/includes/social_stream.php');
+require_once(__DIR__ . '/includes/social_feed_configs.php');
 
 
 //  ===========================================================================
@@ -199,10 +200,17 @@ function link_next_pagination() {
 function get_filter_product_types_form() {
 
 	$param = safe_GET('product_type', '-');
+	
+	$types = get_terms('product-type');
 
+	if($param == '-'){
+		// get the first 
+		$param = get_terms('product-type', array('number' => 1, 'orderby' => 'term_order'));
+		$param = $param[0]->slug;
+	} 
   // retrive verb
   $value = get_product_type_verb_by_slug($param);
-  $types = get_terms('product-type');
+  
   ob_start();
   ?>
   <div class="dropdown filters md yellow" data-filter="product-type">
@@ -241,9 +249,21 @@ function get_filter_product_categories_form() {
 	  $cat = get_category_by_path(get_query_var('category_name'),false);
 		$value = $cat->cat_name;
 	} else {
+		//esto es un slug
 		$value = safe_GET('category', '-');
+		
+		if($value != '-'){
+			$value = get_term_by('slug', $value, 'category');
+			$value = $value->name;
+		}
 	}
 
+	if($value == '-'){
+		// get the first 
+		$value = get_terms('category', array('number' => 1, 'orderby' => 'term_order'));
+		$value = $value[0]->name;
+	}
+	
   $categories = get_categories();
   ob_start();
   ?>
@@ -413,9 +433,24 @@ function display_grid_products($total = 5) {
   get_template_part('partials/grid', 'products');
   return ob_end_flush();
 }
+function check_and_get_related($product_id, $limit = 5){
+
+  $ret = get_related_products($product_id, $limit);
+  
+  if(have_posts()) {
+  	return true;
+  } else {
+  	get_products(5);
+  	//traigo 5 aleatorios
+  	return false;
+  }
+	
+}
+
 
 function display_related_products($product_id, $limit = 5) {
-  get_related_products($product_id, $limit);
+  
+
   ob_start();
   get_template_part('partials/loop', 'products');
   return ob_end_flush();
@@ -492,8 +527,6 @@ function get_campaign_products($campaign_id){
 	}
 	$limit = 3;
 	$args = array('fields' => 'slugs');
-
-
   $filters = array(
     'args' => array(
       'post__not_in' => array($product_id),
@@ -536,6 +569,8 @@ function get_products($limit = 5, $filters = array()) {
 
   $types = safe_GET('product_type');
   $cats = safe_GET('category');
+
+
   if(!$cats && is_category()){
   	//solamente para template categoría
   	$cat = get_category_by_path(get_query_var('category_name'),false);

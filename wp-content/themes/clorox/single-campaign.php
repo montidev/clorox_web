@@ -42,7 +42,13 @@
   <!-- productos relacionados -->
 	<section class="bg-blue section" id="section-relateds">
     <article class="clearfix">
-      <h2 class="title white text-center">Productos Relacionados</h2>
+      <h2 class="title white text-center">
+      		<?php if(check_and_get_related(get_the_ID())){ ?> 
+	      		Productos Relacionados 
+	      	<?php } else {?>  
+	      		Productos que te pueden servir 
+	      	<?php } ?>
+      </h2>
       <div class="container-products">
         <?php display_related_products(get_the_ID()); ?>
       </div>

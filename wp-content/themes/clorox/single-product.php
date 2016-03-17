@@ -27,13 +27,11 @@
               <?php display_categories_of(get_the_ID()); ?>
             </div>
             
-
             <div class="dropdown pull-left">
             	<button type="button" class="btn btn-default btn-lg btn-clorox"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	              <i class="icon icon-share"></i>
 	              <span>Compartir</span>
-	            </button>
-			        
+	            </button>			        
 			        <ul class="dropdown-menu" aria-labelledby="dLabel">
 			        	<li class="text-center"><?php if ( function_exists( 'ADDTOANY_SHARE_SAVE_KIT' ) ) { 
 								    ADDTOANY_SHARE_SAVE_KIT( array( 'use_current_page' => true ) );
@@ -62,7 +60,13 @@
   </section>
   <section class="bg-blue section" id="section-relateds">
     <article class="clearfix">
-      <h2 class="title white text-center">Productos Relacionados</h2>
+      <h2 class="title white text-center">
+      	<?php if(check_and_get_related(get_the_ID())){ ?> 
+      		Productos Relacionados 
+      	<?php } else {?>  
+      		Productos que te pueden servir 
+      	<?php } ?>
+      </h2>
       <div class="container-products">
         <?php display_related_products(get_the_ID()); ?>
       </div>

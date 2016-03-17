@@ -1,6 +1,16 @@
 <?php
   global $limit;
-  get_products($limit);
+
+
+	$types = get_terms('product-type', array('number' => 1, 'orderby' => 'term_order'));
+	$types = $types[0]->slug;
+	if(!is_front_page()){
+		$cats = get_terms('category', array('number' => 1, 'orderby' => 'term_order'));
+		$cats = $cats[0]->slug;
+	}
+
+
+  get_products($limit, array('categories' => $cats, 'product-types' => $types));
 ?>
 
 <?php global $total_products; ?>

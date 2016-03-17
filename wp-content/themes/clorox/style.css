@@ -941,6 +941,10 @@ article.fb-text-image-vertical .image .play-btn{
   background-image: url('assets/img/plus-icon.png');
 }
 
+.plus-icon-blue {
+	background-image: url('assets/img/plus-icon-blue.png');	
+}
+
 .icon-fb {
   background-image: url('assets/img/fb-icon.png');
 }

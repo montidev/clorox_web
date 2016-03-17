@@ -24,7 +24,6 @@
 		        	<div class="likebtns pull-left blue fontX18 m-t-xss">
 		        		<span class='pull-left'> ¿Te resultó interesante este tip?</span>
 		        		<?php echo do_shortcode('[rating-system-posts]'); ?>
-
 		        	</div>
 		        	<div class="dropdown pull-right">
 				        <button type="button" id="shareme" class="btn btn-default btn-lg btn-clorox btn-share pull-right" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -48,7 +47,10 @@
 	<!-- productos relacionados -->
 	<section class="bg-blue section" id="section-relateds">
     <article class="clearfix">
-      <h2 class="title white text-center">Productos que te podrán ayudar</h2>
+      <h2 class="title white text-center">
+      	Productos que te podrán ayudar
+      	<?php check_and_get_related(get_the_ID()) ?>
+      </h2>
       <div class="container-products">
         <?php display_related_products(get_the_ID()); ?>
       </div>

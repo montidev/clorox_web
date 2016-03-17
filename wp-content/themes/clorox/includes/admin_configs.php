@@ -395,6 +395,7 @@ function clorox_settings_page() {
 
 function handle_logo_upload()
 {
+
 	if(!empty($_FILES["logo"]["tmp_name"]))
 	{
 		$urls = wp_handle_upload($_FILES["logo"], array('test_form' => FALSE));

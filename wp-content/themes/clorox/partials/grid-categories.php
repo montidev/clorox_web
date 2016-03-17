@@ -1,5 +1,5 @@
 <div class="content boxes environments clearfix categoryBoxCont">
-  <?php $categories = get_categories(array('number' => 6)); ?>
+  <?php $categories = get_categories(array('number' => 6, 'orderby' => 'term_order')); ?>
   <?php foreach ($categories as $category): ?>
     <div class="col-lg-2 col-md-4 col-xs-4">
       <a href="<?php echo_safe(get_category_link($category->cat_ID)); ?>">
