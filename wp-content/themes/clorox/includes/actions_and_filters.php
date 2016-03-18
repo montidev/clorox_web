@@ -17,7 +17,7 @@ function wp_new_excerpt($text)
 		$text = str_replace(']]>', ']]>', $text);
 		$text = strip_tags($text);
 		$text = nl2br($text);
-		$excerpt_length = apply_filters('excerpt_length', 10);
+		$excerpt_length = apply_filters('excerpt_length', 12);
 		$words = explode(' ', $text, $excerpt_length + 1);
 		if (count($words) > $excerpt_length) {
 			array_pop($words);
