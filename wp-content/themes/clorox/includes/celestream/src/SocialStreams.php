@@ -15,8 +15,7 @@ class SocialStreams implements StreamInterface {
     }
 
     if ( array_key_exists('facebook', $args) ) {
-
-      $this->facebook = new FacebookStream($args['facebook']);
+      	$this->facebook = new FacebookStream($args['facebook']);     
     }
   }
 
@@ -26,14 +25,16 @@ class SocialStreams implements StreamInterface {
 
     try {
       $facebook_feeds = $this->facebook->getFeeds($args['facebook']);
-    } catch (Exception $e) {
-      error_log(var_dump($e));
+    } catch (\Exception $e) {
+      error_log('Social feed error');
+      return false;
     }
 
     try {
       $youtube_feeds = $this->youtube->getFeeds($args['youtube']);
-    } catch (Exception $e) {
-      error_log(var_dump($e));
+    } catch (\Exception $e) {
+      error_log('Social feed error');
+      return false;
     }
 
     return array('facebook' => $facebook_feeds, 'youtube' => $youtube_feeds);

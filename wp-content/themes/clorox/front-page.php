@@ -24,19 +24,18 @@
     </div>
   </section>
   <!-- #/section-control -->
-
+  <?php 
+  if(get_option('socialfeed_active')){
+  ?>
   <section class="section clearfix" id="section-social">
     <?php get_template_part('partials/grid-social'); ?>
   </section>
+  <?php
+	}
+	?>
   <!-- #/section-stream -->
 
   <section class="bg-blue section "id="section-products">
-    <!-- <div class="title text-center with-filters">
-      <h2 class="clearfix">
-        <div class="col-md-7 text-right label-filter">Necesito un producto para</div>
-        <div class="pull-left text-left"><?php get_filter_product_types_form(); ?></div>
-      </h2>
-    </div> -->
     <div class="title text-center with-filters">
       <h2 class="clearfix text-center">
         <span class="label-filter">Necesito un producto para</span>

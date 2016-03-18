@@ -1,5 +1,8 @@
 <?php
 	$sfeed = get_social_feed();
+	
+	if(count($sfeed['facebook']) && count($sfeed['youtube']) && count($sfeed['facebook']) > 3 && count($sfeed['youtube']) > 2 ) {
+	
 ?>
 
 <!-- first feed column -->
@@ -27,8 +30,6 @@
 			$templateType = 'yt-text';
 		?>
 		<?php dislay_social_feed_item(2, $item, $type, $templateType)?>
-
-
 	</div>
 </div>
 
@@ -70,5 +71,8 @@
 	</div>
 </div>
 
+<?php 
+}
+?>
 
 
