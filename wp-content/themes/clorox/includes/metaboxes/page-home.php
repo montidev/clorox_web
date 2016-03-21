@@ -39,3 +39,9 @@ $homepage->add_group_field( $slider, array(
   'id'    => HOMEPAGE_MB_SLIDER_IMAGE,
   'type'  => 'file'
 ));
+
+$homepage->add_group_field( $slider, array(
+  'name'  => __('Link', 'clorox' ),
+  'id'    => HOMEPAGE_MB_SLIDER_LINK,
+  'type'  => 'text'
+));

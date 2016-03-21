@@ -22,12 +22,13 @@ function register_clorox_settings() {
 	//register our settings
 	register_setting( 'clorox-settings-group', 'fb_link' );
 	register_setting( 'clorox-settings-group', 'yt_link' );
-	register_setting( 'clorox-settings-group', 'tw_link' );
 	register_setting( 'clorox-settings-group', 'telephone_contact' );
 	register_setting( 'clorox-settings-group', 'email_contact');
 	register_setting( 'clorox-settings-group', 'site_country' );
 	register_setting( 'clorox-settings-group', 'country_flag' );
 	register_setting( 'clorox-settings-group', 'logo', 'handle_logo_upload');
+	register_setting( 'clorox-settings-group', 'contact_title' );
+	register_setting( 'clorox-settings-group', 'contact_text' );
 }
 
 function clorox_settings_page() {
@@ -66,12 +67,6 @@ function clorox_settings_page() {
           </td>
         </tr>
         <tr valign="top">
-          <th scope="row">Twitter URL</th>
-          <td>
-            <input type="text" name="tw_link" value="<?php echo esc_attr( get_option('tw_link') ); ?>" />
-          </td>
-        </tr>
-        <tr valign="top">
           <th scope="row">Telefono de contacto</th>
           <td>
             <input type="text" name="telephone_contact" value="<?php echo esc_attr( get_option('telephone_contact') ); ?>" />
@@ -84,6 +79,24 @@ function clorox_settings_page() {
           </td>
         </tr>
       </table>
+
+
+
+      <h2>Formulario de contacto </h2>
+      <table class="form-table">
+      	<tr valign="top">
+          <th scope="row">Título de formulario</th>
+          <td>
+            <input type="text" name="contact_title" value="<?php echo esc_attr( get_option('contact_title') ); ?>" />
+          </td>
+        </tr>
+        <tr valign="top">
+          <th scope="row">Texto de formulario</th>
+          <td>
+            <textarea name="contact_text" rows="5"><?php echo esc_attr( get_option('contact_text') ); ?> </textarea>
+          </td>
+        </tr>
+     	</table>
 
       <h2>Información regional del Sitio </h2>
       <table class="form-table">

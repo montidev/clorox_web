@@ -41,7 +41,8 @@ jQuery(function($){
     useCSS: true,
     easing: 'easeOutElastic',
     speed: 2000,
-    pager: false
+    pager: false,
+    preloadImages: 'all'
   });
 
   $('.ajax-load').click(function(e){

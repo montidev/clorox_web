@@ -20,9 +20,10 @@
         </div>
         <div class="col-md-7">
           <div class="row">
-            <h2 class="title white xs-hide"><?php echo_safe( get_product_type(get_the_ID()) ); ?></h2>
             <h1 class="title white xs-hide"><?php the_title(); ?></h1>
-            <?php the_content(); ?>
+            <div class="detail">
+            	<?php the_content(); ?>
+            </div>
             <div class="categories-container">
               <?php display_categories_of(get_the_ID()); ?>
             </div>
@@ -44,20 +45,32 @@
       </div>
     </article>
   </section>
+  <?php 
+  	$haschar = has_characteristics(get_the_ID()); 
+  	$hasvid = has_video(get_the_ID());
+  ?>
+  <?php if($hasvid || $haschar) { ?>
   <section class="bg-white section" id="section-characteristics">
+  	<?php if($haschar) { ?>
     <article class="top-overlaped bg-white clearfix">
       <h2 class="title blue text-center">Características</h2>
       <div class="col-md-12 characteristics">
         <?php display_characteristics(get_the_ID()); ?>
       </div>
     </article>
+    <?php } ?>
+
+    <?php if($hasvid) { ?>
     <article class="how-to-use clearfix">
       <h2 class="title blue text-center">Como se usa</h2>
       <div class="col-md-12 videoContainer">
         <?php display_product_video(get_the_ID()); ?>
       </div>
     </article>
+
+    <?php } ?>
   </section>
+  <?php } ?>
   <section class="bg-blue section" id="section-relateds">
     <article class="clearfix">
       <h2 class="title white text-center">

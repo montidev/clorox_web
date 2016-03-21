@@ -5,9 +5,9 @@
 		<div class='clearfix'>
 			<div class="row bg-green">
 				<div class="col-sm-offset-2 col-md-8">
-					<h2 class="title white text-center">Siempre estamos con ganas de charlar</h2>
+					<h2 class="title white text-center"><?php echo esc_attr( get_option('contact_title') ); ?></h2>
 					<p class="white text-contact">
-						Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. 
+						<?php echo esc_attr( get_option('contact_text') ); ?>
 					</p>
 				</div>
 			</div>
@@ -35,9 +35,7 @@
 		 				<li>
 		 					<a href="<?php echo esc_attr( get_option('yt_link') ); ?>" target="_blank" class="white"><i class="icon icon-yt-white iconX40"></i> /clorox</a>
 		 				</li>
-		 				<li>
-		 					<a href="<?php echo esc_attr( get_option('tw_link') ); ?>" target="_blank" class="white"><i class="icon icon-tw-white iconX40"></i> @clorox</a>
-		 				</li>
+		 				
 		 			</ul>
 		 		</div>
 			</div>

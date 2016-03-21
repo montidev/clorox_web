@@ -3,10 +3,12 @@
 <section class="bxslider">
   <?php foreach ($slides as $slide): ?>
     <article class="bxslide">
-      <div class="bg-image" style="background-image:url(<?php echo $slide['url']; ?>);"></div>
-      <div class="bottom-left description box-blue">
-        <h3><?php echo_safe($slide['text']); ?></h3>
-      </div>
+    	<a href="<?php echo $slide['link']; ?>">
+	      <div class="bg-image" style="background-image:url(<?php echo $slide['url']; ?>);"></div>
+	      <div class="bottom-left description box-blue">
+	        <h3><?php echo_safe($slide['text']); ?></h3>
+	      </div>
+	    </a>
     </article>
   <?php endforeach; ?>
 </section>

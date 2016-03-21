@@ -357,6 +357,7 @@ function get_home_slides($id) {
     return array(
       'text' => $slide[HOMEPAGE_MB_SLIDER_TEXT],
       'url' => $slide[HOMEPAGE_MB_SLIDER_IMAGE],
+      'link' => $slide[HOMEPAGE_MB_SLIDER_LINK],
     );
   }, $slides);
 
@@ -456,6 +457,15 @@ function display_related_products($product_id, $limit = 5) {
   return ob_end_flush();
 }
 
+function has_characteristics($product_id) {
+	$chars = get_characteristics($product_id);
+	if(empty($chars)) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
 function display_characteristics($product_id) {
   $chars = get_characteristics($product_id);
   ob_start();
@@ -470,6 +480,15 @@ function display_characteristics($product_id) {
     <?php endforeach; ?>
   <?php
   return ob_end_flush();
+}
+
+function has_video($product_id){
+	$video_embed = get_post_meta($product_id, PRODUCT_MB_VIDEO, true);
+	if($video_embed){
+		return true;
+	} else {
+		return false;
+	}
 }
 
 function display_product_video($product_id) {

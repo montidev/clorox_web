@@ -79,8 +79,6 @@
 	 				</li>
 	 				<li>
 	 					<a target="_blank" class="white" href="<?php echo esc_attr( get_option('yt_link') ); ?>"><i class="icon icon-yt-white iconX50"></i> <span>/clorox</span></a>
-	 				<li>
-	 					<a target="_blank" class="white" href="<?php echo esc_attr( get_option('tw_link') ); ?>"><i class="icon icon-tw-white iconX50"></i> <span>@clorox</span></a>
 	 				</li>
 	 			</ul>
 	 		</div>
