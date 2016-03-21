@@ -1865,6 +1865,7 @@ footer .logo img {
   margin: auto;
   padding-top: 150px;
   padding-bottom: 50px;
+  max-height: 275px;
 }
 
 footer .menu li a {
