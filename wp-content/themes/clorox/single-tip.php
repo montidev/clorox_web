@@ -20,7 +20,7 @@
       		endif;
 
       	?>
-      	<div class="videoContainer videoBlueBorder" style="background-image: url('<?php echo $bgtip[0]; ?>'); height: 422px; border-bottom: 4px solid #1967bb; ">
+      	<div class="videoContainer videoBlueBorder" style="background-image: url('<?php echo $bgtip[0]; ?>'); height: 422px; border-bottom: 4px solid #1967bb; background-size: cover; ">
 
       	</div>
       	<?php } ?>
