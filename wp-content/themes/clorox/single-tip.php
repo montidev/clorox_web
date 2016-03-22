@@ -10,9 +10,20 @@
 
 	  <article class="container850 bottom-overlaped bg-white clearfix">
 	 		<div class="clearfix">
+	 			<?php if(get_post_meta(get_the_ID(), TIP_MB_VIDEO, true)){ ?>
       	<div class="videoContainer videoBlueBorder">
         	<?php display_tip_video(get_the_ID()); ?>
       	</div>
+      	<?php } else { 
+      		if (has_post_thumbnail( get_the_ID() ) ):
+      			$bgtip = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'single-post-thumbnail' );
+      		endif;
+
+      	?>
+      	<div class="videoContainer videoBlueBorder" style="background-image: url('<?php echo $bgtip[0]; ?>'); height: 422px; border-bottom: 4px solid #1967bb; ">
+
+      	</div>
+      	<?php } ?>
 	      <div class="col-md-12">
 	      	<div class="detailContainer">
 		        <h1 class="title"><?php the_title(); ?></h1>

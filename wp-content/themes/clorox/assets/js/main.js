@@ -79,9 +79,14 @@ jQuery(function($){
       var target = $(this).attr('data-target');
       var containerToAppend = $(this).attr('data-container-append');
       var items = $(this).attr('data-item');
-      $(containerToAppend).append($('<div>').load(link + ' ' + target));
-      window.history.pushState('', '', link);
-      canPaginate($(this))
+      that = this;
+      $(containerToAppend).append($('<div>').load(link + ' ' + target, function(data){
+      	var a = $(data).find('.btn-more a').attr('href');
+      	$(that).attr('href', a);
+      	window.history.pushState('', '', link);
+      	canPaginate($(that));      	
+      }));
+      
     }
 
   });

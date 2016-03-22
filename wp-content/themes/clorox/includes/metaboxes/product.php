@@ -40,3 +40,15 @@ $product->add_group_field( $chars, array(
   'id'    => PRODUCT_MB_CHARAC_TEXT,
   'type'  => 'textarea'
 ));
+
+$product->add_field( array(
+    'name'        => __( 'Productos relacionados' ),
+    'id'          => PRODUCT_MB_PRODUCTS,
+    'type'        => 'post_search_text', // This field type
+    // post type also as array
+    'post_type'   => 'product',
+    // Default is 'checkbox', used in the modal view to select the post type
+    'select_type' => 'checkbox',
+    // Will replace any selection with selection from modal. Default is 'add'
+    'select_behavior' => 'replace',
+) );

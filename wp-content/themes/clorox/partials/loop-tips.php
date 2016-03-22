@@ -3,7 +3,11 @@
     <div class="col-md-4 tip">
       <article class="box box-layered">
         <div class="header">
-          <div class="bg-image" style="background-image:url(<?php get_image_uri('test-1.jpg'); ?>)"></div>
+          <?php if (has_post_thumbnail( get_the_ID() ) ): ?>
+					  <?php $image = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'single-post-thumbnail' ); ?>
+					  <div class="bg-image" style="background-image: url('<?php echo $image[0]; ?>'); ?>)"></div>
+					  
+					<?php endif; ?>
         </div>
         <div class="body bg-white animate-height">
           <h4 class="title"><?php the_title(); ?></h4>

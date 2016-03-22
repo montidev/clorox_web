@@ -13,6 +13,7 @@ define('PRODUCT_MB_CHARACS', PRODUCT_MB . '_characteristics');
 define('PRODUCT_MB_CHARAC_IMAGE', PRODUCT_MB_CHARACS . '_image');
 define('PRODUCT_MB_CHARAC_TEXT', PRODUCT_MB_CHARACS . '_text');
 define('PRODUCT_MB_VIDEO', PRODUCT_MB . '_video');
+define('PRODUCT_MB_PRODUCTS', PRODUCT_MB . '_products');
 
 define('PRODUCT_TYPE_MB', PREFIX . 'metabox_product_type');
 define('PRODUCT_TYPE_MB_VERB', PREFIX . 'metabox_product_type_verb');
