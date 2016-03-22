@@ -472,6 +472,43 @@ function check_and_get_related($product_id, $limit = 5){
 	
 }
 
+function check_and_get_related_tip($tip_id, $limit = 5){
+	$ids = get_post_meta($tip_id, TIP_MB_PRODUCTS, true);
+	if($ids) {
+		//hay cargados productos relacionados
+		$ids = preg_split("/[\s,]+/",$ids);
+		for ($i=0; $i < count($ids); $i++) {
+			$ids[$i] = (int) $ids[$i];
+		}
+
+		$limit = 3;
+		$args = array('fields' => 'slugs');
+	  $filters = array(
+	    'args' => array(
+	      'post__not_in' => array($product_id),
+	      'post__in' => $ids
+	    )
+	  );
+	  get_products($limit, $filters);
+	} else {
+		//traigo relacionados por categoria y tipo
+		$ret = get_related_products($product_id, $limit);	
+	}
+
+
+  
+  
+  if(have_posts()) {
+  	return true;
+  } else {
+  	//en defecto de lo anterior
+  	//traigo 5 aleatorios
+  	get_products(5);  	
+  	return false;
+  }
+	
+}
+
 
 function display_related_products($product_id, $limit = 5) {
   

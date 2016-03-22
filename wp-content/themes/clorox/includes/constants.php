@@ -26,6 +26,7 @@ define('CATEGORY_MB_IMAGES_TYPE', CATEGORY_MB_IMAGES . '_type');
 define('TIP_MB', PREFIX . 'tip_metabox');
 define('TIP_MB_CHARACS', TIP_MB . '_characteristics');
 define('TIP_MB_VIDEO', TIP_MB . '_video');
+define('TIP_MB_PRODUCTS', TIP_MB . '_products');
 
 
 define('CAMPAIGN_MB', PREFIX . 'campaign_metabox');

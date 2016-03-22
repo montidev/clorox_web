@@ -60,7 +60,7 @@
     <article class="clearfix">
       <h2 class="title white text-center">
       	Productos que te podrán ayudar
-      	<?php check_and_get_related(get_the_ID()) ?>
+      	<?php check_and_get_related_tip(get_the_ID()) ?>
       </h2>
       <div class="container-products">
         <?php display_related_products(get_the_ID()); ?>
