@@ -75,10 +75,10 @@
 
 	 			<ul class='list-unstyled socialShare white'>
 	 				<li>
-	 					<a target="_blank" class="white" href="<?php echo esc_attr( get_option('fb_link') ); ?>"><i class="icon icon-fb-white iconX50"></i> <span>/clorox</span> </a> 
+	 					<a target="_blank" class="white" href="<?php echo esc_attr( get_option('fb_link') ); ?>"><i class="icon icon-fb-white iconX50"></i> <span><?php echo esc_attr( get_option('fb_label_link') ); ?></span> </a> 
 	 				</li>
 	 				<li>
-	 					<a target="_blank" class="white" href="<?php echo esc_attr( get_option('yt_link') ); ?>"><i class="icon icon-yt-white iconX50"></i> <span>/clorox</span></a>
+	 					<a target="_blank" class="white" href="<?php echo esc_attr( get_option('yt_link') ); ?>"><i class="icon icon-yt-white iconX50"></i> <span><?php echo esc_attr( get_option('yt_label_link') ); ?></span></a>
 	 				</li>
 	 			</ul>
 	 		</div>

@@ -21,7 +21,9 @@ function clorox_create_menu() {
 function register_clorox_settings() {
 	//register our settings
 	register_setting( 'clorox-settings-group', 'fb_link' );
+	register_setting( 'clorox-settings-group', 'fb_label_link' );
 	register_setting( 'clorox-settings-group', 'yt_link' );
+	register_setting( 'clorox-settings-group', 'yt_label_link' );
 	register_setting( 'clorox-settings-group', 'telephone_contact' );
 	register_setting( 'clorox-settings-group', 'email_contact');
 	register_setting( 'clorox-settings-group', 'site_country' );
@@ -61,9 +63,21 @@ function clorox_settings_page() {
           </td>
         </tr>
         <tr valign="top">
+          <th scope="row">Facebook label</th>
+          <td>
+            <input type="text" name="fb_label_link" value="<?php echo esc_attr( get_option('fb_label_link') ); ?>" />
+          </td>
+        </tr>
+        <tr valign="top">
           <th scope="row">Youtube URL</th>
           <td>
             <input type="text" name="yt_link" value="<?php echo esc_attr( get_option('yt_link') ); ?>" />
+          </td>
+        </tr>
+        <tr valign="top">
+          <th scope="row">Youtube label</th>
+          <td>
+            <input type="text" name="yt_label_link" value="<?php echo esc_attr( get_option('yt_label_link') ); ?>" />
           </td>
         </tr>
         <tr valign="top">
