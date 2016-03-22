@@ -235,6 +235,10 @@ button:hover
 .dropdown.md.yellow > button {
 	border-bottom: 2px solid  #f0c828!important;;
   background-image: url('assets/img/caret-yellow.png');
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-right: 15px;
 }
 
 .dropdown.md > button:focus {
