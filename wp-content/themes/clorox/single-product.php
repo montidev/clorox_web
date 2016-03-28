@@ -8,9 +8,8 @@
     <article class="container850">
       <div class="clearfix">
       	<div class="row">
-	      	<div class="col-xs-12 md-hide">
-	      		<h2 class="title white"><?php echo_safe( get_product_type(get_the_ID()) ); ?></h2>
-	            <h1 class="title white"><?php the_title(); ?></h1>
+	      	<div class="col-xs-12 md-hide">	      		
+	          <h1 class="title white"><?php the_title(); ?></h1>
 	      	</div>
 	      </div>
         <div class="col-md-5">

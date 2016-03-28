@@ -1001,7 +1001,7 @@ article.fb-text-image-vertical .image .play-btn{
 }
 
 .list-inline.categories > li + li {
-  margin-left: 20px;
+  
 }
 
 .list-inline.categories.light-bg > li > .bg-image {
@@ -1534,6 +1534,14 @@ header .menu-primary-container ul:first-child {
 
 .single-product .characteristics {
   padding-top: 80px;
+  text-align: center;
+}
+
+.single-product .characteristics > div {
+	float: none;
+	display: inline-block;
+	width: 32%;
+	vertical-align: top;
 }
 
 .single-product .characteristic {
@@ -2316,6 +2324,19 @@ footer .copyright {
 	.home .dropdown.filters > .btn {
 		font-size: 38px;
 	}
+
+
+	/*
+	*	Single Product
+	*/
+
+	.single-product .characteristics > div {
+		float: none;
+		display: block;
+		width: auto;
+		
+	}
+
 
  }
 

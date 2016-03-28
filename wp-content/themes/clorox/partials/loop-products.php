@@ -6,8 +6,7 @@
           <div class="header">
             <div class="bg-image" style="background-image:url(<?php get_featured_image_uri(get_the_ID()); ?>)"></div>
           </div>
-          <div class="body visible-on-hover text-left">
-            <h4 class="title blue light"><?php echo_safe(get_product_type(get_the_ID())); ?></h4>
+          <div class="body visible-on-hover text-left">        
             <h5 class="title blue light"><?php the_title(); ?></h5>
           </div>
         </article>
