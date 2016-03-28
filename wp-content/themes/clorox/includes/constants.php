@@ -17,6 +17,7 @@ define('PRODUCT_MB_PRODUCTS', PRODUCT_MB . '_products');
 
 define('PRODUCT_TYPE_MB', PREFIX . 'metabox_product_type');
 define('PRODUCT_TYPE_MB_VERB', PREFIX . 'metabox_product_type_verb');
+define('PRODUCT_TYPE_MB_LABEL_FILTER', PREFIX . 'metabox_product_type_label_filter');
 
 define('CATEGORY_MB', PREFIX . 'category');
 define('CATEGORY_MB_IMAGES', CATEGORY_MB . '_images');

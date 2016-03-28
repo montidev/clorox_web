@@ -197,6 +197,52 @@ function link_next_pagination() {
   echo_safe($link);
 }
 
+function get_filter_product_types_grid_form() {
+
+	$param = safe_GET('product_type', '-');
+	
+	$types = get_terms('product-type');
+
+	if($param == '-'){
+		// get the first 
+		$param = get_terms('product-type', array('number' => 1, 'orderby' => 'term_order'));
+		$param = $param[0]->slug;
+	} 
+  // retrive verb
+  $value = get_product_type_label_filter_by_slug($param);
+  
+  ob_start();
+  ?>
+  <div class="dropdown filters md yellow" data-filter="product-type">
+    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+      <span class="text light"><?php echo ($value) ? ucfirst($value) : '-'; ?></span>
+    </button>
+    <ul class="dropdown-menu">
+      <?php foreach ($types as $type): ?>
+        <?php $verb = get_product_type_label_filter($type->term_id); ?>
+        <li class="text blue fontX20">
+          <?php $args = array( array('product_type' => $type->slug) ); ?>
+          <a class="ajax-load"
+            href="<?php link_to_with_args($args); ?>"
+            data-target=".container-products"
+            data-container=".container-products">
+            <?php echo_safe(ucfirst($verb)); ?>
+          </a>
+        </li>
+      <?php endforeach; ?>
+    </ul>
+  </div>
+  <script type="text/javascript">
+    $('.ajax-load').click(function(e){
+      e.preventDefault();
+      var text = $(this).text().trim();
+      $(this).closest('.dropdown').find('button>.text').html(text);
+    })
+  </script>
+  <?php
+  return ob_end_flush();	
+}
+
 function get_filter_product_types_form() {
 
 	$param = safe_GET('product_type', '-');
@@ -594,9 +640,18 @@ function get_product_type_verb($term_id) {
   return get_term_meta( $term_id, PRODUCT_TYPE_MB_VERB, true);
 }
 
+function get_product_type_label_filter($term_id) {
+  return get_term_meta( $term_id, PRODUCT_TYPE_MB_LABEL_FILTER, true);
+}
+
 function get_product_type_verb_by_slug($term_slug) {
   $product_type = get_term_by('slug', $term_slug, 'product-type');
   return get_product_type_verb( $product_type->term_id);
+}
+
+function get_product_type_label_filter_by_slug($term_slug) {
+  $product_type = get_term_by('slug', $term_slug, 'product-type');
+  return get_product_type_label_filter( $product_type->term_id);
 }
 
 function get_campaign_products($campaign_id){

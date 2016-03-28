@@ -14,6 +14,11 @@ $meta_boxes[PRODUCT_TYPE_MB] = array(
       'name'  => __('Verbo', 'clorox' ),
       'id'    => PRODUCT_TYPE_MB_VERB,
       'type'  => 'text',
-    )
+    ),
+    array(
+      'name'  => __('Etiqueta filtro compuesto', 'clorox' ),
+      'id'    => PRODUCT_TYPE_MB_LABEL_FILTER,
+      'type'  => 'text',
+    ),
   )
 );
