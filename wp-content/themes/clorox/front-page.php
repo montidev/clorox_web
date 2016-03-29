@@ -6,7 +6,7 @@
   <!-- ./featuted-image --> 
   <section class="bg-white section " id="section-environment">
     <div class="title text-center">
-      <h2>¿Qué ambiente <strong>me necesita</strong>?</h2>
+      <h2><?php echo_safe(get_post_meta( get_the_ID(), HOMEPAGE_MB_TITLE_CATEGORIES, true )); ?></h2>
     </div>
     <?php get_template_part('partials/grid', 'categories'); ?>
   </section>

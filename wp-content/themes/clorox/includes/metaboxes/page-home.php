@@ -16,6 +16,12 @@ $homepage = new_cmb2_box( array(
   'show_names'    => true, // Show field names on the left
 ));
 
+$homepage->add_field(array(
+	'name'          => __('Título categorías', 'clorox' ),
+	'id'            => HOMEPAGE_MB_TITLE_CATEGORIES,
+	'type'          => 'text'
+));
+
 $slider = $homepage->add_field(array(
   'id'            => HOMEPAGE_MB_SLIDER,
   'type'          => 'group',
