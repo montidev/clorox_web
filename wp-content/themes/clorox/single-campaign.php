@@ -8,7 +8,7 @@
   <!-- ./featuted-image -->
   <section class="bg-white" id="sectionCampaignDetail">
  		<div class="clearfix">
-	  	<h2 class="title text-center">Nuevo <strong><?php the_title() ?></strong></h2>
+	  	<h2 class="title text-center"><strong><?php the_title() ?></strong></h2>
 
 	  	<div class="text-center">
 	  		<?php the_content() ?>
@@ -31,32 +31,20 @@
   <section class="bg-green" id="section-relateds-tips">
 			
 	    <h2 class="title fontX38 light white text-center">Tips Relacionados</h2>
+	    <?php get_campaign_related_tips(get_the_ID()); ?>
 
 	    <?php display_related_tips(get_the_ID()); ?>
 	    
-	    <?php //get_template_part('partials/grid', 'tips'); ?>
+	    
 	</section>
 
   <!-- ./tips relacionados --> 
 
-  <!-- productos relacionados -->
-	<section class="bg-blue section" id="section-relateds">
-    <article class="clearfix">
-      <h2 class="title white text-center">
-      		<?php if(check_and_get_related(get_the_ID())){ ?> 
-	      		Productos Relacionados 
-	      	<?php } else {?>  
-	      		Productos que te pueden servir 
-	      	<?php } ?>
-      </h2>
-      <div class="container-products">
-        <?php display_related_products(get_the_ID()); ?>
-      </div>
-    </article>
-  </section>
+  
 
 
   <!-- formulario de contacto --> 
+  <?php if(campaign_has_contact_form(get_the_ID())): ?>
  	<section class="bg-white section" id="section-contactForm">
 
 
@@ -84,12 +72,16 @@
 	 		</div>
 		</div>
  	</section>	
+
+ <?php endif; ?>
   <!-- ./formulario de contacto --> 
 
 
 
 
 
-	<?php endwhile; ?>
+	<?php endwhile; 
+	
+	?>
 
 <?php get_footer('nonenewsletter');?>

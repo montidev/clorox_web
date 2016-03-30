@@ -217,8 +217,10 @@ button:hover
 .underline {
 	text-decoration: underline !important;
 }
+
+
 .dropdown.open>.dropdown-menu {
-  width: 100%;
+  width: auto;
 }
 
 .dropdown.md > button {
@@ -1871,13 +1873,18 @@ footer .newsletter input{
 
 footer .input-md + .input-group-btn > .btn {
   margin-top: 8px;
+  margin-bottom: 50px;
 }
-
+footer .logo {
+	padding-top: 150px;
+	margin-bottom: 50px;
+}
 footer .logo img {
   margin: auto;
-  padding-top: 150px;
-  padding-bottom: 50px;
-  max-height: 275px;
+  position:relative;
+  
+  
+  /*max-height: 275px;*/
 }
 
 footer .menu li a {
@@ -1963,7 +1970,7 @@ footer .copyright {
 }
 
 .home .with-filters h2 .dropdown {
-	max-width: 320px;
+	max-width: 400px;
 	display: inline-block;
 }
 
@@ -3034,6 +3041,20 @@ footer .copyright {
 		margin-left: -15px;
 		margin-right: -15px;
 	}
+
+
+	/* 
+	* footer
+	*/
+
+	footer .list-inline>li {
+		margin-top: 7px;
+	}
+
+	footer .list-inline>li:last-child {
+		border: 0 !important;
+	}
+
 
 
 

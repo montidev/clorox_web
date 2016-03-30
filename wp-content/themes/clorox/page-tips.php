@@ -6,6 +6,7 @@
   </div>
   <?php global $limit; $limit = 9; ?>
   <?php get_template_part('partials/grid-tips'); ?>
+
   <div class="text-center btn-more">
     <a class="paginate-ajax"
       href="<?php link_next_pagination(); ?>"

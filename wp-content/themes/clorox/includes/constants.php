@@ -37,3 +37,5 @@ define('CAMPAIGN_MB_CHARAC_IMAGE', CAMPAIGN_MB_SLIDER . '_image');
 define('CAMPAIGN_MB_CHARAC_TEXT', CAMPAIGN_MB_SLIDER . '_text');
 define('CAMPAIGN_MB_VIDEO', CAMPAIGN_MB . '_video');
 define('CAMPAIGN_MB_PRODUCTS', CAMPAIGN_MB . '_products');
+define('CAMPAIGN_MB_TIPS', CAMPAIGN_MB . '_tips');
+define('CAMPAIGN_MB_CONTACT', CAMPAIGN_MB . '_contact');

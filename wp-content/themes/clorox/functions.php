@@ -187,21 +187,25 @@ function link_next_pagination() {
   );
 
   $page_numbers = paginate_links( $args );
+  if($page_numbers){
+  	$next_link = array_pop($page_numbers);
 
-  $next_link = array_pop($page_numbers);
+	  preg_match('/^<a.*?href=(["\'])(.*?)\1.*$/', $next_link, $m);
 
-  preg_match('/^<a.*?href=(["\'])(.*?)\1.*$/', $next_link, $m);
+	  $link = count($m) ? array_pop($m) : "";
 
-  $link = count($m) ? array_pop($m) : "";
-
-  echo_safe($link);
+	  echo_safe($link);	
+  } else {
+  	echo '';
+  }
+  
 }
 
 function get_filter_product_types_grid_form() {
 
 	$param = safe_GET('product_type', '-');
 	
-	$types = get_terms('product-type');
+	$types = get_terms('product-type', array('orderby' => 'term_order'));
 
 	if($param == '-'){
 		// get the first 
@@ -247,12 +251,13 @@ function get_filter_product_types_form() {
 
 	$param = safe_GET('product_type', '-');
 	
-	$types = get_terms('product-type');
+	$types = get_terms('product-type', array( 'orderby' => 'term_order'));
 
 	if($param == '-'){
 		// get the first 
 		$param = get_terms('product-type', array('number' => 1, 'orderby' => 'term_order'));
 		$param = $param[0]->slug;
+		
 	} 
   // retrive verb
   $value = get_product_type_verb_by_slug($param);
@@ -434,6 +439,14 @@ function get_campaign_slides($id) {
 	}
 }
 
+function campaign_has_contact_form($campaign_id){
+	$c = get_post_meta( $campaign_id, CAMPAIGN_MB_CONTACT, true );
+	if($c && $c == 'si') {
+		return true;
+	} else {
+		return false;
+	}
+}
 
 function display_campaign_video($campaign_id) {
   $video_embed = get_post_meta($campaign_id, CAMPAIGN_MB_VIDEO, true);
@@ -444,6 +457,46 @@ function display_campaign_products($campaign_id){
   ob_start();
   get_template_part('partials/loop', 'campaignProducts');
   return ob_end_flush();
+}
+
+function get_campaign_related_tips($campaign_id, $limit = 3){
+	$ids = get_post_meta($campaign_id, CAMPAIGN_MB_TIPS, true);
+	if($ids) {
+
+		//hay cargados productos relacionados
+		//dd($ids);
+		$ids = preg_split("/[\s,]+/",$ids);
+		for ($i=0; $i < count($ids); $i++) {
+			$ids[$i] = (int) $ids[$i];
+		}
+
+		$limit = 3;
+		$args = array('fields' => 'slugs');
+	  $filters = array(
+	    'args' => array(
+	      'post__not_in' => array($campaign_id),
+	      'post__in' => $ids
+	    )
+	  );
+	  get_tips($limit, $filters);
+	} else {
+		//traigo relacionados por categoria y tipo
+
+		$ret = get_related_tips($campaign_id, $limit);	
+	}
+
+
+  
+  
+  if(have_posts()) {
+  	return true;
+  } else {
+  	//en defecto de lo anterior
+  	//traigo 5 aleatorios
+  	get_tips(3);  	
+  	return false;
+  }
+	
 }
 
 
@@ -615,9 +668,8 @@ function display_tip_video($product_id) {
 }
 
 function display_related_tips($tip_id, $limit = 3) {
-  get_related_tips($tip_id, $limit);
   ob_start();
-  get_template_part('partials/grid', 'tips');
+  get_template_part('partials/loop', 'tips');
   return ob_end_flush();
 }
 
@@ -672,7 +724,7 @@ function get_campaign_products($campaign_id){
   get_products($limit, $filters);
 }
 
-function get_tips($limit = 3) {
+function get_tips($limit = 3, $filters = array()) {
   wp_reset_query();
   global $wp_query;
   global $total_products;
@@ -682,6 +734,11 @@ function get_tips($limit = 3) {
     'posts_per_page' => $limit,
     'paged' => $paged
   );
+
+
+  if ( array_key_exists('args', $filters) ) {
+    $args = array_merge($args, $filters['args']);
+  }
   query_posts($args);
   return $wp_query->posts;
 }
@@ -708,8 +765,10 @@ function get_products($limit = 5, $filters = array()) {
 
   if(!$cats && is_category()){
   	//solamente para template categoría
+
   	$cat = get_category_by_path(get_query_var('category_name'),false);
-		$cats = $cat->cat_name;
+  	//dd($cat);
+		$cats = $cat->slug;
   }
   if ( !$types && array_key_exists('product-types', $filters) ) {
     $types = $filters['product-types'];
