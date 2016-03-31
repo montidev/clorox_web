@@ -47,7 +47,7 @@
       <?php display_grid_products(); ?>
     </div>
     <div class="text-center btn-more">
-      <a href="<?php link_to('products'); ?>">
+      <a href="<?php link_to('productos'); ?>">
         <span class="icon iconX2 plus-icon"></span>
       </a>
     </div>
