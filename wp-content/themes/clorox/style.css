@@ -229,6 +229,7 @@ button:hover
 
 .dropdown.open>.dropdown-menu {
   width: auto;
+  min-width: 300px;
 }
 
 .dropdown.md > button {
@@ -352,9 +353,12 @@ select.input-md {
 .section > .title.with-filters .label-filter {
   line-height: 70px;
 }
-
 .section > .with-filters .filters {
-  padding-top: 9px;
+	padding-top: 9px;
+}
+.home .section > .with-filters .filters {
+  padding-top: 0px;
+  vertical-align: top;
 }
 
 .section.bg-green > .title > h2,
@@ -2123,8 +2127,12 @@ footer .copyright {
   .category #section-products h2, .page #section-products h2 {
   	display: inline-block;
   	margin: 0 auto;
+  	max-width: 350px;
   }
 
+  .home #section-products h2 {
+  	max-width: 360px;
+  }
   .category #section-products h2 div:nth-child(2), .page #section-products h2 div:nth-child(2) {
   	clear: left;
   	width: 100%;
@@ -2157,6 +2165,10 @@ footer .copyright {
 
 	}
 
+	.page #section-products .container-fluid:first-child .filters > .btn, .category #section-products .container-fluid:first-child .filters > .btn {
+    font-size: 23px;
+	}
+
 	.home .dropdown.filters > .btn {
 		font-size: 38px;
 	}
@@ -2164,6 +2176,15 @@ footer .copyright {
 	/*
 	* Filter
 	*/
+	.page #section-products .label-filter, .category #section-products .label-filter {
+		font-size: 28px;
+		font-weight: 200;
+		text-align: left;
+	}
+
+	.home #section-products .label-filter {
+		font-size: 32px;
+	}
 
 	.filters-new h2 > div {
 		
@@ -2548,8 +2569,12 @@ footer .copyright {
 	}
 
 	.home #section-products h2 div:nth-child(2) {
-		max-width: 340px;
+		max-width: 350px;
 		display: block;		
+	}
+
+	.home .dropdown.filters > .btn {
+    font-size: 36px;
 	}
 
 	/* solo para la home page */
@@ -2594,11 +2619,7 @@ footer .copyright {
 	}
 
 
-	#section-products .label-filter {
-		font-size: 28px;
-		font-weight: 200;
-		text-align: left;
-	}
+	
 
 
 	#section-products .label-filter + div {
@@ -2634,6 +2655,10 @@ footer .copyright {
 		font-size: 38px;
 	}
 
+
+	.home #section-products .label-filter {
+    font-size: 28px;
+	}
 
 	/*
 	* Product Single
@@ -3017,6 +3042,20 @@ footer .copyright {
 	.page .content h2 {
 		font-size: 32px;
 	}
+
+	/*
+	* Filtros
+	*/
+
+	.category #section-products h2, .page #section-products h2 {
+  	display: inline-block;
+  	margin: 0 auto;
+  	max-width: 350px;
+  }
+
+  .home #section-products h2 {
+  	max-width: 350px;
+  }
 }
 
 /* Extra Small Devices, Phones */
