@@ -16,7 +16,8 @@
 				<div class="container404 bg-white">
 					<p class="t1 blue"> No encontramos la página que buscabas, <br />pero tenemos algunos consejos para darte:</p>
 					<section class="bg-transparent" id="section-relateds-tips">
-					    <?php display_related_tips(get_the_ID()); ?>
+							
+					    <?php get_template_part('partials/grid', 'tips'); ?>
 
 					    <div class="text-center btn-more">
 					      <a href="<?php link_to('tips'); ?>">
