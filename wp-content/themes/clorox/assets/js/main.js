@@ -199,7 +199,7 @@ jQuery(function($){
 $(function(){
 	//para iniciar le demos el tamaño del viewport a .navbar-collapse
 	var adjustHeight = function() {$('.navbar-collapse').css('height',($('html').height() - 74) + 'px');  };
-
+	adjustHeight();
 
 	//función que cada vez que apriete. quede bien
 	$('.navbar-toggle').click(function(e){
