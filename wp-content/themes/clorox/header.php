@@ -9,8 +9,8 @@
   </head>
   <body <?php body_class(); ?>>
 
-    <header>
-      <nav class="navbar navbar-fixed-top navbar-default navbar-custom border-x2-top border-blue">
+    
+      <nav class="navbar navbar-fixed-top navbar-default navbar-custom border-x2-top border-blue shadow">
         <div class="container-fluid">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-top-collapse" aria-expanded="false">
@@ -38,6 +38,6 @@
 	      </div>
       </nav>
 
-    </header>
+    
 
     <main id="main-wrapper">

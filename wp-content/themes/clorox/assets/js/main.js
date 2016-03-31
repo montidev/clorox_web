@@ -180,12 +180,7 @@ jQuery(function($){
     $('.bg-transparent').addClass('transition');
   });
 
-  // $(window).bind('exitBreakpoint1024',function() {
-  //   $('#log').append('<p>Exiting 1024 breakpoint</p>');
-  // });
-  // $(window).bind('enterBreakpoint1024',function() {
-  //   $('#log').append('<p>Entering 1024 breakpoint</p>');
-  // });
+  
 
 	$(window).setBreakpoints({
 		distinct: true,
@@ -193,10 +188,38 @@ jQuery(function($){
 	});
 
 
-  // $('.filters').on('click', 'a', function(e){
-  //   e.preventDefault();
-  //   var el = e.target;
-  //   console.log($(el).attr('data-value'));
-  // });
 
+
+	
+  
+
+});
+
+
+$(function(){
+	//para iniciar le demos el tamaño del viewport a .navbar-collapse
+	var adjustHeight = function() {$('.navbar-collapse').css('height',($('html').height() - 74) + 'px');  };
+
+
+	//función que cada vez que apriete. quede bien
+	$('.navbar-toggle').click(function(e){
+		e.stopPropagation();
+		
+		
+
+		if($('.navbar-collapse').is(':visible')) {
+			$('.navbar-collapse').slideToggle(500, adjustHeight);
+			$('.navbar-collapse').removeClass('in');
+			$('body > nav').addClass('shadow');
+
+		} else {
+			//espero a que abra
+			$('.navbar-collapse').slideToggle(500, adjustHeight);
+			$('.navbar-collapse').addClass('in');
+			$('body > nav.shadow').removeClass('shadow');
+			
+		}
+
+		
+	})
 });

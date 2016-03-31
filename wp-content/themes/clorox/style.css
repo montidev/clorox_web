@@ -3,6 +3,10 @@ body {
   font-family: 'Titillium Web', sans-serif;
 }
 
+html {
+	height: 100%;
+}
+
 main {
   height: 100%;
 }
@@ -1044,7 +1048,7 @@ article.fb-text-image-vertical .image .play-btn{
 * HEADER
 */
 
-header > nav {
+body > nav.shadow {
   box-shadow: -50px -20px 80px 0px;
   -moz-box-shadow: -50px -20px 80px 0px;
   -webkit-box-shadow: -50px -20px 80px 0px;
@@ -1085,7 +1089,7 @@ header > nav {
 	box-shadow: none;
 }
 
-header .menu-primary-container ul:first-child {
+nav .menu-primary-container ul:first-child {
 	margin-right: 83px;
 }
 
@@ -2411,7 +2415,7 @@ footer .copyright {
 	}
 
 
-	header .menu-primary-container ul:first-child {
+	nav .menu-primary-container ul:first-child {
   	margin-right: 0px;
 	}
 
