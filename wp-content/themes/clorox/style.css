@@ -52,6 +52,10 @@ button:hover
 	-webkit-box-shadow: none;
 }
 
+.navbar-fixed-bottom .navbar-collapse, .navbar-fixed-top .navbar-collapse {
+    max-height: 100%;
+}
+
 .form-control::-webkit-input-placeholder { color: #1967bb; }
 .form-control:-moz-placeholder { color: #1967bb; }
 .form-control::-moz-placeholder { color: #1967bb; }
