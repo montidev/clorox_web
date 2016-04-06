@@ -129,42 +129,36 @@ function display_social_networks() {
 
 
 
-function dislay_social_feed_item($pos, $item, $type, $templateType) {
-	$link = $item->getLink();
-	$description = trim_add_ellipsis($item->getDescription(), 135);
-	$title = trim_add_ellipsis($item->getTitle(), 135);
-	$imageUrl = $item->getImageUrl();
+function dislay_social_feed_item($feed, $big) {
+
 
 
 	ob_start();
 	?>
-		<article class="social-feed pos-<?php echo_safe($pos.' '.$templateType); ?>">
-			<a href="<?php echo_safe($link); ?>" target="_blank">
-				<?php if($title) {?>
-				<div class="text">
-					<?php if($type == 'yt' && $templateType == 'yt-text') { ?>
-							<span class='play-btn-sm'></span>
-					<?php } ?>
-					<h4><?php echo_safe($title); ?></h4>
-					<p>
-						<?php if($type == 'yt') { ?>
-							<?php echo_safe($description); ?>
-						<?php } ?>
+		<article class="social-feed <?php echo_safe($feed['type']); ?> <?php if($big){ echo 'big'; } ?>">
+			<a href="<?php echo_safe($feed['link']); ?>" target="_blank">
+				<div class="<?php echo_safe($feed['type']); ?> ">
+				<img src="<?php echo_safe($feed['image']); ?>" >
 
-						<?php if($type == 'fb' && $templateType == 'fb-text' || $type == 'fb' && $templateType == 'fb-text-image-vertical') { ?>
-							<span class='icon-fb'></span>
-						<?php } ?>
-					</p>
-				</div>
-				<?php } ?>
-				<?php if($imageUrl) {?>
-				<div class="image" style="background-image: url(<?php echo_safe($imageUrl); ?>);">
-					<?php if($type == 'yt'){ ?>
-						<!-- mostramos el play button -->
-						<span class="play-btn"></span>
+
+				<div class="cover">
+					<span class='sm-text'><?php echo_safe($feed['text']); ?> </span>
+					<?php if($feed['type'] == 'facebook') {?>																														
+						<span class='icon-fb-big'></span>			
+
 					<?php } ?>
+				
+				
+					<?php if($feed['type'] == 'youtube'){ ?>
+						<!-- mostramos el play button -->
+						<span class="icon-yt-big"></snpan>
+					<?php } ?>	
+
+
 				</div>
-				<?php } ?>
+
+						
+				</div>
 			</a>
 		</article>
 	<?php
@@ -229,7 +223,9 @@ function get_filter_product_types_grid_form() {
           <a class="ajax-load"
             href="<?php link_to_with_args($args); ?>"
             data-target=".container-products"
-            data-container=".container-products">
+            data-container=".container-products" 
+            val="<?php echo_safe($type->slug); ?>"
+            type="product-type">
             <?php echo_safe(ucfirst($verb)); ?>
           </a>
         </li>
@@ -276,7 +272,9 @@ function get_filter_product_types_form() {
           <a class="ajax-load"
             href="<?php link_to_with_args($args); ?>"
             data-target=".container-products"
-            data-container=".container-products">
+            data-container=".container-products"
+            val="<?php echo_safe($type->slug); ?>"
+            type="product-type">
             <?php echo_safe(ucfirst($verb)); ?>
           </a>
         </li>
@@ -329,7 +327,9 @@ function get_filter_product_categories_form() {
           <a class="ajax-load"
             href="<?php link_to_with_args($args); ?>"
             data-target=".container-products"
-            data-container=".container-products">
+            data-container=".container-products"
+            val="<?php echo_safe($cat->slug); ?>"
+            type="category">
             <?php echo_safe(ucfirst($cat->name)); ?>
           </a>
         </li>
@@ -446,6 +446,15 @@ function campaign_has_contact_form($campaign_id){
 	} else {
 		return false;
 	}
+}
+
+function campaign_get_form_short_code($campaign_id){
+	$c = get_post_meta( $campaign_id, CAMPAIGN_MB_CONTACT_FORM_ID, true );
+
+	if($c){
+		echo do_shortcode( '[contact-form-7 id="'.$c.'" title="Formulario de contacto"]' );
+	}
+
 }
 
 function display_campaign_video($campaign_id) {
@@ -732,7 +741,9 @@ function get_tips($limit = 3, $filters = array()) {
   $args = array(
     'post_type' => 'tip',
     'posts_per_page' => $limit,
-    'paged' => $paged
+    'paged' => $paged,
+    'orderby' => 'menu_order', 
+    'order' => 'ASC'
   );
 
 
@@ -756,7 +767,9 @@ function get_products($limit = 5, $filters = array()) {
   $args = array(
     'post_type' => 'product',
     'posts_per_page' => $limit,
-    'paged' => $paged
+    'paged' => $paged,
+    'orderby' => 'menu_order', 
+    'order' => 'ASC'
   );
 
   $types = safe_GET('product_type');
@@ -806,8 +819,6 @@ function get_products($limit = 5, $filters = array()) {
   if ( array_key_exists('args', $filters) ) {
     $args = array_merge($args, $filters['args']);
   }
-
-  // dd($args);
 
   query_posts($args);
 

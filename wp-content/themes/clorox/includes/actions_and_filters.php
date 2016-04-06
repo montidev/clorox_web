@@ -42,9 +42,60 @@ function register_my_menu() {
 
 remove_action( 'admin_init', 'A2A_SHARE_SAVE_add_meta_box' );
 
-// Adds new $_GET params
-// add_filter( 'query_vars', 'add_query_vars_filter' );
-// function add_query_vars_filter( $vars ){
-//   $vars[] = "product-type";
-//   return $vars;
-// }
+
+
+//Ajax function to filter categories 
+
+function get_related_prod_types_callback() {
+
+	//primero hago un búsqueda general, traigo los post relacionados al término 
+
+	//primero por product-type
+	global $limit;
+	global $wp_query;
+	$type = '';
+	$value = '';
+	if(isset($_REQUEST['type']) ){
+		$type = $_REQUEST['type'];
+	}
+
+	if(isset($_REQUEST['value']) ){
+		$value = $_REQUEST['value'];
+	}
+
+	$filter = array();
+	$typeSearch = '';
+	if($type && $value) {
+		if($type == 'product-type'){
+			$filter['product-types'] = $value;		
+			$typeSearch = 'category';
+		} else if($type == 'category') {
+			$filter['categories'] = $value;
+			$typeSearch = 'product-type';
+		}
+		
+	}
+	
+	get_products($limit, $filter);
+	
+	$tms = array();
+	if(have_posts())
+  {
+    while(have_posts()) : the_post();
+    		$args = array('fields' => 'slugs');
+
+  			$cats = wp_get_post_terms( get_the_ID(), $typeSearch, $args );
+        $tms = array_merge($tms, $cats);
+    endwhile;
+  }
+
+
+	
+
+	header('Content-Type: application/json');
+	echo json_encode(array( 'data' => array_values(array_unique($tms)), 'type' => $type)) ;
+	die();
+}
+
+add_action('wp_ajax_get_related_prod_types', 'get_related_prod_types_callback');
+add_action('wp_ajax_nopriv_get_related_prod_types', 'get_related_prod_types_callback');

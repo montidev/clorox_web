@@ -45,7 +45,7 @@ jQuery(function($){
     preloadImages: 'all'
   });
 
-  $('.ajax-load').click(function(e){
+  $('.ajax-load').click(function(e){  	
     e.preventDefault();
     var link = $(this).attr('href');
     var target = $(this).attr('data-target');
@@ -53,12 +53,68 @@ jQuery(function($){
     var append = $(this).attr('data-container');
     var objURL = window.filters.addFilterFromUrl(link);
     var filtersURL = '?' + $.param( objURL );
+
+    var type = $(this).attr('type');
+    var val = $(this).attr('val');
+
+    
+
+
+    $.ajax({
+    	url: '/wp-admin/admin-ajax.php',
+    	data: {
+    		action: 'get_related_prod_types',
+    		type: type,
+    		value: val
+    	},
+    	success: function(data){
+
+    		if(data.type == 'product-type') {
+
+    			options = $('#filter-type-prod .ajax-load').css('display','none');
+    			
+    			$.each(data.data, function(index, value){
+
+    				nd = $.grep(options, function(a){
+    					return $(a).attr('val') == value;
+    				})
+
+    				if(nd){
+    					$(nd).css('display', 'block');
+    				}
+    			});
+    		} else if(data.type == 'category'){
+
+    			options = $('.filter-category-prod .ajax-load').css('display','none');
+    			
+    			$.each(data.data, function(index, value){
+
+    				nd = $.grep(options, function(a){
+    					return $(a).attr('val') == value;
+    				})
+
+    				if(nd){
+    					$(nd).css('display', 'block');
+    				}
+    			});
+    		}
+    		//iteron y esconodo los que no van. muestro los otros. 
+    	}
+    })
+
     $(container).fadeOut();
     $(container).load(filtersURL + ' ' + target, function(){
       window.history.pushState('', '', filtersURL);
       $(this).fadeIn();
     });
   });
+
+
+  $('.filter-category-prod .ajax-load').click(function(){
+  	
+
+  });
+
 
   var isLastPage = function( link ) {
     return (link === '' || (window.location.href == link));
@@ -90,6 +146,14 @@ jQuery(function($){
     }
 
   });
+
+
+
+  $('.with-filters .disable').click(function(e){
+  	e.preventDefault();
+  	$('.with-filters .disable').removeClass('disable');
+
+  })
 
 
 
@@ -126,7 +190,7 @@ jQuery(function($){
   	}
 
     if(!proRelateds && $('#section-relateds .products').length && $('#section-relateds .products .product').length > 2){
-    	console.log('entro a')
+    	
 	    proRelateds = $('#section-relateds .products').bxSlider({
 	    	hideControlOnEnd: true,
 			  slideWidth: 190,

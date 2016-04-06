@@ -38,7 +38,7 @@
   <section class="bg-blue section "id="section-products">
     <div class="title text-center with-filters">
       <h2 class="clearfix text-center">
-        <span class="label-filter">Necesito un producto para</span>
+        <span class="label-filter"><?php echo_safe(get_option('page_home_products_title')); ?></span>
         <?php get_filter_product_types_form(); ?>
       </h2>
 

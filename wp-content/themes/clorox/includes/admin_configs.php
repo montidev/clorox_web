@@ -31,6 +31,8 @@ function register_clorox_settings() {
 	register_setting( 'clorox-settings-group', 'logo', 'handle_logo_upload');
 	register_setting( 'clorox-settings-group', 'contact_title' );
 	register_setting( 'clorox-settings-group', 'contact_text' );
+	register_setting( 'clorox-settings-group', 'page_products_title' );
+	register_setting( 'clorox-settings-group', 'page_home_products_title');
 }
 
 function clorox_settings_page() {
@@ -94,7 +96,25 @@ function clorox_settings_page() {
         </tr>
       </table>
 
+      <h2>Pagina principal</h2>
+      <table class="form-table">
+      	<tr valign="top">
+          <th scope="row">Texto de filtro</th>
+          <td>
+            <input type="text" name="page_home_products_title" value="<?php echo esc_attr( get_option('page_home_products_title') ); ?>" />
+          </td>
+        </tr>
+      </table>
 
+      <h2>Página de productos </h2>
+      <table class="form-table">
+      	<tr valign="top">
+          <th scope="row">Texto de filtro</th>
+          <td>
+            <input type="text" name="page_products_title" value="<?php echo esc_attr( get_option('page_products_title') ); ?>" />
+          </td>
+        </tr>
+      </table>
 
       <h2>Formulario de contacto </h2>
       <table class="form-table">

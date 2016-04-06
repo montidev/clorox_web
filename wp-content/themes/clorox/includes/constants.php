@@ -19,6 +19,7 @@ define('PRODUCT_MB_PRODUCTS', PRODUCT_MB . '_products');
 define('PRODUCT_TYPE_MB', PREFIX . 'metabox_product_type');
 define('PRODUCT_TYPE_MB_VERB', PREFIX . 'metabox_product_type_verb');
 define('PRODUCT_TYPE_MB_LABEL_FILTER', PREFIX . 'metabox_product_type_label_filter');
+define('PRODUCT_TYPE_MB_PRODUCTS', PRODUCT_TYPE_MB . '_products');
 
 define('CATEGORY_MB', PREFIX . 'category');
 define('CATEGORY_MB_IMAGES', CATEGORY_MB . '_images');
@@ -39,3 +40,4 @@ define('CAMPAIGN_MB_VIDEO', CAMPAIGN_MB . '_video');
 define('CAMPAIGN_MB_PRODUCTS', CAMPAIGN_MB . '_products');
 define('CAMPAIGN_MB_TIPS', CAMPAIGN_MB . '_tips');
 define('CAMPAIGN_MB_CONTACT', CAMPAIGN_MB . '_contact');
+define('CAMPAIGN_MB_CONTACT_FORM_ID', CAMPAIGN_MB . '_contact_form_id');

@@ -23,6 +23,14 @@ $campaign->add_field(array(
   ),
 ));
 
+
+$campaign->add_field(array(
+  'name'  => __('Id de formulario', 'clorox' ),
+  'id'    => CAMPAIGN_MB_CONTACT_FORM_ID,
+  'type'  => 'text'
+));
+
+
 $slider = $campaign->add_field(array(
   'id'            => CAMPAIGN_MB_SLIDER,
   'type'          => 'group',
@@ -47,6 +55,12 @@ $campaign->add_group_field( $slider, array(
   'type'  => 'file'
 ));
 
+
+$campaign->add_group_field( $slider, array(
+  'name'  => __('Título destacado', 'clorox' ),
+  'id'    => CAMPAIGN_MB_SLIDER_TEXT,
+  'type'  => 'text'
+));
 
 
 

@@ -2,8 +2,8 @@
 	<section class="bg-blue section "id="section-products">
 	  <div class="container-fluid title text-center with-filters filters-new">
 	    <h2 class="clearfix">
-	      <div class="col-md-5 text-right label-filter">Necesito un producto para</div>
-	      <div class="col-md-3 text-left"><?php get_filter_product_types_grid_form(); ?></div>
+	      <div class="col-md-5 text-right label-filter"><?php echo_safe(get_option('page_products_title')); ?></div>
+	      <div class="col-md-3 text-left filter-category-prod"><?php get_filter_product_types_grid_form(); ?></div>
 	      <div id="filter-type-prod-label" class="col-md-1 text-center label-filter">mi</div>
 	      <div id="filter-type-prod" class="col-md-2 text-left"><?php get_filter_product_categories_form(); ?></div>
 	    </h2>
