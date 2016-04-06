@@ -517,6 +517,10 @@ select.input-md {
   height: 80%;
 }
 
+.product .box > .header {
+  height: 75%;
+}
+
 .box > .header > .bg-image {
   height: 100%;
   width: 100%;
@@ -579,7 +583,7 @@ select.input-md {
 }
 
 .product .box > .body {
-	height: 20%;
+	height: 25%;
 }
 .environments .box > .body a {
   height: 100%;
@@ -1314,7 +1318,8 @@ nav .menu-primary-container ul:first-child {
   display: inline-block;
   padding: 15px 30px;
   padding-bottom: 15px !important;
-  /*min-width: 225px;*/
+  vertical-align: top;
+  overflow: hidden;
 }
 
 
@@ -1331,7 +1336,7 @@ nav .menu-primary-container ul:first-child {
 }
 
 .products .product .body > .title {
-  font-size: 20px;
+  font-size: 19px;
 }
 
 .products .box .bg-image {
