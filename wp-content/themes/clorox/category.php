@@ -1,5 +1,10 @@
 <?php get_header(); ?>
 	<section class="bg-blue section "id="section-products">
+		<h3 class="white semibold text-center m-b-md">
+  			Encontrá el producto indicado para tu necesidad
+		    <!-- <span class="fontX35"><?php echo_safe($total_products); ?></span> -->
+		  
+			</h3>
 	  <div class="container-fluid title text-center with-filters filters-new">
 	    <h2 class="clearfix">
 	      <div class="col-md-5 text-right label-filter"><?php echo_safe(get_option('page_products_title')); ?></div>

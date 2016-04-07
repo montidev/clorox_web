@@ -36,7 +36,13 @@
   <!-- #/section-stream -->
 
   <section class="bg-blue section "id="section-products">
+  	<h3 class="white semibold text-center m-b-md">
+			  Encontrá el producto indicado para tu necesidad
+			    <!-- <span class="fontX35"><?php echo_safe($total_products); ?></span> -->
+			  
+			</h3>
     <div class="title text-center with-filters">
+
       <h2 class="clearfix text-center">
         <span class="label-filter"><?php echo_safe(get_option('page_home_products_title')); ?></span>
         <?php get_filter_product_types_form(); ?>

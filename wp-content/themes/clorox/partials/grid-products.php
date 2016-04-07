@@ -15,10 +15,6 @@
 ?>
 
 <?php global $total_products; ?>
-<h3 class="white semibold text-center">
-  Encontrá el producto indicado para tu necesidad
-    <!-- <span class="fontX35"><?php echo_safe($total_products); ?></span> -->
-  
-</h3>
+
 
 <?php get_template_part('partials/loop', 'products'); ?>
