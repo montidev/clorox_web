@@ -820,7 +820,7 @@ function get_products($limit = 5, $filters = array()) {
   }
 
   query_posts($args);
-  dd($args);
+ 
   $total_products = $wp_query->post_count;
 
   return $wp_query->posts;
