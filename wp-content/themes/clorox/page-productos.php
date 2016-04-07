@@ -10,7 +10,7 @@
 	    </h2>
 	  </div>
 	  <div class="container-products">
-	    <?php display_grid_products(15); ?>
+	    <?php display_grid_products(-1); ?>
 	  </div>
 	</section>
 <?php get_footer(); ?>

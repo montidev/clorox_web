@@ -756,7 +756,6 @@ function get_tips($limit = 3, $filters = array()) {
 
 function get_products($limit = 5, $filters = array()) {
   wp_reset_query();
-
   global $wp_query;
   global $total_products;
 
@@ -821,7 +820,7 @@ function get_products($limit = 5, $filters = array()) {
   }
 
   query_posts($args);
-
+  dd($args);
   $total_products = $wp_query->post_count;
 
   return $wp_query->posts;
