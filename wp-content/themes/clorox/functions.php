@@ -201,21 +201,30 @@ function get_filter_product_types_grid_form() {
 	
 	$types = get_terms('product-type', array('orderby' => 'term_order'));
 
-	if($param == '-'){
-		// get the first 
-		$param = get_terms('product-type', array('number' => 1, 'orderby' => 'term_order'));
-		$param = $param[0]->slug;
-	} 
+	// if($param == '-'){
+	// 	// get the first 
+	// 	$param = get_terms('product-type', array('number' => 1, 'orderby' => 'term_order'));
+	// 	$param = $param[0]->slug;
+	// } 
   // retrive verb
-  $value = get_product_type_label_filter_by_slug($param);
-  
+  if($param != '-'){
+  	$value = get_product_type_label_filter_by_slug($param);
+  }
+
+  	
   ob_start();
   ?>
-  <div class="dropdown filters md yellow" data-filter="product-type">
+  <?php $argsInit = array( array('product_type' => $param) ); ?>
+  <div class="dropdown filters md yellow" data-filter="product-type" initial-state="<?php echo_safe($param) ; ?>" data-target=".container-products"
+            data-container=".container-products" type="product-type">
     <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
       <span class="text light"><?php echo ($value) ? ucfirst($value) : '-'; ?></span>
     </button>
     <ul class="dropdown-menu">
+    	<li class="text blue fontX20">
+
+    		<a href="" class="reload-product-type"> - </a>
+    	</li>
       <?php foreach ($types as $type): ?>
         <?php $verb = get_product_type_label_filter($type->term_id); ?>
         <li class="text blue fontX20">
@@ -249,12 +258,12 @@ function get_filter_product_types_form() {
 	
 	$types = get_terms('product-type', array( 'orderby' => 'term_order'));
 
-	if($param == '-'){
-		// get the first 
-		$param = get_terms('product-type', array('number' => 1, 'orderby' => 'term_order'));
-		$param = $param[0]->slug;
+	// if($param == '-'){
+	// 	// get the first 
+	// 	$param = get_terms('product-type', array('number' => 1, 'orderby' => 'term_order'));
+	// 	$param = $param[0]->slug;
 		
-	} 
+	// } 
   // retrive verb
   $value = get_product_type_verb_by_slug($param);
   
@@ -265,6 +274,9 @@ function get_filter_product_types_form() {
       <span class="text light"><?php echo ($value) ? ucfirst($value) : '-'; ?></span>
     </button>
     <ul class="dropdown-menu">
+    	<li class="text blue fontX20">
+    		<a href="" class="reload-product-type"> - </a>
+    	</li>
       <?php foreach ($types as $type): ?>
         <?php $verb = get_product_type_verb($type->term_id); ?>
         <li class="text blue fontX20">
@@ -307,20 +319,27 @@ function get_filter_product_categories_form() {
 		}
 	}
 
-	if($value == '-'){
-		// get the first 
-		$value = get_terms('category', array('number' => 1, 'orderby' => 'term_order'));
-		$value = $value[0]->name;
-	}
+	// if($value == '-'){
+	// 	// get the first 
+	// 	$fstCat = get_terms('category', array('number' => 1, 'orderby' => 'term_order'));
+		
+	// 	$value = $fstCat[0]->name;
+	// }
 	
-  $categories = get_categories();
+  //$categories = get_categories(array('orderby' => 'term_order'));
+  $categories = $types = get_terms('category', array('orderby' => 'term_order'));
+  //dd($categories);
   ob_start();
   ?>
-  <div class="dropdown filters md yellow" data-filter="category">
-    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
-      <span class="text"><?php echo_safe(ucfirst($value)); ?></span>
+
+  <div class="dropdown filters md yellow" data-filter="category" initial-state="<?php if(isset($fstCat)){ echo_safe($fstCat[0]->slug);  }?>" data-target=".container-products" type="category" data-container=".container-products">
+    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" >
+      <span class="text"><?php echo_safe( ($value)?  ucfirst($value) : '-' ); ?></span>
     </button>
     <ul class="dropdown-menu">
+    	<li class="text blue fontX20">
+    		<a href="" class="reload-category"> - </a>
+    	</li>
       <?php foreach ($categories as $cat): ?>
         <li class="text blue fontX20">
           <?php $args = array( array('category' => $cat->slug) ); ?>
@@ -779,10 +798,11 @@ function get_products($limit = 5, $filters = array()) {
   	//solamente para template categoría
 
   	$cat = get_category_by_path(get_query_var('category_name'),false);
-  	//dd($cat);
 		$cats = $cat->slug;
   }
   if ( !$types && array_key_exists('product-types', $filters) ) {
+
+
     $types = $filters['product-types'];
   } else {
     if ( ! empty($types) ) {
@@ -818,9 +838,9 @@ function get_products($limit = 5, $filters = array()) {
   if ( array_key_exists('args', $filters) ) {
     $args = array_merge($args, $filters['args']);
   }
-
+  //dd($args);
   query_posts($args);
- 
+ 	
   $total_products = $wp_query->post_count;
 
   return $wp_query->posts;

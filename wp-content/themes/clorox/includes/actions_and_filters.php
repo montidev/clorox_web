@@ -64,6 +64,8 @@ function get_related_prod_types_callback() {
 	}
 
 	$filter = array();
+
+
 	$typeSearch = '';
 	if($type && $value) {
 		if($type == 'product-type'){
@@ -82,8 +84,7 @@ function get_related_prod_types_callback() {
 	if(have_posts())
   {
     while(have_posts()) : the_post();
-    		$args = array('fields' => 'slugs');
-
+    		$args = array('fields' => 'slugs' );
   			$cats = wp_get_post_terms( get_the_ID(), $typeSearch, $args );
         $tms = array_merge($tms, $cats);
     endwhile;

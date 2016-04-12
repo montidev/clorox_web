@@ -1278,6 +1278,7 @@ nav .menu-primary-container ul:first-child {
 .featured-image .bottom-left {
   bottom: 100px;
   left: 50px;
+  max-width: 84%;
 }
 
 .featured-image .box-blue h3 {
@@ -2659,6 +2660,7 @@ footer .copyright {
     bottom: 100px;
     left: auto;
     margin: 0px 5%;
+    max-width: none;
 	}
 
 	.box-blue {

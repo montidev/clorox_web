@@ -32,6 +32,16 @@ jQuery(function($){
     $(this).closest('.contactForm .form-group').css({'border-color': '#a2a2a2'})
   });
 
+
+
+  var updateProducts = function(container, target, filtersURL) {
+  	  $(container).fadeOut();
+	    $(container).load(filtersURL + ' ' + target, function(){
+	      window.history.pushState('', '', filtersURL);
+	      $(this).fadeIn();
+	    });
+  }
+
 	//Slider
   $('.bxslider').bxSlider({
     mode: 'horizontal',
@@ -42,7 +52,101 @@ jQuery(function($){
     easing: 'easeOutElastic',
     speed: 2000,
     pager: false,
-    preloadImages: 'all'
+    pause: 5000,
+    preloadImages: 'all',
+    onSlideBefore: function($slideElement, oldIndex, newIndex){
+
+    	var el = this.getCurrentSlideElement();
+
+    	el = $(el).find('#big-video-wrap');
+
+    	if($(el).attr('data-video')){
+	    	var vid = $(el).attr('data-video');	
+
+	    	var BV = new $.BigVideo();
+				BV.init();
+				BV.show(vid);
+
+			}
+    }
+    
+
+  });
+
+
+  $('.reload-product-type').click(function(e){
+  	e.preventDefault();
+  	var newAr = [];
+  	var filtersURL = "";
+	  if($('#filter-type-prod button span.text').text() != "-" && $('#filter-type-prod button span.text').text()) {
+	  	var a = $.grep($('#filter-type-prod a.ajax-load'), function(a){
+	    				return $(a).css('display') == 'block';
+	    });
+	  	a = a[0];
+	  	console.log(a);
+	  	var link = $(a).attr('href');
+	  	var objURL = window.filters.addFilterFromUrl(link);
+	  	var filtersURL = '?' + $.param( objURL );
+
+	  	$.each(filtersURL.split('&'), function(index, val) {
+	  					var ax = val.split('=');
+	  					if(ax[0] != 'product_type'){
+	  						newAr.push(val);
+	  					} 
+	  		}
+	  	);
+
+	  	filtersURL = newAr.join('&');
+	  } else{
+	  	
+	  	var objURL = window.filters.addFilterFromUrl("?product_type= ");
+    	var filtersURL = '?' + $.param( objURL );
+	  	filtersURL = "?product_type= ";
+	  }
+
+  	$('#filter-type-prod a.ajax-load').css('display','block');
+  	$('.filter-category-prod a.ajax-load').css('display','block');
+  	//$('#filter-type-prod button span.text').text($(a).text());
+  	$('.filter-category-prod button span.text').text("-");
+  	updateProducts('.container-products', '.container-products', filtersURL);
+  });
+
+
+  $('.reload-category').click(function(e){
+  	e.preventDefault();
+  	var newAr = [];
+  	if($('.filter-category-prod button span.text').text() != "-") {
+
+  		var currentName = $('.filter-category-prod button span.text').text();
+	  	var a = $.grep($('.filter-category-prod a.ajax-load'), function(a){
+	    				return $(a).text().trim() == currentName.trim();
+	    });
+	  	a = a[0];
+	  	
+	  	var link = $(a).attr('href');
+	  	var objURL = window.filters.addFilterFromUrl(link);
+	  	var filtersURL = '?' + $.param( objURL );
+
+	  	$.each(filtersURL.split('&'), function(index, val) {
+	  					var ax = val.split('=');
+	  					if(ax[0] != 'category'){
+	  						newAr.push(val);
+	  					} 
+	  		}
+	  	);	
+
+	  	filtersURL = newAr.join('&');
+	  } else {
+	  	var objURL = window.filters.addFilterFromUrl("?category= ");
+    	var filtersURL = '?' + $.param( objURL );
+	  	filtersURL = "?category= ";
+	  } 	
+
+  	$('#filter-type-prod a.ajax-load').css('display','block');
+  	$('.filter-category-prod a.ajax-load').css('display','block');
+  	$('#filter-type-prod button span.text').text("-");
+  	//$('.filter-category-prod button span.text').text($(a).text());
+  	updateProducts('.container-products', '.container-products', filtersURL);
   });
 
   $('.ajax-load').click(function(e){  	
@@ -53,13 +157,9 @@ jQuery(function($){
     var append = $(this).attr('data-container');
     var objURL = window.filters.addFilterFromUrl(link);
     var filtersURL = '?' + $.param( objURL );
-
     var type = $(this).attr('type');
     var val = $(this).attr('val');
-
     
-
-
     $.ajax({
     	url: '/wp-admin/admin-ajax.php',
     	data: {
@@ -68,51 +168,72 @@ jQuery(function($){
     		value: val
     	},
     	success: function(data){
-
+    		var first = [];
     		if(data.type == 'product-type') {
-
+    			
     			options = $('#filter-type-prod .ajax-load').css('display','none');
-    			
+    			console.log(data.data);
     			$.each(data.data, function(index, value){
 
     				nd = $.grep(options, function(a){
     					return $(a).attr('val') == value;
     				})
-
     				if(nd){
     					$(nd).css('display', 'block');
+    				
     				}
     			});
-    		} else if(data.type == 'category'){
 
-    			options = $('.filter-category-prod .ajax-load').css('display','none');
+    			var currentCatName = $('#filter-type-prod button span.text').text();
+    			currentCatName = currentCatName.trim();
     			
-    			$.each(data.data, function(index, value){
 
-    				nd = $.grep(options, function(a){
-    					return $(a).attr('val') == value;
-    				})
-
-    				if(nd){
-    					$(nd).css('display', 'block');
-    				}
+    			first = $.grep(options, function(a){
+    				return ($(a).text().trim() == currentCatName && $(a).css('display') == 'block');
     			});
+
+
+    			if(!first.length){
+    				$('#filter-type-prod button span.text').text("-");
+
+    				//clear category from url; 
+    				var newAr = []; 
+
+    				$.each(filtersURL.split('&'), function(index, val) {
+    					var ax = val.split('=');
+    					if(ax[0] != 'category'){
+		  						newAr.push(val);
+		  				}
+    				});
+    				//reformulamos filterUrl
+    				filtersURL = newAr.join('&');
+    			}
+
+  			
     		}
-    		//iteron y esconodo los que no van. muestro los otros. 
+    		// } else if(data.type == 'category'){
+
+    		// 	options = $('.filter-category-prod .ajax-load').css('display','none');
+    			
+    		// 	$.each(data.data, function(index, value){
+
+    		// 		nd = $.grep(options, function(a){
+    		// 			return $(a).attr('val') == value;
+    		// 		})
+
+    		// 		if(nd){
+    		// 			$(nd).css('display', 'block');
+    		// 		}
+    		// 	});
+
+    			
+    		// }
+    	    	
+  			updateProducts(container, target, filtersURL);
     	}
     })
-
-    $(container).fadeOut();
-    $(container).load(filtersURL + ' ' + target, function(){
-      window.history.pushState('', '', filtersURL);
-      $(this).fadeIn();
-    });
-  });
-
-
-  $('.filter-category-prod .ajax-load').click(function(){
-  	
-
+    
+   
   });
 
 
@@ -147,11 +268,51 @@ jQuery(function($){
 
   });
 
+  $(window).load(function(){
+  	var a = $('.filter-category-prod a.ajax-load:first-child');
 
+  	var val = $(a).attr("val");
+  	var type = $(a).attr('type');
+
+  	$.ajax({
+    	url: '/wp-admin/admin-ajax.php',
+    	data: {
+    		action: 'get_related_prod_types',
+    		type: type,
+    		value: val
+    	},
+    	success: function(data){
+
+    		if(data.type == 'product-type') {
+    			console.log(data.data[0]);
+    			options = $('#filter-type-prod .ajax-load').css('display','none');
+    			$.each(data.data, function(index, value){
+
+    				nd = $.grep(options, function(a){
+    					return $(a).attr('val') == value;
+    				})
+
+    				if(nd){
+    					$(nd).css('display', 'block');
+    				}
+    			});
+    		}
+    	}
+    });
+
+
+  })
 
   $('.with-filters .disable').click(function(e){
   	e.preventDefault();
-  	$('.with-filters .disable').removeClass('disable');
+
+
+  	if($('.with-filters .disable').hasClass('disable')){
+  		e.stopPropagation();
+	  	$('.with-filters .disable').removeClass('disable');
+	  	
+	  }
+
 
   })
 
@@ -258,7 +419,7 @@ jQuery(function($){
   
 
 });
-
+    
 
 $(function(){
 	//para iniciar le demos el tamaño del viewport a .navbar-collapse

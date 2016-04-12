@@ -45,7 +45,9 @@
 
       <h2 class="clearfix text-center">
         <span class="label-filter"><?php echo_safe(get_option('page_home_products_title')); ?></span>
+        <span class="filter-category-prod">
         <?php get_filter_product_types_form(); ?>
+      	</span>
       </h2>
 
     </div>
