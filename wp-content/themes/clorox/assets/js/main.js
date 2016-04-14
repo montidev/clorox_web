@@ -58,21 +58,20 @@ jQuery(function($){
     onSliderLoad: function(currentIndex){
 
     	var el = this.getCurrentSlideElement();    
-
+    	var el = $(el).find('.bg-image')[0];
 
     	if($(el).attr('data-video')){
-    		//si tiene data video - inicio. 
 	    	var vid = $(el).attr('data-video');	
+	    	var vidWebm = $(el).attr('data-video-webm');
 
 	    	BV = new $.BigVideo({
-	    		container: $(el),
-	    		doLoop:true,
+	    		container:$(el),
+	    		doLoop:false,
 	    	});
 				BV.init();
-				BV.show(vid);
-			} else {
+				BV.show([{type: "video/mp4", src: vid}, {type: "video/webm", src: vidWebm}]);
 
-			}
+			}				
     },
     onSlideAfter: function($slideElement, oldIndex, newIndex) {
     	var el = this.getCurrentSlideElement();
