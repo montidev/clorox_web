@@ -428,6 +428,8 @@ function get_home_slides($id) {
       'text' => $slide[HOMEPAGE_MB_SLIDER_TEXT],
       'url' => $slide[HOMEPAGE_MB_SLIDER_IMAGE],
       'link' => $slide[HOMEPAGE_MB_SLIDER_LINK],
+      'video_mp4' => $slide[HOMEPAGE_MB_SLIDER_VIDEO_MP4],
+      'video_webm' => $slide[HOMEPAGE_MB_SLIDER_VIDEO_WEBM],
     );
   }, $slides);
 

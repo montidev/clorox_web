@@ -51,3 +51,16 @@ $homepage->add_group_field( $slider, array(
   'id'    => HOMEPAGE_MB_SLIDER_LINK,
   'type'  => 'text'
 ));
+
+
+$homepage->add_group_field( $slider, array(
+  'name'  => __('Video mp4', 'clorox' ),
+  'id'    => HOMEPAGE_MB_SLIDER_VIDEO_MP4,
+  'type'  => 'file'
+));
+
+$homepage->add_group_field( $slider, array(
+  'name'  => __('Video webm', 'clorox' ),
+  'id'    => HOMEPAGE_MB_SLIDER_VIDEO_WEBM,
+  'type'  => 'file'
+));

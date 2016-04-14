@@ -7,6 +7,8 @@ define('HOMEPAGE_MB_SLIDER', HOMEPAGE_MB . '_slider');
 define('HOMEPAGE_MB_SLIDER_IMAGE', HOMEPAGE_MB_SLIDER . '_image');
 define('HOMEPAGE_MB_SLIDER_TEXT', HOMEPAGE_MB_SLIDER . '_text');
 define('HOMEPAGE_MB_SLIDER_LINK', HOMEPAGE_MB_SLIDER . '_link');
+define('HOMEPAGE_MB_SLIDER_VIDEO_MP4', HOMEPAGE_MB_SLIDER . '_video_mp4');
+define('HOMEPAGE_MB_SLIDER_VIDEO_WEBM', HOMEPAGE_MB_SLIDER . '_video_webm');
 define('HOMEPAGE_MB_TITLE_CATEGORIES', HOMEPAGE_MB . '_title_categories');
 
 define('PRODUCT_MB', PREFIX . 'product_metabox');

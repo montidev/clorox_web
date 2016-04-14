@@ -21,7 +21,7 @@ window.filters = {
 
 // Update filters when page is loaded
 window.filters.addFilterFromUrl(window.location.search);
-
+var BV;
 jQuery(function($){
 
   $('.contactForm .form-group input').focusin(function(){
@@ -41,33 +41,81 @@ jQuery(function($){
 	      $(this).fadeIn();
 	    });
   }
-
+  
 	//Slider
   $('.bxslider').bxSlider({
     mode: 'horizontal',
     captions: true,
-    controls: false,
+    controls: true,
     auto: true,
     useCSS: true,
     easing: 'easeOutElastic',
     speed: 2000,
     pager: false,
-    pause: 5000,
+    pause: 190000,
+
     preloadImages: 'all',
-    onSlideBefore: function($slideElement, oldIndex, newIndex){
+    onSliderLoad: function(currentIndex){
 
+    	var el = this.getCurrentSlideElement();    
+
+
+    	if($(el).attr('data-video')){
+    		//si tiene data video - inicio. 
+	    	var vid = $(el).attr('data-video');	
+
+	    	BV = new $.BigVideo({
+	    		container: $(el),
+	    		doLoop:true,
+	    	});
+				BV.init();
+				BV.show(vid);
+			} else {
+
+			}
+    },
+    onSlideAfter: function($slideElement, oldIndex, newIndex) {
     	var el = this.getCurrentSlideElement();
+    	var el = $(el).find('.bg-image')[0];
 
-    	el = $(el).find('#big-video-wrap');
+    	var bef = this.getSlideElement(oldIndex);
+    	var bef = $(bef).find('.bg-image')[0];
+
+    	if($(bef).attr('data-video') && $(bef).find('#big-video-wrap').length) {
+				BV.dispose();
+			}
+
+			var el = this.getCurrentSlideElement();    
+			var el = $(el).find('.bg-image')[0];
 
     	if($(el).attr('data-video')){
 	    	var vid = $(el).attr('data-video');	
+	    	var vidWebm = $(el).attr('data-video-webm');
 
-	    	var BV = new $.BigVideo();
+	    	BV = new $.BigVideo({
+	    		container:$(el),
+	    		doLoop:false,
+	    	});
 				BV.init();
-				BV.show(vid);
+				BV.show([{type: "video/mp4", src: vid}, {type: "video/webm", src: vidWebm}]);
 
+			}				
+    },
+    onSlideBefore: function($slideElement, oldIndex, newIndex){
+    	
+    	var player;
+    	var bef = this.getSlideElement(oldIndex);
+
+    	var bef = $(bef).find('.bg-image')[0];
+
+    	if($(bef).attr('data-video') && $(bef).find('#big-video-wrap').length) {
+				player = BV.getPlayer();
+				player.pause();
 			}
+
+			
+
+
     }
     
 
@@ -83,7 +131,6 @@ jQuery(function($){
 	    				return $(a).css('display') == 'block';
 	    });
 	  	a = a[0];
-	  	console.log(a);
 	  	var link = $(a).attr('href');
 	  	var objURL = window.filters.addFilterFromUrl(link);
 	  	var filtersURL = '?' + $.param( objURL );
@@ -172,7 +219,6 @@ jQuery(function($){
     		if(data.type == 'product-type') {
     			
     			options = $('#filter-type-prod .ajax-load').css('display','none');
-    			console.log(data.data);
     			$.each(data.data, function(index, value){
 
     				nd = $.grep(options, function(a){
@@ -284,7 +330,6 @@ jQuery(function($){
     	success: function(data){
 
     		if(data.type == 'product-type') {
-    			console.log(data.data[0]);
     			options = $('#filter-type-prod .ajax-load').css('display','none');
     			$.each(data.data, function(index, value){
 
