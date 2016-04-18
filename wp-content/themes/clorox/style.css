@@ -2632,6 +2632,11 @@ footer .copyright {
     padding: 35px 60px 35px 60px;
 	}
 
+	.featured-image {
+		height: 250px;
+	}
+
+
 	.single .top-overlaped {
     margin-top: 0px;
     min-height: 500px;

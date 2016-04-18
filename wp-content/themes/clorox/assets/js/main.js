@@ -60,17 +60,18 @@ jQuery(function($){
     	var el = this.getCurrentSlideElement();    
     	var el = $(el).find('.bg-image')[0];
 
-    	if($(el).attr('data-video')){
+    	if($(el).attr('data-video') && window.screen.availWidth > 480){
 	    	var vid = $(el).attr('data-video');	
 	    	var vidWebm = $(el).attr('data-video-webm');
 
 	    	BV = new $.BigVideo({
 	    		container:$(el),
-	    		doLoop:false,
+	    		doLoop:true,
+	    		shrinkable: true,
 	    	});
+
 				BV.init();
 				BV.show([{type: "video/mp4", src: vid}, {type: "video/webm", src: vidWebm}]);
-
 			}				
     },
     onSlideAfter: function($slideElement, oldIndex, newIndex) {
@@ -87,13 +88,13 @@ jQuery(function($){
 			var el = this.getCurrentSlideElement();    
 			var el = $(el).find('.bg-image')[0];
 
-    	if($(el).attr('data-video')){
+    	if($(el).attr('data-video') && window.screen.availWidth > 480){
 	    	var vid = $(el).attr('data-video');	
 	    	var vidWebm = $(el).attr('data-video-webm');
 
 	    	BV = new $.BigVideo({
 	    		container:$(el),
-	    		doLoop:false,
+	    		doLoop:true,
 	    	});
 				BV.init();
 				BV.show([{type: "video/mp4", src: vid}, {type: "video/webm", src: vidWebm}]);
@@ -249,30 +250,10 @@ jQuery(function($){
     					if(ax[0] != 'category'){
 		  						newAr.push(val);
 		  				}
-    				});
-    				//reformulamos filterUrl
+    				});    				
     				filtersURL = newAr.join('&');
-    			}
-
-  			
+    			}			
     		}
-    		// } else if(data.type == 'category'){
-
-    		// 	options = $('.filter-category-prod .ajax-load').css('display','none');
-    			
-    		// 	$.each(data.data, function(index, value){
-
-    		// 		nd = $.grep(options, function(a){
-    		// 			return $(a).attr('val') == value;
-    		// 		})
-
-    		// 		if(nd){
-    		// 			$(nd).css('display', 'block');
-    		// 		}
-    		// 	});
-
-    			
-    		// }
     	    	
   			updateProducts(container, target, filtersURL);
     	}
@@ -416,16 +397,20 @@ jQuery(function($){
 
 
   /* BREAKPOINT events */
-  $(window).bind('enterBreakpoint320',function() {
+  $(window).bind('enterBreakpoint1',function() {
+  	initSliders();
 
-    	initSliders();
+
+  });
+
+  $(window).bind('enterBreakpoint320',function() {
+    initSliders();
 
   });
 
 
   $(window).bind('enterBreakpoint480',function() {
-
-    	initSliders();
+    initSliders();
 
   });
 
@@ -453,7 +438,7 @@ jQuery(function($){
 
 	$(window).setBreakpoints({
 		distinct: true,
-		breakpoints: [320, 480, 768]
+		breakpoints: [1,320, 480, 768]
 	});
 
 
