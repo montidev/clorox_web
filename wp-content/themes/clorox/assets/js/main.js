@@ -459,8 +459,6 @@ $(function(){
 	$('.navbar-toggle').click(function(e){
 		e.stopPropagation();
 		
-		
-
 		if($('.navbar-collapse').is(':visible')) {
 			$('.navbar-collapse').slideToggle(500, adjustHeight);
 			$('.navbar-collapse').removeClass('in');

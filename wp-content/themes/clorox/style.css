@@ -2663,12 +2663,12 @@ footer .copyright {
 
 	.featured-image .box-blue h3 {
     font-weight: 200;
-    font-size: 30px;
+    font-size: 1.5em;
     color: #fff;
   }
 
   .featured-image .bottom-left {
-    bottom: 100px;
+    bottom: 15px;
     left: auto;
     margin: 0px 5%;
     max-width: none;
@@ -2889,6 +2889,8 @@ footer .copyright {
 	}
 	.page #section-products, .category #section-products {
 		padding-top: 55px;
+		padding-left: 1em;
+		padding-right: 1em;
 	}
 	.products .product {
 		width: 32%;
