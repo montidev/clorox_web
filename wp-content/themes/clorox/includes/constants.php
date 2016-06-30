@@ -23,10 +23,22 @@ define('PRODUCT_TYPE_MB_VERB', PREFIX . 'metabox_product_type_verb');
 define('PRODUCT_TYPE_MB_LABEL_FILTER', PREFIX . 'metabox_product_type_label_filter');
 define('PRODUCT_TYPE_MB_PRODUCTS', PRODUCT_TYPE_MB . '_products');
 
+
+define('PRODUCT_CLASS_MB', PREFIX . 'metabox_product_class');
+define('PRODUCT_CLASS_MB_VERB', PREFIX . 'metabox_product_class_verb');
+define('PRODUCT_CLASS_MB_LABEL_FILTER', PREFIX . 'metabox_product_class_label_filter');
+define('PRODUCT_CLASS_MB_PRODUCTS', PRODUCT_CLASS_MB . '_products');
+
+
 define('CATEGORY_MB', PREFIX . 'category');
 define('CATEGORY_MB_IMAGES', CATEGORY_MB . '_images');
 define('CATEGORY_MB_IMAGES_IMAGE', CATEGORY_MB_IMAGES . '_image');
 define('CATEGORY_MB_IMAGES_TYPE', CATEGORY_MB_IMAGES . '_type');
+
+define('PRODUCT_CLASS_MB', PREFIX . 'product-class');
+define('PRODUCT_CLASS_MB_IMAGES', PRODUCT_CLASS_MB . '_images');
+define('PRODUCT_CLASS_MB_IMAGES_IMAGE', PRODUCT_CLASS_MB_IMAGES . '_image');
+define('PRODUCT_CLASS_MB_IMAGES_TYPE', PRODUCT_CLASS_MB_IMAGES . '_type');
 
 define('TIP_MB', PREFIX . 'tip_metabox');
 define('TIP_MB_CHARACS', TIP_MB . '_characteristics');

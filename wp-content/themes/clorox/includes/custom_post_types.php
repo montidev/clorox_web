@@ -61,6 +61,18 @@ function clorox_create_post_types() {
       )
     )
   );
+
+
+  register_taxonomy( 'product-class', array( 'product'),
+    array(
+      'labels'            => array(
+        'name'            => __( 'Clases', 'clorox' ),
+        'singular_name'   => __( 'Clase del producto', 'clorox' ),
+        'add_new_item'    => __( ' Agregar nueva clase ', 'clorox')
+      )
+    )
+  );
+
 };
 
 

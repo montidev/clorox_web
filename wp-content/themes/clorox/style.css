@@ -290,6 +290,10 @@ button:hover
   margin-top: 20px;
 }
 
+.dropdown .dropdown-toggle {
+  text-transform: capitalize;
+}
+
 .input-md {
   border: 0;
   padding: 0 50px 0 5px;
@@ -1433,7 +1437,45 @@ nav .menu-primary-container ul:first-child {
 
 }
 .categoryBox {
-	margin: 10px auto;
+	margin-top: 30px auto;
+  /*margin-left: 50px;*/
+}
+
+.classBox {
+  /*width: 200px;*/
+  height: 200px;
+  /*margin: 20px;*/
+}
+
+.classBox:hover {
+  background-color: white;
+}
+
+.classBox .name-box{
+  color: white;
+  border-color: white;
+}
+
+.classBox:hover .header, .classBox:hover .name-box{
+  background-color: white;
+  color: #1967bb;
+}
+
+.classBox .bg-image {
+  background-size: auto;
+}
+
+.classBox .light-bg,
+.classBox:hover .dark-bg {
+  display: none;
+}
+.classBox:hover .light-bg {
+  display: inline-block;
+}
+
+.product-class-title{
+  margin-top: 30px;
+  margin-bottom: 50px;
 }
 
 /*
@@ -1690,6 +1732,11 @@ nav .menu-primary-container ul:first-child {
 #section-relateds {
   min-height: 500px;
   padding: 50px;
+}
+
+div.hidden
+{
+   display: none;
 }
 
 
@@ -2101,6 +2148,11 @@ footer .copyright {
 * Filtros nuevos
 */
 
+.class-text-filter {
+    margin-top: 40px;
+  }
+
+
 #filter-type-prod-label.disable {
 	opacity: 0.5;
 }
@@ -2209,6 +2261,8 @@ footer .copyright {
   /*
   * Products
   */
+
+
   .page #section-products .container-fluid:first-child h2, .category #section-products .container-fluid:first-child h2 {
   	font-size: 32px;
   	line-height: 50px;
@@ -2240,6 +2294,11 @@ footer .copyright {
 	/*
   * Products
   */
+
+  .class-text-filter {
+    margin-top: 0px;
+  }
+
   .category #section-products h2, .page #section-products h2 {
   	display: inline-block;
   	margin: 0 auto;
@@ -2877,6 +2936,7 @@ footer .copyright {
 		position: absolute;
 	}
 
+ 
 	.category #section-products h2 div:nth-child(4), .page #section-products h2 div:nth-child(4) {
   	margin-top: 9px;
   }
@@ -3190,6 +3250,7 @@ footer .copyright {
 		width: 49%;
 	}
 
+  
 	/*
 	* own history && policies
 	*/

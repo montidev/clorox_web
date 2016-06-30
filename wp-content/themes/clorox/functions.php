@@ -100,6 +100,21 @@ function get_category_image_uri($cat_id, $type = 'light-bg') {
   }
 }
 
+function get_class_image_uri($cat_id, $type = 'light-bg') {
+  $images = get_term_meta($cat_id, PRODUCT_CLASS_MB_IMAGES, true);
+  if ( is_array($images) ) {
+    $results = array_filter($images, function($e) use ($type) {
+      return $e[PRODUCT_CLASS_MB_IMAGES_TYPE] == $type;
+    });
+
+    if ( count($results) ) {
+      $image = array_pop($results);
+      $img_url = $image[PRODUCT_CLASS_MB_IMAGES_IMAGE];
+      echo esc_url( $img_url );
+    }
+  }
+}
+
 function display_primary_menu($classes = "") {
   $args = array( 'theme_location' => 'primary', 'menu_class' => $classes );
   return wp_nav_menu( $args );
@@ -166,9 +181,6 @@ function dislay_social_feed_item($feed, $big) {
 }
 
 
-
-
-
 function link_next_pagination() {
   global $wp_query;
 
@@ -181,6 +193,7 @@ function link_next_pagination() {
   );
 
   $page_numbers = paginate_links( $args );
+
   if($page_numbers){
   	$next_link = array_pop($page_numbers);
 
@@ -193,6 +206,54 @@ function link_next_pagination() {
   	echo '';
   }
   
+}
+
+function get_filter_product_class_grid_form() {
+
+  $param = safe_GET('class', '-');
+  
+  $classes = get_terms( 'product-class', array('orderby' => 'term_order', 'hide_empty' => false)); 
+
+  if($param != '-'){
+    $value = get_product_class_label_filter_by_slug($param);
+  }
+  
+  ob_start();
+  ?>
+  <div class="dropdown filters md yellow" data-filter="class" initial-state="<?php echo_safe($param) ; ?>" data-target=".container-products"
+            data-container=".container-products" type="class">
+    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+      <span class="text light"><?php echo (($value) ? ucfirst($value) : 'Selecciona'); ?></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li class="text blue fontX20">
+        <a href="" class="reload-product-class"> - </a>
+      </li>
+      <?php foreach ($classes as $class): ?>
+        <li class="text blue fontX20">
+          <?php $args = array( array('class' => $class->slug) );
+           ?>
+          <a class="ajax-load"
+            href="<?php link_to_with_args($args); ?>"
+            data-target=".container-products"
+            data-container=".container-products" 
+            val="<?php echo_safe($class->slug); ?>"
+            type="class">
+            <?php echo_safe(ucfirst($class->name)); ?>
+          </a>
+        </li>
+      <?php endforeach; ?>
+    </ul>
+  </div>
+  <script type="text/javascript">
+    $('.ajax-load').click(function(e){
+      e.preventDefault();
+      var text = $(this).text().trim();
+      $(this).closest('.dropdown').find('button>.text').html(text);
+    })
+  </script>
+  <?php
+  return ob_end_flush();  
 }
 
 function get_filter_product_types_grid_form() {
@@ -218,7 +279,7 @@ function get_filter_product_types_grid_form() {
   <div class="dropdown filters md yellow" data-filter="product-type" initial-state="<?php echo_safe($param) ; ?>" data-target=".container-products"
             data-container=".container-products" type="product-type">
     <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
-      <span class="text light"><?php echo ($value) ? ucfirst($value) : '-'; ?></span>
+      <span class="text light"><?php echo (($value) ? ucfirst($value) : 'Selecciona'); ?></span>
     </button>
     <ul class="dropdown-menu">
     	<li class="text blue fontX20">
@@ -228,7 +289,8 @@ function get_filter_product_types_grid_form() {
       <?php foreach ($types as $type): ?>
         <?php $verb = get_product_type_label_filter($type->term_id); ?>
         <li class="text blue fontX20">
-          <?php $args = array( array('product_type' => $type->slug) ); ?>
+          <?php $args = array( array('product_type' => $type->slug) ); 
+          ?>
           <a class="ajax-load"
             href="<?php link_to_with_args($args); ?>"
             data-target=".container-products"
@@ -311,7 +373,7 @@ function get_filter_product_categories_form() {
 		$value = $cat->cat_name;
 	} else {
 		//esto es un slug
-		$value = safe_GET('category', '-');
+		$value = safe_GET('category', 'Seleccionar');
 		
 		if($value != '-'){
 			$value = get_term_by('slug', $value, 'category');
@@ -334,11 +396,12 @@ function get_filter_product_categories_form() {
 
   <div class="dropdown filters md yellow" data-filter="category" initial-state="<?php if(isset($fstCat)){ echo_safe($fstCat[0]->slug);  }?>" data-target=".container-products" type="category" data-container=".container-products">
     <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" >
-      <span class="text"><?php echo_safe( ($value)?  ucfirst($value) : '-' ); ?></span>
+      <span class="text"><?php echo_safe( ($value)?  ucfirst($value) : 'Selecciona' ); ?></span>
     </button>
     <ul class="dropdown-menu">
-    	<li class="text blue fontX20">
-    		<a href="" class="reload-category"> - </a>
+      <li class="text blue fontX20">
+
+        <a href="" class="reload-category"> - </a>
     	</li>
       <?php foreach ($categories as $cat): ?>
         <li class="text blue fontX20">
@@ -349,6 +412,7 @@ function get_filter_product_categories_form() {
             data-container=".container-products"
             val="<?php echo_safe($cat->slug); ?>"
             type="category">
+
             <?php echo_safe(ucfirst($cat->name)); ?>
           </a>
         </li>
@@ -411,6 +475,49 @@ function widget_languages_as_dropdown() {
   </div>
   <?php
   return ob_end_flush();
+}
+
+function get_products_classes() {
+
+  $classes = get_terms( 'product-class', array('hide_empty' => false)); 
+  ?>
+    <div class="col-xs-1">
+
+    </div>
+  <?php
+  foreach ($classes as $class): 
+  ?>
+    <div class="col-xs-2" id="grid-class">
+      <?php $args = array( array('class' => $class->slug) ); ?>
+      <a class="ajax-load"
+            href="<?php link_to_with_args($args); ?>"
+            data-target=".container-products"
+            data-container=".container-products" 
+            val="<?php echo_safe($class->slug); ?>"
+            type="class">
+        <article class="box box-white box-shadow border-x4-bottom border-blue classBox animate-scale">
+          <div class="header">
+            <div class="bg-image dark-bg" style="background-image:url(<?php get_class_image_uri($class->term_id, 'dark-bg'); ?>)"></div>
+            <div class="bg-image light-bg" style="background-image:url(<?php get_class_image_uri($class->term_id, 'light-bg'); ?>)"></div>
+          </div>
+          <div class="body text-center name-box">
+            <?php echo_safe($class->name); ?>
+          </div>
+        </article>
+      </a>
+    </div>
+  <?php endforeach; ?>
+    <script type="text/javascript">
+      $('#grid-class .ajax-load').click(function(e){
+        // e.preventDefault();
+        var text = $(this).text().trim();
+        $('#grid-class').hide(500);
+        $('.class-title').hide(500);  
+        $('.class-filter').hide(500)
+        $('.class-text-filter').removeClass('hidden');       
+      })
+    </script> 
+  <?php
 }
 
 //  ===========================================================================
@@ -736,6 +843,15 @@ function get_product_type_label_filter_by_slug($term_slug) {
   return get_product_type_label_filter( $product_type->term_id);
 }
 
+function get_product_class_label_filter($term_id) {
+  return get_term_meta( $term_id, PRODUCT_CLASS_MB_LABEL_FILTER, true);
+}
+
+function get_product_class_label_filter_by_slug($term_slug) {
+  $product_class = get_term_by('slug', $term_slug, 'class');
+  return get_product_class_label_filter( $product_class->term_id);
+}
+
 function get_campaign_products($campaign_id){
 	$ids = get_post_meta($campaign_id, CAMPAIGN_MB_PRODUCTS, true);
 	$ids = preg_split("/[\s,]+/",$ids);
@@ -775,7 +891,19 @@ function get_tips($limit = 3, $filters = array()) {
   return $wp_query->posts;
 }
 
+function debug_to_console( $data ) {
+
+    if ( is_array( $data ) )
+        $output = "<script>console.log( 'Debug Objects: " . implode( ', ', $data) . "' );</script>";
+    else
+        $output = "<script>console.log( 'Debug Objects: " . $data . "' );</script>";
+
+    echo $output;
+}
+
+
 function get_products($limit = 5, $filters = array()) {
+
   wp_reset_query();
   global $wp_query;
   global $total_products;
@@ -788,12 +916,13 @@ function get_products($limit = 5, $filters = array()) {
     'post_type' => 'product',
     'posts_per_page' => $limit,
     'paged' => $paged,
-    'orderby' => 'menu_order', 
+    'orderby' => 'menu_order',  
     'order' => 'ASC'
   );
 
   $types = safe_GET('product_type');
   $cats = safe_GET('category');
+  $classes = safe_GET('class');
 
 
   if(!$cats && is_category()){
@@ -802,6 +931,7 @@ function get_products($limit = 5, $filters = array()) {
   	$cat = get_category_by_path(get_query_var('category_name'),false);
 		$cats = $cat->slug;
   }
+
   if ( !$types && array_key_exists('product-types', $filters) ) {
 
 
@@ -809,6 +939,16 @@ function get_products($limit = 5, $filters = array()) {
   } else {
     if ( ! empty($types) ) {
       $types = array($types);
+    }
+  }
+
+  if ( !$types && array_key_exists('product-classes', $filters) ) {
+
+
+    $classes = $filters['product-classes'];
+  } else {
+    if ( ! empty($classes) ) {
+      $classes = array($classes);
     }
   }
 
@@ -837,6 +977,15 @@ function get_products($limit = 5, $filters = array()) {
     );
   }
 
+  if ( !empty($classes) ) {
+    $args['tax_query']['relation'] = 'AND';
+    $args['tax_query'][] = array(
+      'taxonomy' => 'product-class',
+      'field' => 'slug',
+      'terms' => $classes
+    );
+  }
+
   if ( array_key_exists('args', $filters) ) {
     $args = array_merge($args, $filters['args']);
   }
@@ -844,6 +993,7 @@ function get_products($limit = 5, $filters = array()) {
   query_posts($args);
  	
   $total_products = $wp_query->post_count;
+
 
   return $wp_query->posts;
 }
@@ -864,6 +1014,7 @@ function get_related_products($product_id, $limit = 5) {
 
   $filters = array(
     'product-types' => $product_types,
+    'product-classes' => $product_classes,
     'categories' => $categories,
     'args' => array(
       'post__not_in' => array($product_id)

@@ -35,12 +35,12 @@
 	?>
   <!-- #/section-stream -->
 
-  <section class="bg-blue section "id="section-products">
+  <!-- <section class="bg-blue section "id="section-products">
   	<h3 class="white semibold text-center m-b-md">
-			  Encontrá el producto indicado para tu necesidad
+			  Encontrá el producto indicado para tu necesidad -->
 			    <!-- <span class="fontX35"><?php echo_safe($total_products); ?></span> -->
 			  
-			</h3>
+			<!-- </h3>
     <div class="title text-center with-filters">
 
       <h2 class="clearfix text-center">
@@ -59,7 +59,7 @@
         <span class="icon iconX2 plus-icon"></span>
       </a>
     </div>
-  </section>
+  </section> -->
   <!-- #/section-products -->
 
 <?php get_footer(); ?>
