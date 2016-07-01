@@ -34,6 +34,9 @@ define('CATEGORY_MB', PREFIX . 'category');
 define('CATEGORY_MB_IMAGES', CATEGORY_MB . '_images');
 define('CATEGORY_MB_IMAGES_IMAGE', CATEGORY_MB_IMAGES . '_image');
 define('CATEGORY_MB_IMAGES_TYPE', CATEGORY_MB_IMAGES . '_type');
+define('CATEGORY_MB_DESTACADOS', CATEGORY_MB . '_products');
+define('CATEGORY_MB_PRODUCTS_DESTACADOS', CATEGORY_MB_IMAGES . '_products');
+define('CATEGORY_MB_PRODUCTS_ORDEN', CATEGORY_MB_IMAGES . '_type');
 
 define('PRODUCT_CLASS_MB', PREFIX . 'product-class');
 define('PRODUCT_CLASS_MB_IMAGES', PRODUCT_CLASS_MB . '_images');

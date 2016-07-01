@@ -308,6 +308,10 @@ function get_filter_product_types_grid_form() {
       e.preventDefault();
       var text = $(this).text().trim();
       $(this).closest('.dropdown').find('button>.text').html(text);
+      $('#grid-class').hide(500);
+      $('.class-title').hide(500);  
+      $('.class-filter').hide(500)
+      $('.class-text-filter').removeClass('hidden'); 
     })
   </script>
   <?php
@@ -424,6 +428,10 @@ function get_filter_product_categories_form() {
       e.preventDefault();
       var text = $(this).text().trim();
       $(this).closest('.dropdown').find('button>.text').html(text);
+      $('#grid-class').hide(500);
+      $('.class-title').hide(500);  
+      $('.class-filter').hide(500)
+      $('.class-text-filter').removeClass('hidden'); 
     })
   </script>
   <?php
@@ -502,6 +510,7 @@ function get_products_classes() {
           </div>
           <div class="body text-center name-box">
             <?php echo_safe($class->name); ?>
+            <hr class="bottom-line">            
           </div>
         </article>
       </a>
@@ -518,6 +527,56 @@ function get_products_classes() {
       })
     </script> 
   <?php
+}
+
+/**
+ * Gets a number of posts and displays them as options
+ * @param  array $query_args Optional. Overrides defaults.
+ * @return array             An array of options that matches the CMB2 options array
+ */
+function cmb2_get_post_options( $query_args ) {
+
+    $args = wp_parse_args( $query_args, array(
+      'post_type'   => 'post',
+      'numberposts' => 10,
+    ));
+
+    $posts = get_posts( $args );
+
+    $post_options = array();
+    if ( $posts ) {
+        foreach ( $posts as $post ) {
+          $post_options[ $post->ID ] = $post->post_title;
+        }
+    }
+
+    return $post_options;
+}
+
+/**
+ * Gets 5 posts for your_post_type and displays them as options
+ * @return array An array of options that matches the CMB2 options array
+ */
+function cmb2_get_product_options() {
+  $tax_id = safe_GET("tag_ID");
+  $tax = safe_GET("taxonomy", "category");
+  return cmb2_get_post_options( array( 
+    'post_type' => 'product', 
+    'numberposts' => -1,
+    'tax_query' => array(
+      array(
+        'taxonomy' => $tax,
+        'field' => 'id',
+        'terms' => $tax_id
+      )
+    )
+  ));
+}
+
+add_action( 'cmb2_render_text_number', 'sm_cmb_render_text_number', 10, 5 );
+
+function sm_cmb_render_text_number( $field, $escaped_value, $object_id, $object_type, $field_type_object ) {
+    echo $field_type_object->input( array( 'class' => 'cmb2-text-small', 'type' => 'number' ) );
 }
 
 //  ===========================================================================

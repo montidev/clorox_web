@@ -41,6 +41,26 @@ $meta_boxes[CATEGORY_MB] = array(
         ),
       ),
     ),
+    array(
+      'id' => CATEGORY_MB_DESTACADOS,
+      'description' => __( 'Produtos destacados de la categoría', 'clorox' ),
+      'type' => 'group',
+      'options'     => array(
+        'group_title'   => __( 'Producto {#}', 'clorox' ),
+        'add_button'    => __( 'Agregar otro producto', 'clorox' ),
+        'remove_button' => __( 'Remover producto', 'clorox' ),
+        // 'sortable' => true,
+      ),
+      'fields' => array(
+        array(
+          'name'  => __('Producto', 'clorox' ),
+          'id'    => CATEGORY_MB_PRODUCTS_DESTACADOS,
+          'row_classes' => 'col-md-6',
+          'type'        => 'select', 
+          'options_cb' => 'cmb2_get_product_options',
+        ),
+      ),
+    ),
 
   )
 );

@@ -150,7 +150,6 @@ jQuery(function($){
   $('.filter-category-prod, .filter-type-prod, .filter-class-prod').on('click', '.dropdown-menu a', function(e){
     var newPathName = window.location.pathname.replace(/\/page\/[0-9]+\//g, "/");
     window.history.pushState('', '', newPathName);
-    console.log(window.filters)
   });
 
 

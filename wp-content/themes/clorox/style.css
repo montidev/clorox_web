@@ -1478,6 +1478,14 @@ nav .menu-primary-container ul:first-child {
   margin-bottom: 50px;
 }
 
+.bottom-line{
+  border: 0; height: 12px; box-shadow: inset 0 12px 12px -12px #2E9AFE; 
+}
+
+.classBox:hover .bottom-line{
+  border: 0; height: 20px; box-shadow: inset 0 20px 5px -12px #eef016; 
+}
+
 /*
 * Pages
 */
