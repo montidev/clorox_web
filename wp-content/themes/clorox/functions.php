@@ -495,7 +495,7 @@ function get_products_classes() {
   <?php
   foreach ($classes as $class): 
   ?>
-    <div class="col-xs-2" id="grid-class">
+    <div class="col-sm-2" id="grid-class">
       <?php $args = array( array('class' => $class->slug) ); ?>
       <a class="ajax-load"
             href="<?php link_to_with_args($args); ?>"
@@ -503,15 +503,17 @@ function get_products_classes() {
             data-container=".container-products" 
             val="<?php echo_safe($class->slug); ?>"
             type="class">
-        <article class="box box-white box-shadow border-x4-bottom border-blue classBox animate-scale">
+        <article class="box box-white classBox animate-scale">
           <div class="header">
             <div class="bg-image dark-bg" style="background-image:url(<?php get_class_image_uri($class->term_id, 'dark-bg'); ?>)"></div>
             <div class="bg-image light-bg" style="background-image:url(<?php get_class_image_uri($class->term_id, 'light-bg'); ?>)"></div>
           </div>
           <div class="body text-center name-box">
             <?php echo_safe($class->name); ?>
-            <hr class="bottom-line">            
+                     
           </div>
+          <span class="icon flecha-icon"></span>
+
         </article>
       </a>
     </div>
@@ -571,12 +573,6 @@ function cmb2_get_product_options() {
       )
     )
   ));
-}
-
-add_action( 'cmb2_render_text_number', 'sm_cmb_render_text_number', 10, 5 );
-
-function sm_cmb_render_text_number( $field, $escaped_value, $object_id, $object_type, $field_type_object ) {
-    echo $field_type_object->input( array( 'class' => 'cmb2-text-small', 'type' => 'number' ) );
 }
 
 //  ===========================================================================
@@ -976,23 +972,37 @@ function get_products($limit = 5, $filters = array()) {
     'posts_per_page' => $limit,
     'paged' => $paged,
     'orderby' => 'menu_order',  
-    'order' => 'ASC'
+    'order' => 'ASC',
   );
 
+  $fromHome = safe_GET("h");
   $types = safe_GET('product_type');
   $cats = safe_GET('category');
   $classes = safe_GET('class');
 
+  if($fromHome == "1" && $cats ) {
+    $cat = get_category_by_slug( $cats );
+    $destacados = get_term_meta($cat->term_id, CATEGORY_MB_DESTACADOS, true);
+
+    // debug_to_console($cat);
+    //dd($destacados);  
+
+    if ( is_array($destacados) ) {
+      debug_to_console("aca");
+      $results = array_map(function($e) {
+        return $e[CATEGORY_MB_PRODUCTS_DESTACADOS];
+      }, $destacados);
+
+      $args = array_merge($args, array("post__in" => $results));
+    }
+  }
 
   if(!$cats && is_category()){
-  	//solamente para template categoría
-
   	$cat = get_category_by_path(get_query_var('category_name'),false);
 		$cats = $cat->slug;
   }
 
   if ( !$types && array_key_exists('product-types', $filters) ) {
-
 
     $types = $filters['product-types'];
   } else {
@@ -1002,7 +1012,6 @@ function get_products($limit = 5, $filters = array()) {
   }
 
   if ( !$types && array_key_exists('product-classes', $filters) ) {
-
 
     $classes = $filters['product-classes'];
   } else {

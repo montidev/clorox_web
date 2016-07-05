@@ -10,7 +10,9 @@ window.filters = {
     var fs = link.split('&');
     if ( fs.length ) {
       for (var i = 0; i < fs.length; i++) {
-        this._addParam(fs[i]);
+        if(fs[i] != "h=1"){
+          this._addParam(fs[i]);
+        };
       }
     } else {
       this._addParam(link);
@@ -46,6 +48,7 @@ jQuery(function($){
 
 
   var updateProducts = function(container, target, filtersURL, cb) {
+
     $(container).fadeOut();
     $(container).load(filtersURL + ' ' + target, function(){
       window.history.pushState('', '', filtersURL);
@@ -139,9 +142,6 @@ jQuery(function($){
 				player.pause();
 			}
 
-			
-
-
     }
     
 
@@ -223,7 +223,9 @@ jQuery(function($){
   	$('.filter-category-prod a.ajax-load').css('display','block');
   	$('#filter-type-prod button span.text').text("-");
   	//$('.filter-category-prod button span.text').text($(a).text());
-  	updateProducts('.container-products', '.container-products', filtersURL);
+  	updateProducts('.container-products', '.container-products', filtersURL, function(){
+      updateFilters(filtersURL);
+    });
   });
 
   $('.reload-product-class').click(function(e){

@@ -2,7 +2,7 @@
   <?php $categories = get_categories(array('number' => 6, 'orderby' => 'term_order')); ?>
   <?php foreach ($categories as $category): ?>
     <div class="col-lg-2 col-md-4 col-xs-4">
-      <a href="/productos?category=<?php echo_safe($category->slug); ?>">
+      <a href="/productos?category=<?php echo_safe($category->slug); ?>&h=1">
         <article class="box box-white box-shadow border-x4-bottom border-blue categoryBox animate-scale">
           <div class="header">
             <div class="bg-image" style="background-image:url(<?php get_category_image_uri($category->term_id); ?>)"></div>
